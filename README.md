@@ -1,4 +1,4 @@
-# common-geospatial-registry-specification
+# common-geo-registry-specification
 
 A specification for the common geo-registry.
 
