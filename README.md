@@ -1,6 +1,6 @@
 # common-geospatial-registry-specification
 
-A specification for the common geospatial registry.
+A specification for the common geo-registry.
 
 ## License
 
