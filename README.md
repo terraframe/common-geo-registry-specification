@@ -1,7 +1,3 @@
-# common-geo-registry-specification
-
-A specification for the common geo-registry.
-
 ## About 
 
 The common geo-registry specification seeks to define the API and data specification for communication between the common geo-registry and other systems such as the geospatial widget. There are three primary interface layers that are the subjects of this specification. 
