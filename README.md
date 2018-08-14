@@ -11,6 +11,8 @@ The common geo-registry specification seeks to define the API and data specifica
 
 ![High Level Architecture](https://github.com/terraframe/common-geo-registry-specification/blob/master/resources/high-level-design-v1.png)
 
+Details about this project and the requirement goals driving this project can be found [here](https://docs.google.com/document/d/1aJFSVTeAYszU3c2170jvHJlsku6_4HMn6IAlZ2YDtCQ/edit?usp=sharing).
+
 
 ## License
 
