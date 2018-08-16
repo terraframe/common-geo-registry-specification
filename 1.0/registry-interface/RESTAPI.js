@@ -3,7 +3,7 @@
 //
 
 // URL
-/location
+'/location'
 
 // GET location params
 id=:id
