@@ -18,7 +18,6 @@ Technical changes to the specification are an important part of the evolution of
 
 Consideration should be taken over the uses of the keywords as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt). The use of these words must be capitalized to stress their meaning through out the specification.
 
-The use of fields as defined in the proto file should be `highlighted`.
 
 ## Releasing A New Version
 
