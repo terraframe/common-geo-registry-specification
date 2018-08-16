@@ -1,4 +1,8 @@
-## About 
+## About
+
+Details about this project and the requirement goals driving this project can be found [here](https://docs.google.com/document/d/1aJFSVTeAYszU3c2170jvHJlsku6_4HMn6IAlZ2YDtCQ/edit?usp=sharing).
+
+## Overview
 
 The common geo-registry specification seeks to define the API and data specification for communication between the common geo-registry and other systems such as the geospatial widget. There are three primary interface layers that are the subjects of this specification. 
 1. RESTful Geo-Object Server Specification to/from RESTful Geo-Object Mobile Interface
@@ -7,7 +11,6 @@ The common geo-registry specification seeks to define the API and data specifica
 
 ![High Level Architecture](https://github.com/terraframe/common-geo-registry-specification/blob/master/resources/high-level-design-v1.png)
 
-Details about this project and the requirement goals driving this project can be found [here](https://docs.google.com/document/d/1aJFSVTeAYszU3c2170jvHJlsku6_4HMn6IAlZ2YDtCQ/edit?usp=sharing).
 
 
 ## License
