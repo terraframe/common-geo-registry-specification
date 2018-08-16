@@ -21,7 +21,7 @@ However, the use of this spec in products and code is entirely free:
 there are no royalties, restrictions, or requirements.
 
 ## Implementations
-** [GeoPrism implementation of the Common Geo-Registry](https://github.com/terraframe/geoprism-geo-registry)
+* [GeoPrism implementation of the Common Geo-Registry](https://github.com/terraframe/geoprism-geo-registry)
 
 ## Versioning
 
