@@ -3,7 +3,9 @@
 //
 
 // URL
-`/location`
+```javascript 
+/location
+```
 
 // GET location params
 id=:id
