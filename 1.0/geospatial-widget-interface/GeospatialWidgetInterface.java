@@ -10,8 +10,8 @@ public interface GeospatialWidgetInterface {
     *
     **/
     public JSONObject getLocation();
-	
-	  public JSONObject getDirection();
+
+    public JSONObject getDirection();
     
     
     /**
@@ -20,37 +20,36 @@ public interface GeospatialWidgetInterface {
     **/
     public int startRecordLocation();
 	
-	  public void pauseRecordLocation(int recordId);
+    public void pauseRecordLocation(int recordId);
 	
-	  public void resumeRecordLocation(int recordId); 
+    public void resumeRecordLocation(int recordId); 
 	
-	  public JSONArray stopRecordLocation(int recordId);
+    public JSONArray stopRecordLocation(int recordId);
 	
-	 /**
+    /**
     * Access points for getting a record of a geographic object without GPS
-	  * 
+    * 
     *
     **/
+    public int startDrawingLocation();
 	
-	  public int startDrawingLocation();
+    public JSONObject addDrawingPoint(int drawingId); // Return Point information
 	
-	  public JSONObject addDrawingPoint(int drawingId); // Return Point information
+    public void deleteDrawingPoint(int drawingId, int drawingPointId);
 	
-	  public void deleteDrawingPoint(int drawingId, int drawingPointId);
+    public JSONArray stopDrawingLocation(int drawingId);
 	
-	  public JSONArray stopDrawingLocation(int drawingId);
-	
-	 /**
+    /**
     * Access points for splitting polygons 
-	  * 
+    * 
     *
     **/
 	
-	  public void startSplitPolygon(int polygonId); 
+    public void startSplitPolygon(int polygonId); 
 	
-	  public JSONObject setFirstSplittingPoint(int polygonId);
+    public JSONObject setFirstSplittingPoint(int polygonId);
 	
-	  public JSONObject setSecondSplittingPoint(int polygonId);
+    public JSONObject setSecondSplittingPoint(int polygonId);
 	
-	  public JSONArray stopSplitPolygon(int polygonId);
+    public JSONArray stopSplitPolygon(int polygonId);
 }
