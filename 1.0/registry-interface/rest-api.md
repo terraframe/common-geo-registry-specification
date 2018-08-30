@@ -1,8 +1,8 @@
 
 ### /location
-|  Method  |  params  | description  |
-|---|---|---|
-|  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li></ul>  |  Get a location by id.  |
+| path  |  Method  |  params  | description  |
+|---|---|---|---|
+|  /location  |  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li></ul>  |  Get a location by id.  |
 
 ### /locations
 | path  |  Method  |  params  | description  |
