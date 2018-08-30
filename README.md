@@ -24,10 +24,11 @@ If you are interested in contributing please refer to the [CONTRIBUTING.md](CONT
 
 ## Authors
 
-* Steve Ebener (Health GeoLab Collaborative)
-* Justin Lewis (TerraFrame)
-* Nathan McEachen (TerraFrame)
-* Matt Berg (Ona)
-* Ukang’a Dickson (Ona)
+* Steve Ebener ([Health GeoLab Collaborative](https://healthgeolab.net/))
+* Justin Lewis ([TerraFrame](https://terraframe.com/))
+* Nathan McEachen ([TerraFrame](https://terraframe.com/))
+* Matt Berg ([Ona](https://ona.io/home/))
+* Ukang’a Dickson ([Ona](https://ona.io/home/))
 * Patrick Briand ([Novel-T](http://www.novel-t.ch/))
+* Emmanuel Otin ([Novel-T](http://www.novel-t.ch/))
 
