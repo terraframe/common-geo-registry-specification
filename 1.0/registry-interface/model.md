@@ -13,7 +13,8 @@ The location model defines a location object that represents any location in the
   properties : {
     uid : string,
     name : string,
-    type : string<GeoObjectType>
+    type : string<GeoObjectType> // maps to GeoObjectType name value
+    status : string
   }
 }
 
@@ -41,6 +42,10 @@ The multi-location model defines an object that contains one or more locations.
 }
 ```
 
+### GeoObjectStatus
+```
+
+```
   
   
 
@@ -51,6 +56,7 @@ The multi-location model defines an object that contains one or more locations.
 {
    name : string,
    label : string,
+   type : string,
    terms : {
      name : string,
      label : string
@@ -62,6 +68,7 @@ The multi-location model defines an object that contains one or more locations.
 ```
 {
    name : string,
-   label : string
+   label : string,
+   type : string
 }
 ```
