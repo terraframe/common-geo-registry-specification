@@ -1,6 +1,6 @@
-//
-// EXAMPLE - Single Point location 
-//
+### EXAMPLE - Single Point location 
+
+```
 {
   "type": "Feature",
   "geometry": {
@@ -12,10 +12,10 @@
     "name": "EXAMPLE NAME"
   }
 }
+```
 
-//
-// EXAMPLE - Single Polygon location
-//
+### EXAMPLE - Single Polygon location
+```
 {
   "type": "Feature",
   "geometry": {
@@ -35,10 +35,10 @@
     "name": "EXAMPLE NAME"
   }
 }
+```
 
-//
-// EXAMPLE - Multiple locations
-//
+### EXAMPLE - Multiple locations
+```
 [
     {
         "type": "Feature",
@@ -63,4 +63,4 @@
         }
     }
 ]
-
+```
