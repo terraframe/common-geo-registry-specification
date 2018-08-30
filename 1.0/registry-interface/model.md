@@ -16,11 +16,36 @@ All properties have a reference to type Attribute so that name and label propert
     uid : string,
     name : string,
     type : string<GeoObjectType>, // maps to GeoObjectType name value
-    status : string
+    status : Term
     // user defined and additional system defined attributes added to properties list.
   }
 }
+```
 
+### GeoObject View
+Defines a view object that is constructed by traversing the relationship graph. 
+
+```
+{
+  name : {
+    attributeLabel : string,
+    value : string
+  },
+  uid : {
+    attributeLabel : string,
+    value : string
+  },
+  type : {
+    attributeLabel : string,
+    valueLabel : string,
+    value : string
+  },
+  status : {
+    attributeLabel : string,
+    valueLabel : string,
+    value : string
+  }
+}
 ```
 
 
@@ -75,7 +100,3 @@ All properties have a reference to type Attribute so that name and label propert
 ```
 
 
-### GeoObjectStatus Attribute
-```
-
-```
