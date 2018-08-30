@@ -24,7 +24,10 @@ If you are interested in contributing please refer to the [CONTRIBUTING.md](CONT
 
 ## Authors
 
-* Steve Ebener
-* Justin Lewis
-* Nathan McEachen
+* Steve Ebener (Health GeoLab Collaborative)
+* Justin Lewis (TerraFrame)
+* Nathan McEachen (TerraFrame)
+* Matt Berg (Ona)
+* Ukang’a Dickson (Ona)
+* Patrick Briand ([Novel-T](http://www.novel-t.ch/))
 
