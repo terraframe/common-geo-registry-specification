@@ -1,7 +1,9 @@
 # Location Model Definitions
 
 ### GeoObject Model
-The location model defines a location object that represents any location in the Common Geo-Registry.
+Defines an object in the Common Geo-Registry.
+
+All properties have a reference to type Attribute so that name and label properties can both be localized.
 
 ```
 {
@@ -13,22 +15,14 @@ The location model defines a location object that represents any location in the
   properties : {
     uid : string,
     name : string,
-    type : string<GeoObjectType> // maps to GeoObjectType name value
+    type : string<GeoObjectType>, // maps to GeoObjectType name value
     status : string
+    // user defined and additional system defined attributes added to properties list.
   }
 }
 
 ```
 
-### Multi-Location Model
-The multi-location model defines an object that contains one or more locations. 
-
-```
-{
-  locations : array<Location Model>;
-} 
-
-```
 
 # Meta Model Definitions
 
@@ -40,14 +34,24 @@ The multi-location model defines an object that contains one or more locations.
   description : string,
   attributes : attributeType[]
 }
+```  
+
+### TermType
+```
+{
+  name : string, // referenced from term property in Attribute
+  label : string,
+  terms : Term[]
+}
 ```
 
-### GeoObjectStatus
+### Term
 ```
-
+{
+  name : string,
+  label : string
+}
 ```
-  
-  
 
 ## Attribute Types
 
@@ -57,10 +61,7 @@ The multi-location model defines an object that contains one or more locations.
    name : string,
    label : string,
    type : string,
-   terms : {
-     name : string,
-     label : string
-   }
+   term : string<Term> 
 }
 ```
 
@@ -71,4 +72,10 @@ The multi-location model defines an object that contains one or more locations.
    label : string,
    type : string
 }
+```
+
+
+### GeoObjectStatus Attribute
+```
+
 ```
