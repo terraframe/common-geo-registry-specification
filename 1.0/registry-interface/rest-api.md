@@ -1,47 +1,45 @@
 
-# Get location
+# Single Location
+Locations can be queried from the common geo-registry by id.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
 |  /location  |  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li></ul>  |  Get a location by id.  |
 
-## Example
+### Example
 ```
 www.domain.com/location?id=99999999&geomType=point
 ```
 
-# Get locations
+# Multiple Locations 
+Multiple locations can be queried from specific levels of the location hierarchy. 
 
-### /locations
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
 |  /locations  |  GET  |  <ul><li>hierarchyPositionName=:hierarchyPositionName</li> <li>geomType=:geomType</li></ul>  |  Get all locations at a specific level in the location heirarchy.  |
 
-## Example
+### Example
 ```
 www.domain.com/locations?hierarchyPositionName=village&geomType=point
 ```
 
-# Get direct child locations
+# Locations By Direct Relationship
+Locations can be queried that have a direct relationship with a specific location.
 
-### /directchildlocations
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
 |  /directchildlocations  |  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName </li></ul>  |  Get all direct child locations of a specific location.  |
 
-## Example
+### Example
 ```
 www.domain.com/directchildlocations?hierarchyPositionName=village&geomType=point
 ```
 
-# Get direct parent locations
-
-### /directparentlocations
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
 |  /directparentlocations  |  GET  |  <ul> <li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName </li></ul>  |  Get all direct parent locations of a specific location.  |
 
-## Example
+### Example
 ```
 www.domain.com/directparentlocations?hierarchyPositionName=village&geomType=point
 ```
