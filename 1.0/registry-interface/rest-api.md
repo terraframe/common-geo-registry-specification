@@ -1,5 +1,5 @@
 
 | path  |  params  | description  |
 |---|---|---|
-|  /location  |  <ul><li>id=:id</li> <li>geomType=:geomType</li>  |  Get a location by id.  |
-|  /locations  |  * hierarchyPositionName=:hierarchyPositionName * geomType=:geomType  |  Get all locations at a specific level in the location heirarchy  |
+|  /location  |  <ul><li>id=:id</li> <li>geomType=:geomType</li></ul>  |  Get a location by id.  |
+|  /locations  |  <ul><li>hierarchyPositionName=:hierarchyPositionName</li> <li>geomType=:geomType</li></ul>  |  Get all locations at a specific level in the location heirarchy  |
