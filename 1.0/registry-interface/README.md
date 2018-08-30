@@ -14,7 +14,8 @@ The registry interface defines the standard API interface to an implementation o
 |---|---|
 |  Interface.java  |  Defines the server side Java API to the common geo-registry.  |
 |  rest-api.md  |  Defines the HTTP RESTful API used to interact with the common geo-registry.  |
-|  Model.md  |  Defines the data models used in the common geo-registry.  |
+|  model.md  |  Defines the data models used in the common geo-registry.  |
+|  model-examples.md  |  Provides examples of the objects that adhere to the data model definitions.  |
 
 
 ## Change Log
