@@ -9,5 +9,12 @@ The registry interface defines the standard API interface to an implementation o
 1.  Model defining location objects.
 2.  Model defining collections of location objects.
 
+## File Inventory
+|  File  |  Description  |
+|---|---|
+|  Interface.java  |  Defines the server side Java API to the common geo-registry.  |
+|  rest-api.md  |  Defines the HTTP RESTful API used to interact with the common geo-registry.  |
+|  Model.md  |  Defines the data models used in the common geo-registry.  |
+
 
 ## Change Log
