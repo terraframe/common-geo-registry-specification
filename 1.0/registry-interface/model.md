@@ -1,4 +1,6 @@
-### Location Model
+# Location Model Definitions
+
+### GeoObject Model
 The location model defines a location object that represents any location in the Common Geo-Registry.
 
 ```
@@ -9,8 +11,9 @@ The location model defines a location object that represents any location in the
     coordinates : double[]
   }
   properties : {
-    id : string,
+    uid : string,
     name : string,
+    type : string<GeoObjectType>
     hierarchyPositionName : string,
     hierarchyPosition : integer
   }
@@ -26,4 +29,28 @@ The multi-location model defines an object that contains one or more locations.
   locations : array<Location Model>;
 } 
 
+```
+
+# Meta Model Definitions
+
+### GeoObjectType
+```
+{
+  name : string,
+  label : string,
+  description : string,
+  attributes : attributeType[]
+}
+```
+
+  
+  
+
+### Attribute
+```
+{
+   name : string,
+   label : string,
+   value : string
+}
 ```
