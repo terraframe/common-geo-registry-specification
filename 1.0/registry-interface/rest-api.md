@@ -17,5 +17,5 @@
 
 | path  |  params  | description  |
 |---|---|---|
-|  /directparentlocations  |  <ul><li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName
+|  /directparentlocations  |  <ul> <li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName
   </li> </ul>  |  Get all direct parent locations of a specific location.  |
