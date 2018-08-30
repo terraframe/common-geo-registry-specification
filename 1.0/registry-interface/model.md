@@ -19,6 +19,7 @@ The location model defines a location object that represents any location in the
 ```
 
 ### Multi-Location Model
+The multi-location model defines an object that contains one or more locations. 
 
 ```
 {
