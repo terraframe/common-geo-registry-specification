@@ -10,6 +10,8 @@
 www.domain.com/location?id=99999999&geomType=point
 ```
 
+# Get locations
+
 ### /locations
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
@@ -20,6 +22,8 @@ www.domain.com/location?id=99999999&geomType=point
 www.domain.com/locations?hierarchyPositionName=village&geomType=point
 ```
 
+# Get direct child locations
+
 ### /directchildlocations
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
@@ -29,6 +33,8 @@ www.domain.com/locations?hierarchyPositionName=village&geomType=point
 ```
 www.domain.com/directchildlocations?hierarchyPositionName=village&geomType=point
 ```
+
+# Get direct parent locations
 
 ### /directparentlocations
 | path  |  Method  |  params  | description  |
