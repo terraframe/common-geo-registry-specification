@@ -35,6 +35,14 @@ public interface RegistryInterface {
     String[] getUIDs(Integer : numberOfUIDs);
     
     
+    ukanga
+    /**
+    * Access points for getting UIDs. Commonly used to retrieve an acceptable ID which could be used to persist a new GeoObject.
+    *
+    **/
+    GeoObjectType[] getMetadata(String[] types);
+    
+    
     
     
     /**
