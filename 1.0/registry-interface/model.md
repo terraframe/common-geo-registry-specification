@@ -86,7 +86,7 @@ Defines a view object that is constructed by traversing the relationship graph.
    name : string,
    label : string,
    type : string,
-   terms : obj[] // dynamic list of objects ({}) 
+   term : string<Term>
 }
 ```
 
