@@ -48,6 +48,14 @@ Defines a view object that is constructed by traversing the relationship graph.
 }
 ```
 
+### TreeNode
+```
+{
+  "geoObject" : GeoObject,
+  "children" : TreeNode[]
+}
+```
+
 
 # Meta Model Definitions
 
