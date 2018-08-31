@@ -9,32 +9,32 @@ public interface RegistryInterface {
     * Access points for getting a single location object.
     *
     **/
-    public JSONObject getLocationById(String id, String geomType);
+    public JSONObject getGeoObject(String id);  
+    
+    /**
+    * Access points for getting child location objects of a location.
+    *
+    **/
+    public JSONArray getChildGeoObjects(String id);
+    
+    public TreeNode getChildGeoObjects(String parentUid, String[] childrenTypes, Boolean recursive);
+     
+    /**
+    * Access points for getting parent location objects of a location.
+    *
+    **/
+    public JSONArray getParentGeoObjects(String id);
+    
+    public TreeNode getParentGeoObjects(String parentUid, String[] childrenTypes, Boolean recursive);
     
     
     /**
-    * Access points for getting a collection of location objects from a specific position in the location hierarchy.
+    * Access points for getting UIDs. 
     *
     **/
-    public JSONArray getLocationsByHierarchyPosition(String hierarchyPositionName, String geomType);
+    String[] getUIDs(Integer : numberOfUIDs);
     
     
-    /**
-    * Access points for getting direct child location objects of a location.
-    *
-    **/
-    public JSONArray getDirectChildLocationsById(String id, String geomType);
-    
-    public JSONArray getDirectChildLocationsById(String id, String hierarchyPositionName, String geomType);
-    
-    
-    /**
-    * Access points for getting direct parent location objects of a location.
-    *
-    **/
-    public JSONArray getDirectParentLocationsById(String id, String geomType);
-    
-    public JSONArray getDirectParentLocationsById(String id, String hierarchyPositionName, String geomType);
     
     
     /**
