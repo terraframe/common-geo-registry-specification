@@ -29,7 +29,7 @@ public interface RegistryInterface {
     
     
     /**
-    * Access points for getting UIDs. 
+    * Access points for getting UIDs. Commonly used to retrieve an acceptable ID which could be used to persist a new GeoObject.
     *
     **/
     String[] getUIDs(Integer : numberOfUIDs);
@@ -38,7 +38,7 @@ public interface RegistryInterface {
     
     
     /**
-    * Access points for setting location objects.
+    * Access points for setting location objects. 
     *
     **/
     public Boolean setLocation(JSONObject location);
