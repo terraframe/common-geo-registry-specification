@@ -6,39 +6,19 @@
 public interface GeospatialWidgetInterface {
 
     /**
-    * Access point for getting coordinates of a the current position
-    *
-    **/
-    public JSONObject getLocation();
-
-    public JSONObject getDirection();
-    
-    
-    /**
     * Access points for getting a record of a geographic object with GPS
-    *
+    * Story G1.1 , G1.3
+
     **/
     public int startRecordLocation();
 	
-    public void pauseRecordLocation(int recordId);
+    public void pauseRecordLocation(int routeId);
 	
-    public void resumeRecordLocation(int recordId); 
+    public void resumeRecordLocation(int routeId); 
 	
-    public JSONArray stopRecordLocation(int recordId);
+    public JSONArray stopRecordLocation(int routeId);
 	
-    /**
-    * Access points for getting a record of a geographic object without GPS
-    * 
-    *
-    **/
-    public int startDrawingLocation();
-	
-    public JSONObject addDrawingPoint(int drawingId); // Return Point information
-	
-    public void deleteDrawingPoint(int drawingId, int drawingPointId);
-	
-    public JSONArray stopDrawingLocation(int drawingId);
-	
+    	
     /**
     * Access points for splitting polygons 
     * 
@@ -52,4 +32,20 @@ public interface GeospatialWidgetInterface {
     public JSONObject setSecondSplittingPoint(int polygonId);
 	
     public JSONArray stopSplitPolygon(int polygonId);
+
+
+    /**
+    * Access point for getting Point information by touching the map
+    *
+    **/
+    public JSONObject getPointLocation();
+
+    /**
+    * Access point for creating Circle
+    * Story G3.9
+    *
+    **/
+    public JSONArray getCircleLocation(JSONObject point, int radius); // By giving a point
+
+    public JSONArray getCircleLocation(int radius);                   // with GPS 
 }
