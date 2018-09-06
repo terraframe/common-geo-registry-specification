@@ -83,7 +83,7 @@ Defines an object in a relationship tree hierarchy.
 ### Term
 ```
 {
-  name : string,
+  type : string,
   label : string
 }
 ```
