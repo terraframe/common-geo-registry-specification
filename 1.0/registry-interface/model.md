@@ -1,6 +1,6 @@
 # Location Model Definitions
 
-### GeoObject Model
+### GeoObject
 Defines an object in the Common Geo-Registry.
 
 All properties have a reference to type Attribute so that name and label properties can both be localized.
@@ -22,7 +22,7 @@ All properties have a reference to type Attribute so that name and label propert
 }
 ```
 
-### GeoObject View
+### GeoObjectView
 Defines a view object that is constructed by traversing the relationship graph. 
 
 ```
@@ -88,7 +88,7 @@ Defines a view object that is constructed by traversing the relationship graph.
 
 ## Attribute Types
 
-### Term Attribute
+### TermAttribute
 ```
 {
    name : string,
@@ -98,7 +98,7 @@ Defines a view object that is constructed by traversing the relationship graph.
 }
 ```
 
-### Numeric Attribute
+### NumericAttribute
 ```
 {
    name : string,
