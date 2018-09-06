@@ -16,7 +16,7 @@ All properties have a reference to type Attribute so that name and label propert
     uid : string,
     name : string,
     type : string<GeoObjectType>, // maps to GeoObjectType name value
-    status : Term
+    status : string<Term>
     // user defined and additional system defined attributes added to properties list.
   }
 }
@@ -83,7 +83,7 @@ Defines an object in a relationship tree hierarchy.
 ### Term
 ```
 {
-  type : string,
+  name : string,
   label : string
 }
 ```
