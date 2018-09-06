@@ -49,6 +49,8 @@ Defines a view object that is constructed by traversing the relationship graph.
 ```
 
 ### TreeNode
+Defines an object in a relationship tree hierarchy. 
+
 ```
 {
   "geoObject" : GeoObject,
