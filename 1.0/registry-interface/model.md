@@ -23,7 +23,7 @@ All properties have a reference to type Attribute so that name and label propert
 ```
 | Property | Description |Possible Values|
 |---|---|--|
-|type | (GeoJSON standard type property)[https://tools.ietf.org/html/rfc7946] |"Feature", "FeatureCollection"|
+|type | [GeoJSON standard type property](https://tools.ietf.org/html/rfc7946) |"Feature", "FeatureCollection"|
 |geometry | GeoJSON standard geometry object ||
 |geometry.type | GeoJSON standard geometry object type. |"Point", "MultiPoint", "LineString","MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection"|
 |geometry.coordinates | GeoJSON standard geometry object coordinates array. ||
