@@ -5,7 +5,7 @@ The registry interface defines the standard API interface to an implementation o
 1.  Server side Java API. 
 2.  HTTP RESTful API. 
 
-### Data Model Definitions
+### RESTful API Response Data Model Definitions
 
 ![Object Model Diagram](https://github.com/terraframe/common-geo-registry-specification/blob/master/1.0/registry-interface/docs/registry-interface-data-model.png)
 
@@ -16,6 +16,8 @@ The registry interface defines the standard API interface to an implementation o
 |  rest-api.md  |  Defines the HTTP RESTful API used to interact with the common geo-registry.  |
 |  model.md  |  Defines the data models used in the common geo-registry.  |
 |  model-examples.md  |  Provides examples of the objects that adhere to the data model definitions.  |
+| docs/registry-interface-data-model.png | Object model diagram for objects returned from the registry interface |
+| docs/registry-interface-data-model.svg | Object model diagram source file for objects returned from the registry interface |
 
 
 ## Change Log
