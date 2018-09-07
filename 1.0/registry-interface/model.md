@@ -1,9 +1,8 @@
 # Location Model Definitions
 
 ### GeoObject
-Defines an object in the Common Geo-Registry.
+Defines a representation of an object returned from a request to the Common Geo-Registry.
 
-All properties have a reference to type Attribute so that name and label properties can both be localized.
 
 ```
 {
@@ -80,6 +79,7 @@ Defines an object in a relationship tree hierarchy.
 |localizedLabel | Localized Label for the term. |
 
 ## Attribute Types
+All GeoObjectType objects have a reference to an Attribute type so that name and label properties can both be localized.
 
 ### AttributeTermType
 ```
