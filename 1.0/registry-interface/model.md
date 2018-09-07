@@ -21,6 +21,10 @@ All properties have a reference to type Attribute so that name and label propert
   }
 }
 ```
+| Property | Description |
+|---|---|
+|uid | a description |
+
 
 ### GeoObjectView
 Defines a view object that is constructed by traversing the relationship graph. 
