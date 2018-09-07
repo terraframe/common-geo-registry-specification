@@ -6,9 +6,6 @@ The registry interface defines the standard API interface to an implementation o
 2.  HTTP RESTful API. 
 
 ### Data Model Definitions
-1.  Model defining location objects.
-2.  Model defining collections of location objects.
-
 
 ![Object Model Diagram](https://github.com/terraframe/common-geo-registry-specification/blob/master/1.0/registry-interface/docs/registry-interface-data-model.png)
 
