@@ -71,15 +71,6 @@ Defines an object in a relationship tree hierarchy.
 }
 ```  
 
-### TermType
-```
-{
-  name : string, // referenced from term property in Attribute
-  label : string,
-  terms : Term[]
-}
-```
-
 ### Term
 ```
 {
@@ -90,7 +81,7 @@ Defines an object in a relationship tree hierarchy.
 
 ## Attribute Types
 
-### TermAttribute
+### AttributeTermType
 ```
 {
    name : string,
@@ -100,7 +91,7 @@ Defines an object in a relationship tree hierarchy.
 }
 ```
 
-### NumericAttribute
+### AttributeNumericType
 ```
 {
    name : string,
