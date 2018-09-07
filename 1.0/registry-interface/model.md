@@ -32,32 +32,6 @@ All properties have a reference to type Attribute so that name and label propert
 |properties.status | |
 
 
-### GeoObjectView
-Defines a view object that is constructed by traversing the relationship graph. 
-
-```
-{
-  name : {
-    attributeLabel : string,
-    value : string
-  },
-  uid : {
-    attributeLabel : string,
-    value : string
-  },
-  type : {
-    attributeLabel : string,
-    valueLabel : string,
-    value : string
-  },
-  status : {
-    attributeLabel : string,
-    valueLabel : string,
-    value : string
-  }
-}
-```
-
 ### TreeNode
 Defines an object in a relationship tree hierarchy. 
 
@@ -67,6 +41,10 @@ Defines an object in a relationship tree hierarchy.
   "children" : TreeNode[]
 }
 ```
+| Property | Description |
+|---|---|
+|geoObject | A GeoObject object. |
+|children | An array of TreeNode objects. |
 
 
 # Meta Model Definitions
@@ -75,19 +53,28 @@ Defines an object in a relationship tree hierarchy.
 ```
 {
   name : string,
-  label : string,
-  description : string,
+  localizedLabel : string,
+  localizedDescription : string,
   attributes : attributeType[]
 }
-```  
+``` 
+| Property | Description |
+|---|---|
+|name | Name of the type. |
+|localizedLabel | Localized label for the object. |
+|localizedDescription | Localized description of the object. |
 
 ### Term
 ```
 {
   name : string,
-  label : string
+  localizedLabel : string
 }
 ```
+| Property | Description |
+|---|---|
+|name | Name of the term. |
+|localizedLabel | Localized Label for the term. |
 
 ## Attribute Types
 
@@ -100,14 +87,25 @@ Defines an object in a relationship tree hierarchy.
    term : string<Term>
 }
 ```
+| Property | Description | Possible Values |
+|---|---|---|
+|name | Name of the term. ||
+|localizedLabel | Localized label for the term. ||
+|type | Type of attribute. |TERM|
+|term | Term UID which this attribute references. ||
 
 ### AttributeNumericType
 ```
 {
    name : string,
-   label : string,
+   localizedLabel : string,
    type : string
 }
 ```
+| Property | Description | Possible Values |
+|---|---|---|
+|name | Name of the term. ||
+|localizedLabel | Localized label for the term. ||
+|type | Type of attribute. |NUMBER|
 
 
