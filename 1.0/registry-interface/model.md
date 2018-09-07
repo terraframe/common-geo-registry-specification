@@ -24,10 +24,10 @@ All properties have a reference to type Attribute so that name and label propert
 | Property | Description |Possible Values|
 |---|---|--|
 |type | [GeoJSON standard type property](https://tools.ietf.org/html/rfc7946) |"Feature", "FeatureCollection"|
-|geometry | GeoJSON standard geometry object ||
-|geometry.type | GeoJSON standard geometry object type. |"Point", "MultiPoint", "LineString","MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection"|
+|geometry | [GeoJSON standard geometry object](https://tools.ietf.org/html/rfc7946) ||
+|geometry.type | [GeoJSON standard geometry object type.](https://tools.ietf.org/html/rfc7946) |"Point", "MultiPoint", "LineString","MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection"|
 |geometry.coordinates | GeoJSON standard geometry object coordinates array. ||
-|properties | GeoJSON standard properties object containing non-standard properties.||
+|properties | [GeoJSON standard properties object containing non-standard properties.](https://tools.ietf.org/html/rfc7946)||
 |properties.uid | UID for the object. ||
 |properties.name | Name of the object ||
 |properties.type | Type of the object represented as a GeoObjectType object | GeoObjectType |
