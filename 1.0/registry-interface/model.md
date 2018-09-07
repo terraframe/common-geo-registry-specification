@@ -7,7 +7,7 @@ All properties have a reference to type Attribute so that name and label propert
 
 ```
 {
-  type : string;
+  type : string,
   geometry : {
     type : string,
     coordinates : double[]
@@ -23,7 +23,13 @@ All properties have a reference to type Attribute so that name and label propert
 ```
 | Property | Description |
 |---|---|
-|uid | a description |
+|type | GeoJSON standard type property |
+|geometry | GeoJSON standard geometry object |
+|properties | GeoJSON standard properties object containing non-standard properties.|
+|properties.uid | |
+|properties.name | |
+|properties.type | |
+|properties.status | |
 
 
 ### GeoObjectView
