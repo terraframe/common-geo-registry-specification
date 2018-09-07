@@ -1,7 +1,7 @@
 # Location Model Definitions
 
 ### GeoObject
-Defines a representation of an object returned from a request to the Common Geo-Registry.
+Defines an object returned from a request to the Common Geo-Registry.  GeoObjects store data needed for accessing localized values from a metadata abstraction.
 
 
 ```
@@ -16,7 +16,7 @@ Defines a representation of an object returned from a request to the Common Geo-
     name : string,
     type : string<GeoObjectType>, // maps to GeoObjectType name value
     status : string<Term>
-    // user defined and additional system defined attributes added to properties list.
+    ... user defined and additional system defined attributes added to properties list.
   }
 }
 ```
@@ -34,7 +34,7 @@ Defines a representation of an object returned from a request to the Common Geo-
 
 
 ### TreeNode
-Defines an object in a relationship tree hierarchy. 
+Defines an object in a relationship tree hierarchy. A TreeNode contains the current GeoObject as well as it's child TreeNodes that provide the ability to traverse down the relationship hierarchy.
 
 ```
 {
@@ -51,6 +51,8 @@ Defines an object in a relationship tree hierarchy.
 # Meta Model Definitions
 
 ### GeoObjectType
+Defines an object that describes the type of GeoObject that references it. The GeoObjectType stores data containing localized descriptive values and attributes about the object.
+
 ```
 {
   name : string,
@@ -67,25 +69,29 @@ Defines an object in a relationship tree hierarchy.
 |attributes | Array of attribute objects.| AttributeNumericType, AttributeTermType |
 
 ### Term
+// TODO: this
 ```
 {
   name : string,
-  localizedLabel : string
+  localizedLabel : string,
+  children : Term[]
 }
 ```
 | Property | Description |
 |---|---|
 |name | Name of the term. |
 |localizedLabel | Localized Label for the term. |
+|children | Array of Term objects that are children to the current term in the hierarchy. |
 
 ## Attribute Types
-All GeoObjectType objects have a reference to an Attribute type so that name and label properties can both be localized.
+Attributes store information that describes properties of an object. All GeoObjectType objects have a reference to an Attribute type so that name and label properties can both be localized.
 
 ### AttributeTermType
+Defines an object that contains localized descriptive data as well as references to references to a Term object. 
 ```
 {
    name : string,
-   label : string,
+   localizedLabel : string,
    type : string,
    term : string<Term>
 }
@@ -98,6 +104,8 @@ All GeoObjectType objects have a reference to an Attribute type so that name and
 |term | Term UID which this attribute references. ||
 
 ### AttributeNumericType
+Defines an object that contains localized descriptive data. 
+
 ```
 {
    name : string,
