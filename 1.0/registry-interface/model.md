@@ -30,7 +30,7 @@ All properties have a reference to type Attribute so that name and label propert
 |properties | [GeoJSON standard properties object containing non-standard properties.](https://tools.ietf.org/html/rfc7946)||
 |properties.uid | UID for the object. ||
 |properties.name | Name of the object ||
-|properties.type | Type of the object represented as a GeoObjectType object | GeoObjectType |
+|properties.type | GeoObjectType UID which this object references. | |
 |properties.status | Term UID which this object references.  ||
 
 
@@ -94,7 +94,7 @@ Defines an object in a relationship tree hierarchy.
 |---|---|---|
 |name | Name of the term. ||
 |localizedLabel | Localized label for the term. ||
-|type | Type of attribute. |TERM|
+|type | Type of attribute. |"TERM"|
 |term | Term UID which this attribute references. ||
 
 ### AttributeNumericType
@@ -109,6 +109,6 @@ Defines an object in a relationship tree hierarchy.
 |---|---|---|
 |name | Name of the term. ||
 |localizedLabel | Localized label for the term. ||
-|type | Type of attribute. |NUMBER|
+|type | Type of attribute. |"NUMBER"|
 
 
