@@ -21,15 +21,15 @@ All properties have a reference to type Attribute so that name and label propert
   }
 }
 ```
-| Property | Description |
-|---|---|
-|type | GeoJSON standard type property |
-|geometry | GeoJSON standard geometry object |
-|properties | GeoJSON standard properties object containing non-standard properties.|
-|properties.uid | |
-|properties.name | |
-|properties.type | |
-|properties.status | |
+| Property | Description |Possible Values|
+|---|---|--|
+|type | GeoJSON standard type property ||
+|geometry | GeoJSON standard geometry object ||
+|properties | GeoJSON standard properties object containing non-standard properties.||
+|properties.uid | UID for the object. ||
+|properties.name | Name of the object ||
+|properties.type | Type of the object represented as a GeoObjectType object | GeoObjectType |
+|properties.status | Term UID which this object references.  ||
 
 
 ### TreeNode
@@ -41,10 +41,10 @@ Defines an object in a relationship tree hierarchy.
   "children" : TreeNode[]
 }
 ```
-| Property | Description |
-|---|---|
-|geoObject | A GeoObject object. |
-|children | An array of TreeNode objects. |
+| Property | Description |Possible Values|
+|---|---|--|
+|geoObject | A GeoObject object. ||
+|children | An array of TreeNode objects. ||
 
 
 # Meta Model Definitions
@@ -58,11 +58,12 @@ Defines an object in a relationship tree hierarchy.
   attributes : attributeType[]
 }
 ``` 
-| Property | Description |
-|---|---|
-|name | Name of the type. |
-|localizedLabel | Localized label for the object. |
-|localizedDescription | Localized description of the object. |
+| Property | Description |Possible Values|
+|---|---|---|
+|name | Name of the type. ||
+|localizedLabel | Localized label for the object. ||
+|localizedDescription | Localized description of the object. ||
+|attributes | Array of attribute objects.| AttributeNumericType, AttributeTermType |
 
 ### Term
 ```
