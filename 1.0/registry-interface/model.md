@@ -77,7 +77,8 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 |attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
 
 ### Term
-// TODO: this
+A term is a node in an ontology classification. A term can have a tree association with other terms. The Common Geo-Reigstry allows administrators to define attributes on GeoObject types at runtime. One can define an enumerated list (or select list) attribute and specify the possible values. For example, one could add the attribute "FacilityType" to HealthFacility with possible values "Clinic", "Maternity Ward", etc. Although most likely only single dimentional lists (i.e. list values with no children) will be defined, this design facilitates tree classifications which are useful for things like taxonomies. In the Health Facility example, it would allow for subcategories of Health Facility to be defined.
+
 ```
 {
   name : string,
@@ -86,10 +87,10 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 }
 ```
 | Property | Description |
-|---|---|
-|name | Name of the term. |
-|localizedLabel | Localized Label for the term. |
-|children | Array of Term objects that are children to the current term in the hierarchy. |
+|---|---|---|
+|name | Human readable identifier of the term | "CLINIC", "MAT_WARD"| 
+|localizedLabel | Localized Label for the term. | "Clinic", "Maternity Ward" |
+|children | Array of Term objects that are children to the current term in the hierarchy. | |
 
 ## Attribute Types
 Attributes store information that describes properties of an object. All GeoObjectType objects have a reference to an Attribute type so that name and label properties can both be localized.
