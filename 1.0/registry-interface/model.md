@@ -1,7 +1,11 @@
 # Location Model Definitions
 
 ### GeoObject
-Defines an object returned from a request to the Common Geo-Registry.  GeoObjects store data needed for accessing localized values from a metadata abstraction.
+A programming domain abstraction for a geographic feature that represents a location (point type objects) such as a village, household, or an area (polygon type object) such as a focus area that includes its geometry and attributes.
+
+GeoObjects just contain data and not metadata. Metadata include localized labels and all possible select list options for a term attribute.
+
+According to the HGLC specification, attributes on GeoObject Types can be defined at runtime using an administrative user interface. Metadata that describe a GeoObject's type is defined in the GeoObjecType JSON format.
 
 
 ```
