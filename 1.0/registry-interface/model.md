@@ -32,13 +32,16 @@ According to the HGLC specification, attributes on GeoObject Types can be define
 |geometry.coordinates | [GeoJSON standard geometry object coordinates array.](https://tools.ietf.org/html/rfc7946) ||
 |properties | [GeoJSON standard properties object containing non-standard properties.](https://tools.ietf.org/html/rfc7946)||
 |properties.uid | UID for the object. ||
-|properties.name | Name of the object ||
-|properties.type | GeoObjectType UID which this object references. | |
-|properties.status | Term UID which this object references.  ||
+|properties.name | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. |A postal code|
+|properties.type | GeoObjectType NAME which this object references. | "Village", "Household", "HealthFacility" |
+|properties.status | Term NAME which this object references.  ||
 
 
 ### TreeNode
-Defines an object in a relationship tree hierarchy. A TreeNode contains the current GeoObject as well as it's child TreeNodes that provide the ability to traverse down the relationship hierarchy.
+A TreeNode is the object type that is returned when a call is made to the Common Geo-Registry to fetch a tree of GeoObjects. For example, fetching all children of a GeoObject with a given UUID would return a TreeNode tree structure represending children of the given GeoObject. The Common Geo-Registry will provide a number of method for fetching different kinds of GeoObject trees.
+
+Note: Given that the Common Geo-Registry can model mulptiple hierarchies and a GeoObject can have multiple parents, the relationships between GeoObjects are actually a graph and not a tree. Consequently, when fetching a tree structure that represents transitive child relationships from different hierarchy paths, duplicate GeoObjects can occur in different parts of the tree representing different paths to the same GeoObject. For example, a given Villiage would be returned as a child of a District but would also be returned as a child of a Focus Area if all children of a Province that contains the District and the Focus Area are returned. Eventually the Common Geo-Registry and this specification will provide guidelines on how to filter out such duplicates so as to reduce the data footprint of fetching a large tree, but for the current interation this is not addressed. First let's get it working and then optimize.
+
 
 ```
 {
@@ -49,13 +52,14 @@ Defines an object in a relationship tree hierarchy. A TreeNode contains the curr
 | Property | Description |Possible Values|
 |---|---|--|
 |geoObject | A GeoObject object. ||
-|children | An array of TreeNode objects. ||
+|children | An array of TreeNode objects representing the children of the GeoObject||
 
 
 # Meta Model Definitions
 
 ### GeoObjectType
-Defines an object that describes the type of GeoObject that references it. The GeoObjectType stores data containing localized descriptive values and attributes about the object.
+Defines the metadata of a GeoObject Type, such as Village, Household, or Health Facility. It contains the localized label of the type (e.g. "Health Facility") as well as properties of the attributes it defines, including localized attribute labels. This object contains the metadata needed by the client, either mobile or server, for all GeoObjects of this type so that this information does not need to live on the GeoObject itself. The GeoOject just contains data values. The GeoObjectType contains information about the GeoObject's type and the attributes it defines.
+
 
 ```
 {
@@ -67,7 +71,7 @@ Defines an object that describes the type of GeoObject that references it. The G
 ``` 
 | Property | Description |Possible Values|
 |---|---|---|
-|name | Name of the type. ||
+|name | Name of the type. This is a human readable ID field.  |"HeathFacility"|
 |localizedLabel | Localized label for the object. ||
 |localizedDescription | Localized description of the object. ||
 |attributes | Array of attribute objects.| AttributeNumericType, AttributeTermType |
