@@ -93,10 +93,10 @@ A term is a node in an ontology classification. A term can have a tree associati
 |children | Array of Term objects that are children to the current term in the hierarchy. | |
 
 ## Attribute Types
-Attributes store information that describes properties of an object. All GeoObjectType objects have a reference to an Attribute type so that name and label properties can both be localized.
+Attributes store information that describes properties of an object. All GeoObjectType objects have a reference to an array of Attribute Type objects. All Attribute Types have a name and a localizedLabel property. Other Attribute Types have additional properties. For example, Attribute Term Types define a list of possible values (i.e. and enumerated list or tree) for a given attribute.
 
 ### AttributeTermType
-Defines an object that contains localized descriptive data as well as references to references to a Term object. 
+Defines an object that contains localized descriptive data as well as a reference to a Term object. 
 ```
 {
    name : string,
@@ -107,13 +107,13 @@ Defines an object that contains localized descriptive data as well as references
 ```
 | Property | Description | Possible Values |
 |---|---|---|
-|name | Name of the term. ||
-|localizedLabel | Localized label for the term. ||
+|name | Human readable ID of the attribute | "FacilityType" |
+|localizedLabel | Localized label for the term. |"Facility Type", "Facilidad de Salud"  |
 |type | Type of attribute. |"TERM"|
-|term | Term UID which this attribute references. ||
+|term | Term NAME which this attribute references, which is the root Term whose children are possible values for this attribute | "FacilityType" with children terms "CLINIC", "MAT_WARD", etc. |
 
 ### AttributeNumericType
-Defines an object that contains localized descriptive data. 
+Defines a numeric attribute. 
 
 ```
 {
@@ -124,8 +124,23 @@ Defines an object that contains localized descriptive data.
 ```
 | Property | Description | Possible Values |
 |---|---|---|
-|name | Name of the term. ||
-|localizedLabel | Localized label for the term. ||
+|name | Human readable ID of the attribute | "NumOfBeds" |
+|localizedLabel | Localized label for the term. | "Number of Beds"|
 |type | Type of attribute. |"NUMBER"|
 
 
+### AttributeDateType
+Defines a date attribute. 
+
+```
+{
+   name : string,
+   localizedLabel : string,
+   type : string
+}
+```
+| Property | Description | Possible Values |
+|---|---|---|
+|name | Human readable ID of the attribute | "DateOpened" |
+|localizedLabel | Localized label for the term. | "Date Opened"|
+|format | format of the date |"yyyyy-mm-dd"|
