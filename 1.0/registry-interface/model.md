@@ -42,19 +42,26 @@ A TreeNode is the object type that is returned when a call is made to the Common
 
 Note: Given that the Common Geo-Registry can model mulptiple hierarchies and a GeoObject can have multiple parents, the relationships between GeoObjects are actually a graph and not a tree. Consequently, when fetching a tree structure that represents transitive child relationships from different hierarchy paths, duplicate GeoObjects can occur in different parts of the tree representing different paths to the same GeoObject. For example, a given Villiage would be returned as a child of a District but would also be returned as a child of a Focus Area if all children of a Province that contains the District and the Focus Area are returned. Eventually the Common Geo-Registry and this specification will provide guidelines on how to filter out such duplicates so as to reduce the data footprint of fetching a large tree, but for the current interation this is not addressed. First let's get it working and then optimize.
 
-
 ```
 {
   geoObject : GeoObject,
   hierarchyType : string<HierarchyType>,
   children : TreeNode[]
 }
+
+// OR
+
+{
+  geoObject : GeoObject,
+  hierarchyType : string<HierarchyType>,
+  parents : TreeNode[]
+}
 ```
 | Property | Description |Possible Values|
 |---|---|--|
 |geoObject | A GeoObject object. ||
 |hierarchyType | The name of the hierarchy type in the relationship | "Geopolitical"|
-|children | An array of TreeNode objects representing the children of the GeoObject||
+|children or parents | An array of TreeNode objects representing the children or parents of the GeoObject||
 
 
 # Meta Model Definitions
