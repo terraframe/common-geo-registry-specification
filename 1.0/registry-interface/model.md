@@ -38,20 +38,22 @@ According to the HGLC specification, attributes on GeoObject Types can be define
 
 
 ### TreeNode
-A TreeNode is the object type that is returned when a call is made to the Common Geo-Registry to fetch a tree of GeoObjects. For example, fetching all children of a GeoObject with a given UUID would return a TreeNode tree structure represending children of the given GeoObject. The Common Geo-Registry will provide a number of method for fetching different kinds of GeoObject trees.
+A TreeNode is the object type that is returned when a call is made to the Common Geo-Registry to fetch a tree of GeoObjects. For example, fetching all children of a GeoObject with a given UUID would return a TreeNode tree structure represending children of the given GeoObject. The Common Geo-Registry will provide a number of methods for fetching different kinds of GeoObject trees.
 
 Note: Given that the Common Geo-Registry can model mulptiple hierarchies and a GeoObject can have multiple parents, the relationships between GeoObjects are actually a graph and not a tree. Consequently, when fetching a tree structure that represents transitive child relationships from different hierarchy paths, duplicate GeoObjects can occur in different parts of the tree representing different paths to the same GeoObject. For example, a given Villiage would be returned as a child of a District but would also be returned as a child of a Focus Area if all children of a Province that contains the District and the Focus Area are returned. Eventually the Common Geo-Registry and this specification will provide guidelines on how to filter out such duplicates so as to reduce the data footprint of fetching a large tree, but for the current interation this is not addressed. First let's get it working and then optimize.
 
 
 ```
 {
-  "geoObject" : GeoObject,
-  "children" : TreeNode[]
+  geoObject : GeoObject,
+  hierarchyType : string<HierarchyType>,
+  children : TreeNode[]
 }
 ```
 | Property | Description |Possible Values|
 |---|---|--|
 |geoObject | A GeoObject object. ||
+|hierarchyType | The name of the hierarchy type in the relationship | "Geopolitical"|
 |children | An array of TreeNode objects representing the children of the GeoObject||
 
 
