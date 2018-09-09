@@ -77,7 +77,7 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 |attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
 
 ### HierarchyType
-Defines the GeoObjectTypes that participate in a hierarchy. A relationship between GeoObjectTypes. GeoObjects can relate to one another in different contexts. For example, a village can be located within a distruct but also be administered by a health administration zone. 
+Defines a hierarchy type and specifies which GeoObjectTypes participate in that hierarchy. GeoObjects can relate to one another in different contexts. For example, a village can be located within a distruct but also be administered by a health administration zone. A separate HierarchyType object would be defined for "GeoPolitical" and "HealthAdministrative".
 
 
 ```
@@ -86,15 +86,14 @@ Defines the GeoObjectTypes that participate in a hierarchy. A relationship betwe
   localizedLabel : string,
   localizedDescription : string,
   rootGeoObjectTypes : HierarchyNode[]
-
 }
 ``` 
 | Property | Description |Possible Values|
 |---|---|---|
-|name | Name of the type. This is a human readable ID field.  |"HeathFacility"|
-|localizedLabel | Localized label for the object. |"Health Facility" for English or "Facilidad de Salud" for Spanish, etc.|
-|localizedDescription | Localized description of the object. | "Health Facilities are where people go to seek treatment..." |
-|attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
+|name | Name of the hierarchy type. This is a human readable ID field.  |"GeoPplitical", "HealthAdministrative"|
+|localizedLabel | Localized label for the hierarchy type. |"Geopolitical" for English or "Geopolítico" for Spanish, etc.|
+|localizedDescription | Localized description of the object. | "The Geopolitical hierarchy represents relationships between Geopolitical units... " |
+|rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy | Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy|   
 
 ### HierarchyNode
 A TreeNode is the object type that is returned when a call is made to the Common Geo-Registry to fetch a tree of GeoObjects. For example, fetching all children of a GeoObject with a given UUID would return a TreeNode tree structure represending children of the given GeoObject. The Common Geo-Registry will provide a number of method for fetching different kinds of GeoObject trees.
