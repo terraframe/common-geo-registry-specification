@@ -76,6 +76,41 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 |localizedDescription | Localized description of the object. | "Health Facilities are where people go to seek treatment..." |
 |attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
 
+### HierarchyType
+Defines the GeoObjectTypes that participate in a hierarchy. A relationship between GeoObjectTypes. GeoObjects can relate to one another in different contexts. For example, a village can be located within a distruct but also be administered by a health administration zone. 
+
+
+```
+{
+  name : string,
+  localizedLabel : string,
+  localizedDescription : string,
+  rootGeoObjectTypes : HierarchyNode[]
+
+}
+``` 
+| Property | Description |Possible Values|
+|---|---|---|
+|name | Name of the type. This is a human readable ID field.  |"HeathFacility"|
+|localizedLabel | Localized label for the object. |"Health Facility" for English or "Facilidad de Salud" for Spanish, etc.|
+|localizedDescription | Localized description of the object. | "Health Facilities are where people go to seek treatment..." |
+|attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
+
+### HierarchyNode
+A TreeNode is the object type that is returned when a call is made to the Common Geo-Registry to fetch a tree of GeoObjects. For example, fetching all children of a GeoObject with a given UUID would return a TreeNode tree structure represending children of the given GeoObject. The Common Geo-Registry will provide a number of method for fetching different kinds of GeoObject trees.
+
+```
+{
+  "geoObjectType" : GeoObjectType,
+  "children" : HierarchyNode[]
+}
+```
+| Property | Description |Possible Values|
+|---|---|--|
+|geoObject | A GeoObject object. ||
+|children | An array of TreeNode objects representing the children of the GeoObject||
+
+
 ### Term
 A term is a node in an ontology classification. A term can have a tree association with other terms. The Common Geo-Reigstry allows administrators to define attributes on GeoObject types at runtime. One can define an enumerated list (or select list) attribute and specify the possible values. For example, one could add the attribute "FacilityType" to HealthFacility with possible values "Clinic", "Maternity Ward", etc. Although most likely only single dimentional lists (i.e. list values with no children) will be defined, this design facilitates tree classifications that are useful for things like taxonomies. In the Health Facility example, it would allow for subcategories of Health Facility to be defined. These terms are located on the metadata attribute definition,
 
