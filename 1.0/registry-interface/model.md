@@ -77,8 +77,7 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 |attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
 
 ### HierarchyType
-Defines a hierarchy type and specifies which GeoObjectTypes participate in that hierarchy. GeoObjects can relate to one another in different contexts. For example, a village can be located within a distruct but also be administered by a health administration zone. A separate HierarchyType object would be defined for "GeoPolitical" and "HealthAdministrative".
-
+Defines a hierarchy type and specifies which GeoObjectTypes participate in that hierarchy. GeoObjects can relate to one another in different contexts. For example, a Village can be located within a Distruct but also be administered by a health administration zone. For example, a separate HierarchyType object would be defined for "GeoPolitical" and "HealthAdministrative" hierarchies.
 
 ```
 {
@@ -96,7 +95,7 @@ Defines a hierarchy type and specifies which GeoObjectTypes participate in that 
 |rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy | Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy|   
 
 ### HierarchyNode
-A TreeNode is the object type that is returned when a call is made to the Common Geo-Registry to fetch a tree of GeoObjects. For example, fetching all children of a GeoObject with a given UUID would return a TreeNode tree structure represending children of the given GeoObject. The Common Geo-Registry will provide a number of method for fetching different kinds of GeoObject trees.
+A HierarchyNode is an object used by HierarchyType that models the tree of GeoObjectTypes that participate in the hierarchy.  
 
 ```
 {
@@ -107,7 +106,7 @@ A TreeNode is the object type that is returned when a call is made to the Common
 | Property | Description |Possible Values|
 |---|---|--|
 |geoObject | A GeoObject object. ||
-|children | An array of TreeNode objects representing the children of the GeoObject||
+|children | An array of HierarchyNode objects representing children GeoObjectTypes of the geoObject in the given hierarchy.||
 
 
 ### Term
