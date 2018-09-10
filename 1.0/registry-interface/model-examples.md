@@ -1,4 +1,4 @@
-### EXAMPLE - Single Point location 
+### EXAMPLE - GeoObject
 
 ```
 {
@@ -8,59 +8,96 @@
     "coordinates": [0, 0]
   },
   "properties": {
-    "id": "EXAMPLE ID"
-    "name": "EXAMPLE NAME"
+    "uid": "EXAMPLE ID",
+    "name": "EXAMPLE NAME",
+    "type" : "EXAMPLE ID",
+    "status" : "EXAMPLE ID"
   }
 }
 ```
 
-### EXAMPLE - Single Polygon location
+### EXAMPLE - TreeNode
 ```
 {
-  "type": "Feature",
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [
-        [
-            [100.0, 0.0],
-            [101.0, 0.0],
-            [101.0, 1.0],
-            [100.0, 1.0],
-            [100.0, 0.0]
-        ]
-    ]
-  },
-  "properties": {
-    "id": "EXAMPLE ID"
-    "name": "EXAMPLE NAME"
-  }
+  "geoObject" : EXAMPLEOBJECT,
+  "hierarchyType" : "EXAMPLE ID",
+  "children" : [
+    {
+      "geoObject" : EXAMPLEOBJECT,
+      "hierarchyType" : "EXAMPLE ID",
+      "children" : []
+    },{
+      "geoObject" : EXAMPLEOBJECT,
+      "hierarchyType" : "EXAMPLE ID",
+      "children" : [
+        {
+          "geoObject" : EXAMPLEOBJECT,
+          "hierarchyType" : "EXAMPLE ID",
+          "children" : []
+        }
+      ]
+    }
+  ]
 }
 ```
 
-### EXAMPLE - Multiple locations
+### EXAMPLE - GeoObjectType
 ```
-[
-    {
-        "type": "Feature",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [0, 0]
-        },
-        "properties": {
-            "id": "EXAMPLE ID"
-            "name": "EXAMPLE NAME"
-        }
-    },
-    {
-        "type": "Feature",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [0, 0]
-        },
-        "properties": {
-            "id": "EXAMPLE ID"
-            "name": "EXAMPLE NAME"
-        }
-    }
-]
+{
+  "name" : "EXAMPLE NAME",
+  "localizedLabel" : "EXAMPLE LABEL",
+  "localizedDescription" : "EXAMPLE DESCRIPTION",
+  "attributes" : [//TODO: AttributeTypes]
+}
+```
+
+### EXAMPLE - HierarchyType
+```
+{
+  "name" : "EXAMPLE NAME",
+  "localizedLabel" : "EXAMPLE LABEL",
+  "localizedDescription" : "EXAMPLE DESCRIPTION",
+  "rootGeoObjectTypes" : [//TODO: HierarchyNode]
+}
+```
+
+### EXAMPLE - HierarchyNode
+```
+{
+  "geoObjectType" : {
+    "name" : "EXAMPLE NAME",
+    "localizedLabel" : "EXAMPLE LABEL",
+    "localizedDescription" : "EXAMPLE DESCRIPTION",
+    "attributes" : [//TODO: AttributeTypes]
+  }, 
+  "children" : [//TODO: HierarchyNode]
+}
+```
+
+### EXAMPLE - Term
+```
+{
+  "name" : "EXAMPLE NAME",
+  "localizedLabel" : "EXAMPLE LABEL",
+  children : [// TODO: Term]
+}
+```
+
+### EXAMPLE - AttributeTermType
+```
+{
+  "name" : "EXAMPLE NAME",
+  "localizedLabel" : "EXAMPLE LABEL",
+  "type" : "TERM",
+  "term" : "EXAMPLE ID"
+}
+```
+
+### EXAMPLE - AttributeNumericType
+```
+{
+  "name" : "EXAMPLE NAME",
+  "localizedLabel" : "EXAMPLE LABEL",
+  "type" : "NUMBER"
+}
 ```
