@@ -6,48 +6,101 @@
 public interface RegistryInterface {
 
     /**
-    * Access points for getting a single location object.
+    * Returns a GeoObject with the given uid.
     *
+    * @pre
+    * @post
+    *
+    * @param uid The UID of the GeoObject.
+    *
+    * @returns a GeoObject in GeoJSON format with the given uid.
+    * @throws
     **/
-    public JSONObject getGeoObject(String id);  
+    public GeoObject getGeoObject(String uid);  
     
     /**
-    * Access points for getting child location objects of a location.
+    * Create a new GeoObject in the Common Geo-Registry
     *
+    * @pre UID of the GeoObject needs to have been issued by the Common Geo-Registry
+    * @post geoObject is persisted in the Common Geo-Registry
+    *
+    * @param geoObject in GeoJSON format of the newly created.
+    *
+    * @returns 
+    * @throws //TODO
     **/
-    public JSONArray getChildGeoObjects(String id);
+    public void createGeoObject(GeoJSON geoObject);  
     
+    /**
+    * Update a new GeoObject in the Common Geo-Registry
+    *
+    * @pre 
+    * @post 
+    *
+    * @param geoObject in GeoJSON format to be updated.
+    *
+    * @returns 
+    * @throws //TODO
+    **/
+    public void updateGeoObject(GeoJSON geoObject);  
+    
+    /**
+    * Get children of the given GeoObject
+    *
+    * @pre 
+    * @post 
+    *
+    * @param parentUid UID of the parent object for which the call fetches children.
+    * @param childrentTypes An array of GeoObjectType names of the types of children GeoObjects to fetch. If blank then return children of all types.
+    * @param recursive TRUE if recursive children of the given parent with the given types should be returned, FALSE if only single level children should be returned.  
+    * 
+    * @returns
+    * @throws
+    **/
     public TreeNode getChildGeoObjects(String parentUid, String[] childrenTypes, Boolean recursive);
      
     /**
-    * Access points for getting parent location objects of a location.
+    * Get parents of the given GeoObject
     *
-    **/
-    public JSONArray getParentGeoObjects(String id);
-    
-    public TreeNode getParentGeoObjects(String parentUid, String[] childrenTypes, Boolean recursive);
+    * @pre 
+    * @post 
+    *
+    * @param childUid UID of the child object for which the call fetches parents.
+    * @param parentTypes An array of GeoObjectType names of the types of parent GeoObjects to fetch. If blank then return parents of all types.
+    * @param recursive TRUE if recursive parents of the given parent with the given types should be returned, FALSE if only single level parents should be returned.  
+    * 
+    * @returns
+    * @throws
+    **/   
+    public TreeNode getParentGeoObjects(String childUid, String[] parentTypes, Boolean recursive);
     
     
     /**
-    * Access points for getting UIDs. Commonly used to retrieve an acceptable ID which could be used to persist a new GeoObject.
+    * Get list of valid UIDs for use in creating new GeoObjec The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
     *
+    * @pre 
+    * @post 
+    *
+    * @param numberOfUIDs NumberofUIDs that the Common Geo-Registry will issue to the mobile device.
+    *
+    * @returns
+    * @throws
     **/
     String[] getUIDs(Integer : numberOfUIDs);
     
     
     
     /**
-    * Access points for getting UIDs. Commonly used to retrieve an acceptable ID which could be used to persist a new GeoObject.
+    * Return GeoOjectType objects that define the given list of types.
     *
-    **/
-    GeoObjectType[] getMetadata(String[] types);
-    
-    
-    
-    
-    /**
-    * Access points for setting location objects. 
+    * @pre 
+    * @post 
     *
+    * @param types An array of GeoObjectType names. If blank then all GeoObjectType objects are returned.
+    *
+    * @returns
+    * @throws
     **/
-    public Boolean setLocation(JSONObject location);
+    GeoObjectType[] getGeoObjectTypes(String[] types);
+    
 }
