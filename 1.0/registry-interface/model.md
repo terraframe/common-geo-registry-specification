@@ -33,7 +33,7 @@ According to the HGLC specification, attributes on GeoObject Types can be define
 |properties | [GeoJSON standard properties object containing non-standard properties.](https://tools.ietf.org/html/rfc7946)||
 |properties.uid | UID for the object. ||
 |properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. ||A postal code|
-|properties.type | GeoObjectType NAME which this object references. | "Village", "Household", "HealthFacility" ||
+|properties.type | GeoObjectType NAME which this object references. || "Village", "Household", "HealthFacility" |
 |properties.status | Term NAME which this object references.  |||
 
 
