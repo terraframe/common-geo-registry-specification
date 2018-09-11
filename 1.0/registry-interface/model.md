@@ -24,17 +24,17 @@ According to the HGLC specification, attributes on GeoObject Types can be define
   }
 }
 ```
-| Property | Description |Possible Values|
-|---|---|--|
+| Property | Description |Possible Values|Example|
+|---|---|---|---|
 |type | [GeoJSON standard type property](https://tools.ietf.org/html/rfc7946) |"Feature", "FeatureCollection"|
 |geometry | [GeoJSON standard geometry object](https://tools.ietf.org/html/rfc7946) ||
 |geometry.type | [GeoJSON standard geometry object type.](https://tools.ietf.org/html/rfc7946) |"Point", "MultiPoint", "LineString","MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection"|
 |geometry.coordinates | [GeoJSON standard geometry object coordinates array.](https://tools.ietf.org/html/rfc7946) ||
 |properties | [GeoJSON standard properties object containing non-standard properties.](https://tools.ietf.org/html/rfc7946)||
 |properties.uid | UID for the object. ||
-|properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. |A postal code|
-|properties.type | GeoObjectType NAME which this object references. | "Village", "Household", "HealthFacility" |
-|properties.status | Term NAME which this object references.  ||
+|properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. ||A postal code|
+|properties.type | GeoObjectType NAME which this object references. | "Village", "Household", "HealthFacility" ||
+|properties.status | Term NAME which this object references.  |||
 
 
 ### TreeNode
@@ -57,11 +57,11 @@ Note: Given that the Common Geo-Registry can model mulptiple hierarchies and a G
   parents : TreeNode[]
 }
 ```
-| Property | Description |Possible Values|
-|---|---|--|
+| Property | Description |Possible Values|Example|
+|---|---|---|---|
 |geoObject | A GeoObject object. ||
-|hierarchyType | The name of the hierarchy type in the relationship | "Geopolitical"|
-|children or parents | An array of TreeNode objects representing the children or parents of the GeoObject||
+|hierarchyType | The name of the hierarchy type in the relationship || "Geopolitical"|
+|children or parents | An array of TreeNode objects representing the children or parents of the GeoObject|||
 
 
 # Meta Model Definitions
@@ -78,12 +78,12 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
   attributes : attributeType[]
 }
 ``` 
-| Property | Description |Possible Values|
-|---|---|---|
-|code | Human readable code of the type. This is a human readable ID field.  |"HeathFacility"|
-|localizedLabel | Localized label for the object. |"Health Facility" for English or "Facilidad de Salud" for Spanish, etc.|
-|localizedDescription | Localized description of the object. | "Health Facilities are where people go to seek treatment..." |
-|attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
+| Property | Description |Possible Values|Example|
+|---|---|---|---|
+|code | Human readable code of the type. This is a human readable ID field.  ||"HeathFacility"|
+|localizedLabel | Localized label for the object. |"Health Facility" for English or "Facilidad de Salud" for Spanish, etc.||
+|localizedDescription | Localized description of the object. | "Health Facilities are where people go to seek treatment..." ||
+|attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType ||
 
 ### HierarchyType
 Defines a hierarchy type and specifies which GeoObjectTypes participate in that hierarchy. GeoObjects can relate to one another in different contexts. For example, a Village can be located within a Distruct but also be administered by a health administration zone. For example, a separate HierarchyType object would be defined for "GeoPolitical" and "HealthAdministrative" hierarchies.
@@ -96,12 +96,12 @@ Defines a hierarchy type and specifies which GeoObjectTypes participate in that 
   rootGeoObjectTypes : HierarchyNode[]
 }
 ``` 
-| Property | Description |Possible Values|
-|---|---|---|
-|code | Human readable code of the hierarchy type. This is a human readable ID field.  |"GeoPplitical", "HealthAdministrative"|
-|localizedLabel | Localized label for the hierarchy type. |"Geopolitical" for English or "Geopolítico" for Spanish, etc.|
-|localizedDescription | Localized description of the object. | "The Geopolitical hierarchy represents relationships between Geopolitical units... " |
-|rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy | Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy|   
+| Property | Description |Possible Values|Example|
+|---|---|---|---|
+|code | Human readable code of the hierarchy type. This is a human readable ID field.  ||"GeoPplitical", "HealthAdministrative"|
+|localizedLabel | Localized label for the hierarchy type. |"Geopolitical" for English or "Geopolítico" for Spanish, etc.||
+|localizedDescription | Localized description of the object. | "The Geopolitical hierarchy represents relationships between Geopolitical units... " ||
+|rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy | Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy||   
 
 ### HierarchyNode
 A HierarchyNode is an object used by HierarchyType that models the tree of GeoObjectTypes that participate in the hierarchy.  
@@ -112,10 +112,10 @@ A HierarchyNode is an object used by HierarchyType that models the tree of GeoOb
   "children" : HierarchyNode[]
 }
 ```
-| Property | Description |Possible Values|
-|---|---|--|
-|geoObject | A GeoObject object. ||
-|children | An array of HierarchyNode objects representing children GeoObjectTypes of the geoObject in the given hierarchy.||
+| Property | Description |Possible Values|Example|
+|---|---|---|---|
+|geoObject | A GeoObject object. |||
+|children | An array of HierarchyNode objects representing children GeoObjectTypes of the geoObject in the given hierarchy.|||
 
 
 ### Term
@@ -128,11 +128,11 @@ A term is a node in an ontology classification. A term can have a tree associati
   children : Term[]
 }
 ```
-| Property | Description | Possible Values |
-|---|---|---|
-|code | Human readable identifier of the term | "CLINIC", "MAT_WARD"| 
-|localizedLabel | Localized Label for the term. | "Clinic", "Maternity Ward" |
-|children | Array of Term objects that are children to the current term in the hierarchy. | |
+| Property | Description | Possible Values | Example |
+|---|---|---|---|
+|code | Human readable identifier of the term || "CLINIC", "MAT_WARD"| 
+|localizedLabel | Localized Label for the term. || "Clinic", "Maternity Ward" |
+|children | Array of Term objects that are children to the current term in the hierarchy. | ||
 
 ## Attribute Types
 Attributes store information that describes properties of an object. All GeoObjectType objects have a reference to an array of Attribute Type objects. All Attribute Types have a name and a localizedLabel property. Other Attribute Types have additional properties. For example, Attribute Term Types define a list of possible values (i.e. and enumerated list or tree) for a given attribute.
@@ -147,12 +147,12 @@ Defines an object that contains localized descriptive data as well as a referenc
    term : string<Term>
 }
 ```
-| Property | Description | Possible Values |
-|---|---|---|
-|code | Human readable ID of the attribute | "FacilityType" |
-|localizedLabel | Localized label for the term. |"Facility Type", "Facilidad de Salud"  |
-|type | Type of attribute. |"TERM"|
-|term | Term NAME which this attribute references, which is the root Term whose children are possible values for this attribute | "FacilityType" with children terms "CLINIC", "MAT_WARD", etc. |
+| Property | Description | Possible Values | Example |
+|---|---|---|---|
+|code | Human readable ID of the attribute || "FacilityType" |
+|localizedLabel | Localized label for the term. ||"Facility Type", "Facilidad de Salud"  |
+|type | Type of attribute. |"TERM"||
+|term | Term NAME which this attribute references, which is the root Term whose children are possible values for this attribute || "FacilityType" with children terms "CLINIC", "MAT_WARD", etc. |
 
 ### AttributeNumericType
 Defines a numeric attribute. 
@@ -164,11 +164,11 @@ Defines a numeric attribute.
    type : string
 }
 ```
-| Property | Description | Possible Values |
-|---|---|---|
-|code | Human readable ID of the attribute | "NumOfBeds" |
-|localizedLabel | Localized label for the term. | "Number of Beds"|
-|type | Type of attribute. |"NUMBER"|
+| Property | Description | Possible Values | Example |
+|---|---|---|---|
+|code | Human readable ID of the attribute || "NumOfBeds" |
+|localizedLabel | Localized label for the term. || "Number of Beds"|
+|type | Type of attribute. |"NUMBER"||
 
 
 ### AttributeDateType
@@ -181,8 +181,8 @@ Defines a date attribute.
    type : string
 }
 ```
-| Property | Description | Possible Values |
-|---|---|---|
-|code | Human readable ID of the attribute | "DateOpened" |
-|localizedLabel | Localized label for the term. | "Date Opened"|
-|format | format of the date |"yyyyy-mm-dd"|
+| Property | Description | Possible Values | Example |
+|---|---|---|---|
+|code | Human readable ID of the attribute || "DateOpened" |
+|localizedLabel | Localized label for the term. || "Date Opened"|
+|format | format of the date |"yyyyy-mm-dd"||
