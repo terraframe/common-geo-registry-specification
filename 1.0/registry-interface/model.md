@@ -99,9 +99,9 @@ Defines a hierarchy type and specifies which GeoObjectTypes participate in that 
 | Property | Description |Possible Values|Example|
 |---|---|---|---|
 |code | Human readable code of the hierarchy type. This is a human readable ID field.  ||"GeoPplitical", "HealthAdministrative"|
-|localizedLabel | Localized label for the hierarchy type. |"Geopolitical" for English or "Geopolítico" for Spanish, etc.||
-|localizedDescription | Localized description of the object. | "The Geopolitical hierarchy represents relationships between Geopolitical units... " ||
-|rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy | Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy||   
+|localizedLabel | Localized label for the hierarchy type. ||"Geopolitical" for English or "Geopolítico" for Spanish, etc.|
+|localizedDescription | Localized description of the object. || "The Geopolitical hierarchy represents relationships between Geopolitical units... " |
+|rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy || Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy|   
 
 ### HierarchyNode
 A HierarchyNode is an object used by HierarchyType that models the tree of GeoObjectTypes that participate in the hierarchy.  
