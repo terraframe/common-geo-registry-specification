@@ -81,8 +81,8 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 | Property | Description |Possible Values|Example|
 |---|---|---|---|
 |code | Human readable code of the type. This is a human readable ID field.  ||"HeathFacility"|
-|localizedLabel | Localized label for the object. |"Health Facility" for English or "Facilidad de Salud" for Spanish, etc.||
-|localizedDescription | Localized description of the object. | "Health Facilities are where people go to seek treatment..." ||
+|localizedLabel | Localized label for the object. ||"Health Facility" for English or "Facilidad de Salud" for Spanish, etc.|
+|localizedDescription | Localized description of the object. || "Health Facilities are where people go to seek treatment..." |
 |attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType ||
 
 ### HierarchyType
