@@ -98,7 +98,7 @@ Defines a hierarchy type and specifies which GeoObjectTypes participate in that 
 ``` 
 | Property | Description |Possible Values|Example|
 |---|---|---|---|
-|code | Human readable code of the hierarchy type. This is a human readable ID field.  ||"GeoPplitical", "HealthAdministrative"|
+|code | Human readable code of the hierarchy type. This is a human readable ID field.  ||"GeoPolitical", "HealthAdministrative"|
 |localizedLabel | Localized label for the hierarchy type. ||"Geopolitical" for English or "Geopolítico" for Spanish, etc.|
 |localizedDescription | Localized description of the object. || "The Geopolitical hierarchy represents relationships between Geopolitical units... " |
 |rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy || Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy|   
