@@ -9,7 +9,7 @@
   },
   "properties": {
     "uid": "123",
-    "name": "Valley Health",
+    "code": "Valley Health",
     "type" : "HEALTHFACILITY",
     "status" : "ACTIVE",
     "featureAttributes" : [{
@@ -48,7 +48,7 @@
 ### EXAMPLE - GeoObjectType
 ```
 {
-  "name" : "HEALTHFACILITY",
+  "code" : "HEALTHFACILITY",
   "localizedLabel" : "Health Facility",
   "localizedDescription" : "Location of an organization classified as a health facility by ...",
   "attributes" : [attributeTermType, attributeNumericType, ...]
@@ -58,10 +58,10 @@
 ### EXAMPLE - HierarchyType
 ```
 {
-  "name" : "LOCATEDIN",
+  "code" : "LOCATEDIN",
   "localizedLabel" : "Located In",
   "localizedDescription" : "Target GeoObjects are located in a parent GeoObject",
-  "rootGeoObjectTypes" : [//TODO: HierarchyNode]
+  "rootGeoObjectTypes" : [hierarchyNode ...]
 }
 ```
 
@@ -69,14 +69,14 @@
 ```
 {
   "geoObjectType" : geoObjectType, 
-  "children" : [HierarchyNode ...]
+  "children" : [hierarchyNode ...]
 }
 ```
 
 ### EXAMPLE - Term
 ```
 {
-  "name" : "FACILITYTYPE",
+  "code" : "FACILITYTYPE",
   "localizedLabel" : "Facility Type",
   children : [term ...]
 }
@@ -85,7 +85,7 @@
 ### EXAMPLE - AttributeTermType
 ```
 {
-  "name" : "FACILITYtYPE",
+  "code" : "FACILITYtYPE",
   "localizedLabel" : "Facility Type",
   "type" : "TERM",
   "term" : "FACILITYTYPE"
@@ -95,7 +95,7 @@
 ### EXAMPLE - AttributeNumericType
 ```
 {
-  "name" : "NUMBEROFBEDS",
+  "code" : "NUMBEROFBEDS",
   "localizedLabel" : "Number Of Beds",
   "type" : "NUMBER"
 }
@@ -104,7 +104,7 @@
 ### EXAMPLE - AttributeDateType
 ```
 {
-  "name" : "TREATMENTDATE",
+  "code" : "TREATMENTDATE",
   "localizedLabel" : "Treatment Date",
   "type" : "DATE"
 }
