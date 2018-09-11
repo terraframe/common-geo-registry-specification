@@ -104,8 +104,8 @@
 ### EXAMPLE - AttributeDateType
 ```
 {
-  "code" : "TREATMENTDATE",
-  "localizedLabel" : "Treatment Date",
+  "code" : "DATEOPENED",
+  "localizedLabel" : "Date Opened",
   "type" : "DATE"
 }
 ```
