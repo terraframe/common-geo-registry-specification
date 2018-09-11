@@ -24,19 +24,19 @@
 ```
 {
   "geoObject" : geoObject_1,
-  "hierarchyType" : 111,
+  "hierarchyType" : "LOCATEDIN",
   "children" : [
     {
       "geoObject" : geoObject_2,
-      "hierarchyType" : 222,
+      "hierarchyType" : "LOCATEDIN",
       "children" : []
     },{
       "geoObject" : geoObject_3,
-      "hierarchyType" : 333,
+      "hierarchyType" : "LOCATEDIN",
       "children" : [
         {
           "geoObject" : geoObject_4,
-          "hierarchyType" : 444,
+          "hierarchyType" : "LOCATEDIN",
           "children" : []
         }
       ]
