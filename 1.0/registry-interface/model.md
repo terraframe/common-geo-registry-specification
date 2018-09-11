@@ -17,7 +17,7 @@ According to the HGLC specification, attributes on GeoObject Types can be define
   }
   properties : {
     uid : string,
-    name : string,
+    code : string,
     type : string<GeoObjectType>, // maps to GeoObjectType name value
     status : string<Term>
     ... user defined and additional system defined attributes added to properties list.
@@ -32,7 +32,7 @@ According to the HGLC specification, attributes on GeoObject Types can be define
 |geometry.coordinates | [GeoJSON standard geometry object coordinates array.](https://tools.ietf.org/html/rfc7946) ||
 |properties | [GeoJSON standard properties object containing non-standard properties.](https://tools.ietf.org/html/rfc7946)||
 |properties.uid | UID for the object. ||
-|properties.name | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. |A postal code|
+|properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. |A postal code|
 |properties.type | GeoObjectType NAME which this object references. | "Village", "Household", "HealthFacility" |
 |properties.status | Term NAME which this object references.  ||
 
@@ -72,7 +72,7 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 
 ```
 {
-  name : string,
+  code : string,
   localizedLabel : string,
   localizedDescription : string,
   attributes : attributeType[]
@@ -80,7 +80,7 @@ Defines the metadata of a GeoObject Type, such as Village, Household, or Health 
 ``` 
 | Property | Description |Possible Values|
 |---|---|---|
-|name | Name of the type. This is a human readable ID field.  |"HeathFacility"|
+|code | Human readable code of the type. This is a human readable ID field.  |"HeathFacility"|
 |localizedLabel | Localized label for the object. |"Health Facility" for English or "Facilidad de Salud" for Spanish, etc.|
 |localizedDescription | Localized description of the object. | "Health Facilities are where people go to seek treatment..." |
 |attributes | Array of metadata attribute objects that describe the attributes defined by this type.| AttributeNumericType, AttributeTermType |
@@ -90,7 +90,7 @@ Defines a hierarchy type and specifies which GeoObjectTypes participate in that 
 
 ```
 {
-  name : string,
+  code : string,
   localizedLabel : string,
   localizedDescription : string,
   rootGeoObjectTypes : HierarchyNode[]
@@ -98,7 +98,7 @@ Defines a hierarchy type and specifies which GeoObjectTypes participate in that 
 ``` 
 | Property | Description |Possible Values|
 |---|---|---|
-|name | Name of the hierarchy type. This is a human readable ID field.  |"GeoPplitical", "HealthAdministrative"|
+|code | Human readable code of the hierarchy type. This is a human readable ID field.  |"GeoPplitical", "HealthAdministrative"|
 |localizedLabel | Localized label for the hierarchy type. |"Geopolitical" for English or "Geopolítico" for Spanish, etc.|
 |localizedDescription | Localized description of the object. | "The Geopolitical hierarchy represents relationships between Geopolitical units... " |
 |rootGeoObjectTypes | The highest level GeoObjectTypes that participate in the hierarchy | Country would be the highest GeoObjectType that would participate in the Geopolitical hierarchy|   
@@ -123,14 +123,14 @@ A term is a node in an ontology classification. A term can have a tree associati
 
 ```
 {
-  name : string,
+  code : string,
   localizedLabel : string,
   children : Term[]
 }
 ```
 | Property | Description | Possible Values |
 |---|---|---|
-|name | Human readable identifier of the term | "CLINIC", "MAT_WARD"| 
+|code | Human readable identifier of the term | "CLINIC", "MAT_WARD"| 
 |localizedLabel | Localized Label for the term. | "Clinic", "Maternity Ward" |
 |children | Array of Term objects that are children to the current term in the hierarchy. | |
 
@@ -141,7 +141,7 @@ Attributes store information that describes properties of an object. All GeoObje
 Defines an object that contains localized descriptive data as well as a reference to a Term object. 
 ```
 {
-   name : string,
+   code : string,
    localizedLabel : string,
    type : string,
    term : string<Term>
@@ -149,7 +149,7 @@ Defines an object that contains localized descriptive data as well as a referenc
 ```
 | Property | Description | Possible Values |
 |---|---|---|
-|name | Human readable ID of the attribute | "FacilityType" |
+|code | Human readable ID of the attribute | "FacilityType" |
 |localizedLabel | Localized label for the term. |"Facility Type", "Facilidad de Salud"  |
 |type | Type of attribute. |"TERM"|
 |term | Term NAME which this attribute references, which is the root Term whose children are possible values for this attribute | "FacilityType" with children terms "CLINIC", "MAT_WARD", etc. |
@@ -159,14 +159,14 @@ Defines a numeric attribute.
 
 ```
 {
-   name : string,
+   code : string,
    localizedLabel : string,
    type : string
 }
 ```
 | Property | Description | Possible Values |
 |---|---|---|
-|name | Human readable ID of the attribute | "NumOfBeds" |
+|code | Human readable ID of the attribute | "NumOfBeds" |
 |localizedLabel | Localized label for the term. | "Number of Beds"|
 |type | Type of attribute. |"NUMBER"|
 
@@ -176,13 +176,13 @@ Defines a date attribute.
 
 ```
 {
-   name : string,
+   code : string,
    localizedLabel : string,
    type : string
 }
 ```
 | Property | Description | Possible Values |
 |---|---|---|
-|name | Human readable ID of the attribute | "DateOpened" |
+|code | Human readable ID of the attribute | "DateOpened" |
 |localizedLabel | Localized label for the term. | "Date Opened"|
 |format | format of the date |"yyyyy-mm-dd"|
