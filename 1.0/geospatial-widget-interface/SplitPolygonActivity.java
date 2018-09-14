@@ -1,9 +1,9 @@
 /**
- * Activity displaying a map with user location and direction
- * G3.2
+ * Activity displaying a map while splitting a polygon
+ * G2.4
  * 
  */
-public class LocationActivity extends AppCompatActivity {
+public class SplitPolygonActivity extends AppCompatActivity {
 
     /**  */
     private WidgetMapView mapView;
@@ -18,7 +18,7 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mapView = findViewById(R.id.mapView);
-        mapView.setLocalisation(true);          //  Activate the localisation
+        mapView.setPlittingPolygon(true);          //  Activate the split of polygon
         mapView.setActivity(this);
 
         mapView.onCreate(savedInstanceState);

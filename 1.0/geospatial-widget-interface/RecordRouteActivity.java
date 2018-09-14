@@ -1,9 +1,9 @@
 /**
  * Activity displaying a map where user can record routes by clicking on the map
- * G1.2
+ * G1.1
  * 
  */
-public class RecordManualRouteActivity implements WidgetMapView.OnManualRecordRouteListener {
+public class RecordRouteActivity implements WidgetMapView.OnRecordRouteListener {
 
    /**  */
    private WidgetMapView mapView;
@@ -18,7 +18,7 @@ public class RecordManualRouteActivity implements WidgetMapView.OnManualRecordRo
        setContentView(R.layout.activity_main);
 
        mapView = findViewById(R.id.mapView);
-       mapView.setManualRecording(true);          //  Activate the manual recording
+       mapView.setRecording(true);          //  Activate the recording
        mapView.setActivity(this);
 
        mapView.onCreate(savedInstanceState);
