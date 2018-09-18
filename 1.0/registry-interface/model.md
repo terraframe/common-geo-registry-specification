@@ -31,10 +31,10 @@ According to the HGLC specification, attributes on GeoObject Types can be define
 |geometry.type | [GeoJSON standard geometry object type.](https://tools.ietf.org/html/rfc7946) |"Point", "MultiPoint", "LineString","MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection"|
 |geometry.coordinates | [GeoJSON standard geometry object coordinates array.](https://tools.ietf.org/html/rfc7946) ||
 |properties | [GeoJSON standard properties object containing non-standard properties.](https://tools.ietf.org/html/rfc7946)||
-|properties.uid | UID for the object. ||
-|properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. ||A postal code|
+|properties.uid | UID for the object. This is a default attribute. ||
+|properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. This is a default attribute.||A postal code|
 |properties.type | GeoObjectType NAME which this object references. || "Village", "Household", "HealthFacility" |
-|properties.status | Term NAME which this object references.  |||
+|properties.status | Term CODE which this object references to the term that defines the object status. Status values have not yet been defined. | Display labels on TERM values: "Active", "Inactive", "Pending Review"||
 
 
 ### TreeNode
