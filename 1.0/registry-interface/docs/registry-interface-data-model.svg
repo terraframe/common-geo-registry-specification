@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="registry-interface-data-model.svg"
-   inkscape:export-filename="/home/justin/Documents/terraframe/DS4ME/registry-interface-data-model.png"
+   inkscape:export-filename="/home/justin/git/common-geo-registry-specification/1.0/registry-interface/docs/registry-interface-data-model.png"
    inkscape:export-xdpi="299.996"
    inkscape:export-ydpi="299.996">
   <defs
@@ -293,9 +293,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="555.98188"
-     inkscape:cy="436.1261"
+     inkscape:zoom="1.2837891"
+     inkscape:cx="445.76949"
+     inkscape:cy="244.36158"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -313,7 +313,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -368,7 +368,7 @@
          x="51.120136"
          y="871.96893"
          style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start"
-         id="tspan4411">  name : string</tspan><tspan
+         id="tspan4411">  code : string</tspan><tspan
          sodipodi:role="line"
          x="51.120136"
          y="887.19849"
@@ -445,7 +445,7 @@
          x="621.95667"
          y="641.38196"
          style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start"
-         id="tspan4417-9-8">name : string</tspan><tspan
+         id="tspan4417-9-8">code : string</tspan><tspan
          id="tspan4588-6"
          sodipodi:role="line"
          x="621.95667"
@@ -508,7 +508,7 @@
              x="94.043976"
              y="628.57629"
              style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan4417-9-8-3">name : string</tspan><tspan
+             id="tspan4417-9-8-3">code : string</tspan><tspan
              id="tspan4588-6-0"
              sodipodi:role="line"
              x="94.043976"
@@ -628,7 +628,7 @@
          x="351.06339"
          y="716.72699"
          style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start"
-         id="tspan4407-7-7">name : string</tspan><tspan
+         id="tspan4407-7-7">code : string</tspan><tspan
          sodipodi:role="line"
          x="351.06339"
          y="731.95648"
@@ -695,7 +695,7 @@
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;font-family:Saab;-inkscape-font-specification:Saab;text-align:start;writing-mode:lr-tb;text-anchor:start"
              y="628.57629"
              x="94.043976"
-             sodipodi:role="line">name : string</tspan><tspan
+             sodipodi:role="line">code : string</tspan><tspan
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;font-family:Saab;-inkscape-font-specification:Saab;text-align:start;writing-mode:lr-tb;text-anchor:start"
              y="647.41864"
              x="94.043976"
@@ -920,7 +920,7 @@
              sodipodi:role="line"
              x="94.043976"
              y="628.57629"
-             style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start">name : string</tspan><tspan
+             style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start">code : string</tspan><tspan
              id="tspan4566"
              sodipodi:role="line"
              x="94.043976"
