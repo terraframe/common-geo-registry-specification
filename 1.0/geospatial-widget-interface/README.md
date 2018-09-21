@@ -171,7 +171,7 @@ KEY | Type | Required | Description
 `offline_map_bottom_right_bound` | Only for downloads | Yes | Specifies the bottom right bound of the map
 
 
-The `MapboxOfflineDownloaderService` SHOULD post updates through a local broadcast with action `io.ona.kujaku.service.map.downloader.updates``(Constants.INTENT_ACTION_MAP_DOWNLOAD_SERVICE_STATUS_UPDATES)`. The updates SHOULD have:
+The `MapboxOfflineDownloaderService` SHOULD post updates through a local broadcast with action `io.ona.kujaku.service.map.downloader.updates` `(Constants.INTENT_ACTION_MAP_DOWNLOAD_SERVICE_STATUS_UPDATES)`. The updates SHOULD have:
 
 
 KEY | Mandatory | Constant in Library | Type | Description
@@ -194,7 +194,7 @@ The `MapActivity` will request some permissions(during runtime & in the manifest
 
 The following helper classes will provide additional functionality to manipulate the data.
 
-**1. MapBoxStyleHelper**
+#### 1. MapBoxStyleHelper
 
 This class enables you to:
 - Add data sources to an existing Mapbox style
@@ -204,7 +204,7 @@ This class enables you to:
 - Remove the map center if already added
 - Generate a map center from bounds
 
-```
+```java
         // mapboxStyle is a JSONObject of the Mapbox style
         String[] layersToHide = new String[]{"non-sprayed-areas", "swamps"};
         MapBoxStyleHelper mapBoxStyleHelper = new MapBoxStyleHelper(mapboxStyle);
@@ -345,11 +345,11 @@ This class enables you to:
 ```
 
 
-**2. Coordinate Utils**
+#### 2. Coordinate Utils
 
 This class provides you with methods for:
 1. Checking if a location is in certain bounds
 
-**3. MapBoxWebServiceApi**
+#### 3. MapBoxWebServiceApi
 
 This class enables you to interact with the Mapbox API so that you can retrieve a style JSON using only the styleId. You can then use use the style string obtained to create a Mapbox style with geosptial data
