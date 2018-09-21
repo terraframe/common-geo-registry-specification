@@ -22,7 +22,7 @@ The constants below are required:
     String[] PARCELABLE_KEY_MAPBOX_STYLES};  // Mapbox Styles (https://www.mapbox.com/mapbox-gl-js/style-spec/)
 ```
 
-The `MapActivity` should allow selection of a geospatial feature and post it as a result. The geospatial feature SHOULD be in `GeoJSON` format.
+The `MapActivity` should allow selection of a geospatial feature and post it back as a result. The geospatial feature SHOULD be in `GeoJSON` format.
 
 Example usage:
 
@@ -51,6 +51,15 @@ The `MapboxOfflineDownloaderService` SHOULD post updates through a local broadca
 - `KEY_RESULT_MESSAGE` - a simple message, for example, the download percentage or task failure message.
 - `PARCELABLE_KEY_MAP_UNIQUE_NAME` - the map name.
 - `KEY_RESULTS_PARENT_ACTION` - `SERVICE_ACTION` being performed on the map.
+
+The `MapActivity` will request some permissions(during runtime & in the manifest) for it to work. The following are the permissions:
+
+- `android.permission.ACCESS_FINE_LOCATION`- For the location to center to the user's current location
+- `android.permission.ACCESS_NETWORK_STATE`
+- `android.permission.ACCESS_WIFI_STATE`
+- `android.permission.READ_EXTERNAL_STORAGE` - Read cached mapbox styles on the device
+- `android.permission.WRITE_EXTERNAL_STORAGE` - Cache mapbox styles on the device for offline use
+- `android.permission.INTERNET` - Automatically permitted
 
 ## Helper Functions
 
