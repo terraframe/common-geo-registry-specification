@@ -15,7 +15,7 @@
 
 ## What is a Geospatial Widget?
 
-The Geospatial widget is an Android SDK designed to connect to the georegistry and other common geographical data sources like OSM and OGC servers. It also supports visualisation of geosptial data and inspection. It is designed to integrate into common mobile data collection tools used in global health.  It is expected to support the three elimination use cases including:
+The Geospatial widget is an Android SDK designed to connect to the Mapbox tile server. It also supports visualisation of geosptial data and inspection. It is designed to integrate into common mobile data collection tools used in global health.  It is expected to support the three elimination use cases including:
 - Case Detection, Notification and Investigation
 - Focus Investigation
 - Routine and Reactive Intervention
@@ -217,9 +217,9 @@ Sample code downloading a map for offline use:
         Context.startService(mapDownloadIntent);
 ```
 
-The `MapActivity` will request some permissions(during runtime & in the manifest) for it to work. The following are the permissions:
+The **MapActivity** will request some permissions(during runtime & in the manifest) for it to work. The following are the permissions:
 
-- `android.permission.ACCESS_FINE_LOCATION`- For the location to center to the user's current location
+- `android.permission.ACCESS_FINE_LOCATION`- For the location to focus on the user's current location
 - `android.permission.ACCESS_NETWORK_STATE`
 - `android.permission.ACCESS_WIFI_STATE`
 - `android.permission.READ_EXTERNAL_STORAGE` - Read cached mapbox styles on the device
