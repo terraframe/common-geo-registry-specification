@@ -19,12 +19,64 @@ The constants below are required:
 ```java
 
     String PARCELABLE_KEY_MAPBOX_ACCESS_TOKEN;  // Mapbox API access token
-    String[] PARCELABLE_KEY_MAPBOX_STYLES};  // Mapbox Styles (https://www.mapbox.com/mapbox-gl-js/style-spec/)
+    String[] PARCELABLE_KEY_MAPBOX_STYLES;  // Mapbox Styles (https://www.mapbox.com/mapbox-gl-js/style-spec/)
 ```
+
+The following is what should be sent in the `PARCELABLE_KEY_MAPBOX_STYLES`:
+
+Index 0 should have either of the following:
+- A file path on the local storage eg. `file:///sdcard/MapboxStyles/nairobi-city-view.json`
+- A Mapbox style URL eg. `mapbox://styles/ona/ksdk909kkscd9023k`
+- A string of the JSON Object of an existing Mapbox Style or adhering to the Mapbox Style Spec
 
 The `MapActivity` should allow selection of a geospatial feature and post it back as a result. The geospatial feature SHOULD be in `GeoJSON` format.
 
 Example usage:
+
+1. Start an activity to show a Mapbox Style
+```java
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_STYLES, new String[]{
+                "file:///sdcard/MapboxStyles/nairobi-city-view.json"
+        });
+        intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_ACCESS_TOKEN, "sdklcs823k9OIDFSKsd8uwk");
+
+        startActivity(intent);
+```
+
+
+2. Start an activity with data
+```java
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_STYLES, new String[]{
+                "file:///sdcard/MapboxStyles/nairobi-city-view.json"
+        });
+        intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_ACCESS_TOKEN, "sdklcs823k9OIDFSKsd8uwk");
+
+        startActivity(intent);
+```
+
+3. Start an activity expecting callback in case a feature is selected
+
+```java
+
+
+
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_STYLES, new String[]{
+                mapboxStyleWithKujakuConfigData
+        });
+        intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_ACCESS_TOKEN, "sdklcs823k9OIDFSKsd8uwk");
+
+        startActivityForResult(intent, 43);
+```
+
+In case the user clicks on a feature, the info-window at the bottom is displayed to show more details on the feature. Clicking on the feature again is considered a `double-click` and this initiates the callback closing the activity. The activity returns a JSON Object accessible on `Intent` parameter of the `onActivityResult(int, int, Intent)` calling-activity method. The geoJSON feature is retrieved from the `String` extra with the key `geojson_feature`
+
+For the `MapActivity` to respond to clicks on a feature, the feature requires to have:
+- Specified in the **Kujaku config**
+- Properties defined for it
+- An `id` as one of the `properties`
 
 
 ## MapboxOfflineDownloaderService
