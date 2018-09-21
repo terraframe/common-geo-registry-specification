@@ -46,6 +46,7 @@ Example usage:
 
 
 2. Start an activity with data
+
 ```java
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_STYLES, new String[]{
@@ -59,8 +60,11 @@ Example usage:
 3. Start an activity expecting callback in case a feature is selected
 
 ```java
-
-
+        /*
+        mapboxStyleWithKujakuConfigData is:
+         - a String with the complete Mapbox Style or
+         - a local path on the android device with the complete Mapbox Style
+        */
 
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_STYLES, new String[]{
@@ -79,30 +83,100 @@ For the `MapActivity` to respond to clicks on a feature, the feature requires to
 - An `id` as one of the `properties`
 
 
+## How to create a Mapbox style with Kujaku configuration
+
+The aim is to stick to a certain spec i.e. add the Kujaku configuration as close to the Mapbox specification. [Here](https://github.com/onaio/common-geo-registry-specification/blob/master/1.0/geospatial-widget-interface/sample_mapbox_style_with_kujaku_config.json) is a sample style with the Kujaku configuration.
+The Kujaku Config enables the following capabilities:
+
+1. Showing the information window - Activated on clicking a feature
+2. Arranging the order of features in the information windows i.e. the order in which the features are listed
+3. Specify which properties of a geoJSON feature to show in the information window and the labels to use for each feature
+4. It also enables the callback in case a feature is double clicked by making the widget aware of the relevant data sources
+
+
+Steps:
+
+1. Add layers with preferred visual properties and name them appropriately(as per the Mapbox style spec)
+2. Add your geospatial data to the Mapbox style in the form of geoJSON as per the Mapbox style spec
+3. Add the Kujaku config
+
+The Kujaku config is a JSON Object with the following:
+1. `data_sources` JSON Array of `name`-only JSON Objects - The name points to the data source name in the style
+```json
+"data_sources": [
+        {
+          "name": "opensrp-custom-data-source-0"
+        },
+        {
+          "name": "opensrp-custom-data-source-1"
+        },
+        {
+          "name": "opensrp-custom-data-source-2"
+        },
+        {
+          "name": "opensrp-custom-data-source-3"
+        }
+      ]
+```
+
+2. `sort_fields` JSON Array of JSON Objects(`type`, `data_field`). THe types can be `number`, `date` or `string`
+```json
+"sort_fields": [
+        {
+          "type": "date",
+          "data_field": "client_reg_date"
+        }
+      ]
+```
+
+3. `info_window` JSON Object. This JSON Object contains a JSON Array with key `visible_properties`. The visibile properties array contains JSON Objects of `id` and `label` properties. The `id` is the key of the property in the feature while the label is what is shown on the info window as the property label
+```json
+"info_window": {
+        "visible_properties": [
+          {
+            "id": "first_name",
+            "label": "First Name"
+          },
+          {
+            "id": "Birth_Weight",
+            "label": "Birth Weight"
+          },
+          {
+            "id": "Place_Birth",
+            "label": "Place of Birth"
+          },
+          {
+            "id": "zeir_id",
+            "label": "ZEIR ID"
+          }
+        ]
+      }
+```
+
+
 ## MapboxOfflineDownloaderService
 
 The Geospatial widget SHOULD provide the `MapboxOfflineDownloaderService` service that is used to download map layers for offline use. This service should also support the deletion of the offline map layers and resuming map layer download.
-The service will accept the following constants:
+The service intent extras are as follows:
 
-- `PARCELABLE_KEY_SERVICE_ACTION` - Required for all
-- `PARCELABLE_KEY_NETWORK_STATE` - Required for `SERVICE_ACTION#NETWORK_RESUME`
-- `RCELABLE_KEY_SERVICE_ACTION` - Required for all
-- `PARCELABLE_KEY_NETWORK_STATE` - Required for `SERVICE_ACTION#NETWORK_RESUME`
-- `PARCELABLE_KEY_MAP_UNIQUE_NAME` - Required for `SERVICE_ACTION#DELETE_MAP` & `SERVICE_ACTION#DOWNLOAD_MAP` & `SERVICE_ACTION#STOP_CURRENT_DOWNLOAD`
-- `PARCELABLE_KEY_MAPBOX_ACCESS_TOKEN` - Required for `SERVICE_ACTION#DELETE_MAP` & `SERVICE_ACTION#DOWNLOAD_MAP` & `SERVICE_ACTION#STOP_CURRENT_DOWNLOAD`
-- `PARCELABLE_KEY_STYLE_URL` - Required for `SERVICE_ACTION#DOWNLOAD_MAP`
-- `PARCELABLE_KEY_MAX_ZOOM` - Required for `SERVICE_ACTION#DOWNLOAD_MAP`
-- `PARCELABLE_KEY_MIN_ZOOM` - Required for `SERVICE_ACTION#DOWNLOAD_MAP`
-- `PARCELABLE_KEY_TOP_LEFT_BOUND` - Required for `SERVICE_ACTION#DOWNLOAD_MAP`
-- `PARCELABLE_KEY_BOTTOM_RIGHT_BOUND` - Required for `SERVICE_ACTION#DOWNLOAD_MAP`
-- `PARCELABLE_KEY_DELETE_TASK_TYPE` - Required for `SERVICE_ACTION#STOP_CURRENT_DOWNLOAD`
+KEY | Type | Required | Description
+`map_downloader_service` | `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION` enum | Yes | Action to be performed. The service can either download(MapboxOfflineDownloaderService.SERVICE_ACTION.DOWNLOAD_MAP) or delete(MapboxOfflineDownloaderService.SERVICE_ACTION.DELETE_MAP) a downloaded map
+`offline_map_unique_name` | String | Yes | Unique name for which the map will be referenced by
+`mapbox_access_token` | String | Yes | This is required to access the Mapbox API
+`offline_map_mapbox_style_url` | String | Yes | Required to access to download the map from the Mapbox API
+`offline_map_max_zoom` | Double | Only for downloads | Specifies the max zoom level for the map assets to be downloaded
+`offline_map_min_zoom` | Double | Only for downloads | Specifies the min zoom level for the map assets to be downloaded
+`offline_map_top_left_bound` | Only for downloads | Yes | Specifies the top left bound of the map
+`offline_map_bottom_right_bound` | Only for downloads | Yes | Specifies the bottom right bound of the map
 
-The `MapboxOfflineDownloaderService` SHOULD post updates through a local broadcast with action `INTENT_ACTION_MAP_DOWNLOAD_SERVICE_STATUS_UPDATES`. The updates SHOULD have:
 
-- `KEY_RESULT_STATUS` - which is either `SERVICE_ACTION_RESULT#SUCCESSFUL` or `SERVICE_ACTION_RESULT#FAILED`
-- `KEY_RESULT_MESSAGE` - a simple message, for example, the download percentage or task failure message.
-- `PARCELABLE_KEY_MAP_UNIQUE_NAME` - the map name.
-- `KEY_RESULTS_PARENT_ACTION` - `SERVICE_ACTION` being performed on the map.
+The `MapboxOfflineDownloaderService` SHOULD post updates through a local broadcast with action `io.ona.kujaku.service.map.downloader.updates``(Constants.INTENT_ACTION_MAP_DOWNLOAD_SERVICE_STATUS_UPDATES)`. The updates SHOULD have:
+
+KEY | Mandatory | Constant in Library | Type | Description
+`RESULT STATUS` | Yes | `io.ona.kujaku.service.MapboxOfflineDownloaderService.KEY_RESULT_STATUS` | `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION_RESULT` enum | which is either `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION_RESULT.SUCCESSFUL` or `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION_RESULT.FAILED`
+`RESULT MESSAGE` | Yes | `io.ona.kujaku.service.MapboxOfflineDownloaderService.KEY_RESULT_MESSAGE` | String | a simple message, for example, the download percentage or task failure message.
+`offline_map_unique_name`| Yes | `PARCELABLE_KEY_MAP_UNIQUE_NAME` | String | the map name
+`RESULTS PARENT ACTION` | Yes | `KEY_RESULTS_PARENT_ACTION` |  `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION` enum | Operation being performed on the map which is either a download or deletion
 
 The `MapActivity` will request some permissions(during runtime & in the manifest) for it to work. The following are the permissions:
 
@@ -116,4 +190,5 @@ The `MapActivity` will request some permissions(during runtime & in the manifest
 ## Helper Functions
 
 The following helper functions will provide additional functionality to manipulate the data.
+
 
