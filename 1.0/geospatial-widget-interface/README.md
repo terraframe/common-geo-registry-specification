@@ -190,8 +190,166 @@ The `MapActivity` will request some permissions(during runtime & in the manifest
 - `android.permission.WRITE_EXTERNAL_STORAGE` - Cache mapbox styles on the device for offline use
 - `android.permission.INTERNET` - Automatically permitted
 
-## Helper Functions
+## Helper Classes
 
-The following helper functions will provide additional functionality to manipulate the data.
+The following helper classes will provide additional functionality to manipulate the data.
+
+**1. MapBoxStyleHelper**
+
+This class enables you to:
+- Add data sources to an existing Mapbox style
+- Hide layers in the Mapbox style
+- Add and generate kujaku configs to the Mapbox style
+- Set the map center when the map loads
+- Remove the map center if already added
+- Generate a map center from bounds
+
+```
+        // mapboxStyle is a JSONObject of the Mapbox style
+        String[] layersToHide = new String[]{"non-sprayed-areas", "swamps"};
+        MapBoxStyleHelper mapBoxStyleHelper = new MapBoxStyleHelper(mapboxStyle);
+        
+        // This hides any layers not required
+        mapBoxStyleHelper.disableLayers(layersToHide);
+        
+        // malariaSprayAreaDataSource
+        String malariaSprayAreaLayer = "malaria-spray-area";
+        String malariaSprayAreaDataSourceName = "malaria-spray-area-data-source";
+        
+        // missedSprayAreaDataSource is a JSONObject with `type` `geojson` and `data` property as a JSONObject FeatureCollection
+        /* This is an example
+        {
+      "type": "geojson",
+      "data": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                25.874258604205618,
+                -17.86687127190279,
+                0
+              ]
+            },
+            "properties": {
+              "id": "opensrp-custom-feature-0",
+              "Birth_Weight": "2",
+              "address2": "Gordons",
+              "base_entity_id": "55b83f54-78f1-4991-8d12-813236ce39bb",
+              "epi_card_number": "",
+              "provider_id": "",
+              "last_interacted_with": "1511875745328",
+              "last_name": "Karis",
+              "dod": "",
+              "is_closed": "0",
+              "gender": "Male",
+              "lost_to_follow_up": "",
+              "end": "2017-11-28 16:29:05",
+              "Place_Birth": "Home",
+              "inactive": "",
+              "relational_id": "3d6b0d3a-e3ed-4146-8612-d8ac8ff84e8c",
+              "client_reg_date": "2016-01-28T00:00:00.000Z",
+              "geopoint": "0.3508685 37.5844647",
+              "pmtct_status": "MSU",
+              "address": "usual_residence",
+              "start": "2017-11-28 16:27:06",
+              "First_Health_Facility_Contact": "2017-11-28",
+              "longitude": "37.5844647",
+              "dob": "2017-09-28T00:00:00.000Z",
+              "Home_Facility": "42abc582-6658-488b-922e-7be500c070f3",
+              "date": "2017-11-28T00:00:00.000Z",
+              "zeir_id": "1061647",
+              "deviceid": "867104020633980",
+              "addressType": "usual_residence",
+              "latitude": "0.3508685",
+              "provider_uc": "",
+              "provider_location_id": "",
+              "address3": "6c814e69-ed6f-4fcc-ac2c-8406508603f2",
+              "first_name": "Frank 1"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                25.855265422607058,
+                -17.87051057660028,
+                0
+              ]
+            },
+            "properties": {
+              "id": "opensrp-custom-feature-1",
+              "Birth_Weight": "2",
+              "address2": "Gordons",
+              "base_entity_id": "55b83f54-78f1-4991-8d12-813236ce39bb",
+              "epi_card_number": "",
+              "provider_id": "",
+              "last_interacted_with": "1511875745328",
+              "last_name": "Karis",
+              "dod": "",
+              "is_closed": "0",
+              "gender": "Male",
+              "lost_to_follow_up": "",
+              "end": "2017-11-28 16:29:05",
+              "Place_Birth": "Home",
+              "inactive": "",
+              "relational_id": "3d6b0d3a-e3ed-4146-8612-d8ac8ff84e8c",
+              "client_reg_date": "2016-02-28T00:00:00.000Z",
+              "geopoint": "0.3508685 37.5844647",
+              "pmtct_status": "MSU",
+              "address": "usual_residence",
+              "start": "2017-11-28 16:27:06",
+              "First_Health_Facility_Contact": "2017-11-28",
+              "longitude": "37.5844647",
+              "dob": "2017-09-28T00:00:00.000Z",
+              "Home_Facility": "42abc582-6658-488b-922e-7be500c070f3",
+              "date": "2017-11-28T00:00:00.000Z",
+              "zeir_id": "1061647",
+              "deviceid": "867104020633980",
+              "addressType": "usual_residence",
+              "latitude": "0.3508685",
+              "provider_uc": "",
+              "provider_location_id": "",
+              "address3": "6c814e69-ed6f-4fcc-ac2c-8406508603f2",
+              "first_name": "Frank 2"
+            }
+          }
+        ]
+      }
+    }
+        
+        */
+        String missedSprayAreaLayer = "malaria-non-spray-area";
+        String missedSprayAreaDataSourceName = "malaria-non-spray-area-data-source";
+        
+        JSONArray kujakuDataSourceNames = new JSONArray();
+        
+        // Add the malaria-spray-area data source
+        mapBoxStyleHelper.insertGeoJsonDataSource(malariaSprayAreaDataSource, missedSprayAreaDataSource, malariaSprayAreaDataSourceName);
+        kujakuDataSourceNames.put(malariaSprayAreaDataSourceName);
+        
+        mapBoxStyleHelper.insertGeoJsonDataSource(missedSprayAreaLayer, missedSprayAreaDataSource, missedSprayAreaDataSourceName);
+        kujakuDataSourceNames.put(missedSprayAreaDataSourceName);
+
+        // kujakuConfig is a JSONObject with the key(s) `data_sources`, `sort_fields` and/or `info_window` each holding the appropriate data
+        if (kujakuConfig != null) {
+            // Add correct source layer names
+            kujakuConfig.put("data_source_names", kujakuDataSourceNames);
+            mapBoxStyleHelper.insertKujakuConfig(kujakuConfig);
+        }
+
+        String finalMapboxStyleWithKujakuConfigs = mapboxStyleHelper.build().toString();
+```
 
 
+**2. Coordinate Utils**
+
+This class provides you with methods for:
+1. Checking if a location is in certain bounds
+
+**3. MapBoxWebServiceApi**
+
+This class enables you to interact with the Mapbox API so that you can retrieve a style JSON using only the styleId. You can then use use the style string obtained to create a Mapbox style with geosptial data
