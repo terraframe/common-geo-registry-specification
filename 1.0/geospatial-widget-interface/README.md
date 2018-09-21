@@ -160,6 +160,7 @@ The Geospatial widget SHOULD provide the `MapboxOfflineDownloaderService` servic
 The service intent extras are as follows:
 
 KEY | Type | Required | Description
+--- | --- | --- | ---
 `map_downloader_service` | `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION` enum | Yes | Action to be performed. The service can either download(MapboxOfflineDownloaderService.SERVICE_ACTION.DOWNLOAD_MAP) or delete(MapboxOfflineDownloaderService.SERVICE_ACTION.DELETE_MAP) a downloaded map
 `offline_map_unique_name` | String | Yes | Unique name for which the map will be referenced by
 `mapbox_access_token` | String | Yes | This is required to access the Mapbox API
@@ -172,7 +173,9 @@ KEY | Type | Required | Description
 
 The `MapboxOfflineDownloaderService` SHOULD post updates through a local broadcast with action `io.ona.kujaku.service.map.downloader.updates``(Constants.INTENT_ACTION_MAP_DOWNLOAD_SERVICE_STATUS_UPDATES)`. The updates SHOULD have:
 
+
 KEY | Mandatory | Constant in Library | Type | Description
+--- | --- | --- | --- | ---
 `RESULT STATUS` | Yes | `io.ona.kujaku.service.MapboxOfflineDownloaderService.KEY_RESULT_STATUS` | `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION_RESULT` enum | which is either `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION_RESULT.SUCCESSFUL` or `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION_RESULT.FAILED`
 `RESULT MESSAGE` | Yes | `io.ona.kujaku.service.MapboxOfflineDownloaderService.KEY_RESULT_MESSAGE` | String | a simple message, for example, the download percentage or task failure message.
 `offline_map_unique_name`| Yes | `PARCELABLE_KEY_MAP_UNIQUE_NAME` | String | the map name
