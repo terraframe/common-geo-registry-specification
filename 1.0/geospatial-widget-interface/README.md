@@ -2,10 +2,10 @@
 
 ## What is a Geospatial Widget?
 
-The Geospatial widget is an Android SDK designed to connect to the georegistry and other common geographical data sources like OSM and OGC servers. It is designed to integrate into common mobile data collection tools used in global health.  It is expected to support the three elimination use cases including:
-    - Case Detection, Notification and Investigation
-    - Focus Investigation
-    - Routine and Reactive Intervention
+The Geospatial widget is an Android SDK designed to connect to the georegistry and other common geographical data sources like OSM and OGC servers. It also supports visualisation of geosptial data and inspection. It is designed to integrate into common mobile data collection tools used in global health.  It is expected to support the three elimination use cases including:
+- Case Detection, Notification and Investigation
+- Focus Investigation
+- Routine and Reactive Intervention
 
 The Geospatial widget library provides a map widget and has a map download service for offline support of map layers. It primarily uses the Mapbox SDK to implement its functionalities. The library also provides some helper util functions to support certain operations involving geospatial data.
 
