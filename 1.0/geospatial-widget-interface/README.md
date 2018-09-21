@@ -1,5 +1,18 @@
 # Geospatial Widget (Kujaku) Specification
 
+## Table of Contents
+
+* [What is a Geospatial Widget?](#what-is-a-geospatial-widget)
+* [Specification](#specification)
+   * [Map Activity](#mapactivity)
+   * [How to create a Mapbox style with Kujaku configuration](#how-to-create-a-mapbox-style-with-kujaku-configuration)
+   * [Offline Maps Downloader Service](#offline-maps-downloader-service)
+   * [Helper Classes](#helper-classes)
+     * [MapBoxStyleHelper class](#1-mapboxstylehelper)
+     * [CoordinateUtils class](#2-coordinateutils)
+     * [MapBoxWebServiceApi](#3-mapboxwebserviceapi)
+
+
 ## What is a Geospatial Widget?
 
 The Geospatial widget is an Android SDK designed to connect to the georegistry and other common geographical data sources like OSM and OGC servers. It also supports visualisation of geosptial data and inspection. It is designed to integrate into common mobile data collection tools used in global health.  It is expected to support the three elimination use cases including:
@@ -47,6 +60,8 @@ Example usage:
 
 2. Start an activity with data
 
+Go [here](#mapboxstylehelper) for more on the how to create a mapbox style with your own geospatial data
+
 ```java
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_STYLES, new String[]{
@@ -85,7 +100,7 @@ For the `MapActivity` to respond to clicks on a feature, the feature requires to
 
 ## How to create a Mapbox style with Kujaku configuration
 
-The aim is to stick to a certain spec i.e. add the Kujaku configuration as close to the Mapbox specification. [Here](https://github.com/onaio/common-geo-registry-specification/blob/master/1.0/geospatial-widget-interface/sample_mapbox_style_with_kujaku_config.json) is a sample style with the Kujaku configuration.
+The aim is to stick to a certain spec i.e. add the Kujaku configuration as close to the Mapbox specification. [Here](sample_mapbox_style_with_kujaku_config.json) is a sample style with the Kujaku configuration.
 The Kujaku Config enables the following capabilities:
 
 1. Showing the information window - Activated on clicking a feature
@@ -94,7 +109,7 @@ The Kujaku Config enables the following capabilities:
 4. It also enables the callback in case a feature is double clicked by making the widget aware of the relevant data sources
 
 
-Steps:
+Steps for creating the mapbox style with Kujaku configuration:
 
 1. Add layers with preferred visual properties and name them appropriately(as per the Mapbox style spec)
 2. Add your geospatial data to the Mapbox style in the form of geoJSON as per the Mapbox style spec
@@ -154,7 +169,7 @@ The Kujaku config is a JSON Object with the following:
 ```
 
 
-## MapboxOfflineDownloaderService
+## Offline Maps Downloader Service
 
 The Geospatial widget SHOULD provide the `MapboxOfflineDownloaderService` service that is used to download map layers for offline use. This service should also support the deletion of the offline map layers and resuming map layer download.
 The service intent extras are as follows:
@@ -181,6 +196,27 @@ KEY | Mandatory | Constant in Library | Type | Description
 `offline_map_unique_name`| Yes | `PARCELABLE_KEY_MAP_UNIQUE_NAME` | String | the map name
 `RESULTS PARENT ACTION` | Yes | `KEY_RESULTS_PARENT_ACTION` |  `io.ona.kujaku.service.MapboxOfflineDownloaderService.SERVICE_ACTION` enum | Operation being performed on the map which is either a download or deletion
 
+Sample code downloading a map for offline use:
+
+```java
+
+        double topLeftLat = 37.7897;
+        double topLeftLng = -119.5073;
+        double bottomRightLat = 37.6744;
+        double bottomRightLng = -119.6815;
+
+        Intent mapDownloadIntent = new Intent(this, MapboxOfflineDownloaderService.class);
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_MAPBOX_ACCESS_TOKEN, "sdklcs823k9OIDFSKsd8uwk");
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_SERVICE_ACTION, MapboxOfflineDownloaderService.SERVICE_ACTION.DOWNLOAD_MAP);
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_STYLE_URL, "mapbox://styles/ona/u89ukjhyvbnm");
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_MAP_UNIQUE_NAME, "kenya-malaria-spray-areas");
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_MAX_ZOOM, 20.0);
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_MIN_ZOOM, 0.0);
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_TOP_LEFT_BOUND, new LatLng(topLeftLat, topLeftLng));
+        mapDownloadIntent.putExtra(Constants.PARCELABLE_KEY_BOTTOM_RIGHT_BOUND, new LatLng(bottomRightLat, bottomRightLng));
+        Context.startService(mapDownloadIntent);
+```
+
 The `MapActivity` will request some permissions(during runtime & in the manifest) for it to work. The following are the permissions:
 
 - `android.permission.ACCESS_FINE_LOCATION`- For the location to center to the user's current location
@@ -203,6 +239,8 @@ This class enables you to:
 - Set the map center when the map loads
 - Remove the map center if already added
 - Generate a map center from bounds
+
+The following is example code for how to create a Mapbox style with Kujaku configs
 
 ```java
         // mapboxStyle is a JSONObject of the Mapbox style
@@ -345,7 +383,7 @@ This class enables you to:
 ```
 
 
-#### 2. Coordinate Utils
+#### 2. CoordinateUtils
 
 This class provides you with methods for:
 1. Checking if a location is in certain bounds
