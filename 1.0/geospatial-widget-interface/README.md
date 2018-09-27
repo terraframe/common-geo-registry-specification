@@ -7,7 +7,7 @@
    * [Map Activity](#mapactivity)
    * [How to create a Mapbox style with Kujaku configuration](#how-to-create-a-mapbox-style-with-kujaku-configuration)
    * [Offline Maps Downloader Service](#offline-maps-downloader-service)
-   * [Map View](#kujaku-map-view)
+   * [Kujaku Map View](#kujaku-map-view)
    * [Helper Classes](#helper-classes)
      * [MapBoxStyleHelper class](#1-mapboxstylehelper)
      * [CoordinateUtils class](#2-coordinateutils)
@@ -235,7 +235,7 @@ Example usage:
 1. Add point without GPS
 
 ```java 
-        mapView.addPoint(false, new AddPointCallback() {
+        kujakuMapView.addPoint(false, new AddPointCallback() {
             @Override
             public void onPointAdd(JSONObject jsonObject) {
                 // Pick the new feature created as a result of chosen location
@@ -253,7 +253,7 @@ Example usage:
 2. Add point with GPS
 
 ```java
-        mapView.addPoint(true, new AddPointCallback() {
+        kujakuMapView.addPoint(true, new AddPointCallback() {
             @Override
             public void onPointAdd(JSONObject jsonObject) {
                 // Make use of the new feature created as a result of chosen location
