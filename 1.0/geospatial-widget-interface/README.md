@@ -7,6 +7,7 @@
    * [Map Activity](#mapactivity)
    * [How to create a Mapbox style with Kujaku configuration](#how-to-create-a-mapbox-style-with-kujaku-configuration)
    * [Offline Maps Downloader Service](#offline-maps-downloader-service)
+   * [Kujaku Map View](#kujaku-map-view)
    * [Helper Classes](#helper-classes)
      * [MapBoxStyleHelper class](#1-mapboxstylehelper)
      * [CoordinateUtils class](#2-coordinateutils)
@@ -225,6 +226,52 @@ The **MapActivity** will request some permissions(during runtime & in the manife
 - `android.permission.READ_EXTERNAL_STORAGE` - Read cached mapbox styles on the device
 - `android.permission.WRITE_EXTERNAL_STORAGE` - Cache mapbox styles on the device for offline use
 - `android.permission.INTERNET` - Automatically permitted
+
+## Kujaku Map View
+
+The `KujakuMapView` enables a developer to have low level access to the geo-spatial widget. The developer can access the Mapbox APIs exposed on the mapbox `MapView` and have the flexibility to implement the widget in whatever view they want.
+
+Example usage:
+1. Add point without GPS
+
+```java 
+        kujakuMapView.addPoint(false, new AddPointCallback() {
+            @Override
+            public void onPointAdd(JSONObject jsonObject) {
+                // Pick the new feature created as a result of chosen location
+            }
+
+            @Override
+            public void onCancel() {
+                // Do something here --> 
+                // 1. Explain to the user that a location is required
+                // 2. Give them the option of using GPS for their location
+            }
+        });
+```
+
+2. Add point with GPS
+
+```java
+        kujakuMapView.addPoint(true, new AddPointCallback() {
+            @Override
+            public void onPointAdd(JSONObject jsonObject) {
+                // Make use of the new feature created as a result of chosen location
+            }
+
+            @Override
+            public void onCancel() {
+                // Do something here -->
+                // 1. Explain to the user that a location is required
+                // 2. Give them the option of manually locating the point
+            }
+        });
+
+
+```
+
+The JSONObject can be converted to `String` or used as is
+
 
 ## Helper Classes
 
