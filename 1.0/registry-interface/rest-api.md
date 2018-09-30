@@ -52,7 +52,7 @@ GeoOjectType objects that define the given list of types.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /geoobjecttypes  |  GET  |  <ul><li>types=:string[]</li> </ul>  |  Get list of valid GeoObject types.  |
+|  /geoobjecttypes  |  GET  |  <ul><li>types=string[]</li> </ul>  |  Get list of valid GeoObject types.  |
 
 ### Example
 ```
