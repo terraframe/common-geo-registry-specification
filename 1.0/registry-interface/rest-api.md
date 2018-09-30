@@ -13,7 +13,19 @@ GeoObjects can be queried to & from the common geo-registry.
 www.domain.com/getGeoObject?id=99999999
 ```
 ```
-www.domain.com/createGeoObject?geoObject={}
+www.domain.com/createGeoObject?geoObject={
+  type : string,
+  geometry : {
+    type : string,
+    coordinates : double[]
+  }
+  properties : {
+    uid : string,
+    code : string,
+    type : string<GeoObjectType>, // maps to GeoObjectType name value
+    status : string<Term>
+  }
+}
 ```
 ```
 www.domain.com/updateGeoObject?geoObject={}
