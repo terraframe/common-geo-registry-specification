@@ -1,14 +1,18 @@
 
 # Single Location
-Locations can be queried from the common geo-registry by id.
+GeoObjects can be queried to & from the common geo-registry.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /location  |  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li></ul>  |  Get a location by id.  |
+|  /getGeoObject  |  GET  |  <ul><li>uid=:uid</li></ul>  |  Get a GeoObject by id.  |
+|  /createGeoObject  |  PUT  | <ul><li>geoObject=:geoObject</li></ul>  |  Create a GeoObject.  |
 
 ### Example
 ```
-www.domain.com/location?id=99999999&geomType=point
+www.domain.com/getGeoObject?id=99999999
+```
+```
+www.domain.com/createGeoObject?geoObject={}
 ```
 
 # Multiple Locations 
