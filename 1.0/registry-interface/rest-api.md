@@ -1,5 +1,5 @@
 
-# Single Location
+# Single GeoObject
 GeoObjects can be queried to & from the common geo-registry.
 
 | path  |  Method  |  params  | description  |
@@ -19,7 +19,7 @@ www.domain.com/createGeoObject?geoObject={}
 www.domain.com/updateGeoObject?geoObject={}
 ```
 
-# Multiple Locations 
+# Multiple GeoObjects
 Multiple locations can be queried from specific levels of the location hierarchy. 
 
 | path  |  Method  |  params  | description  |
@@ -31,12 +31,12 @@ Multiple locations can be queried from specific levels of the location hierarchy
 www.domain.com/locations?hierarchyPositionName=village&geomType=point
 ```
 
-# Locations By Direct Relationship
+# GeoObjects By Relationship
 Locations can be queried that have a direct relationship with a specific location.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /directchildlocations  |  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName </li></ul>  |  Get all direct child locations of a specific location.  |
+|  /getChildGeoObjects  |  GET  |  <ul><li>parentUid=:parentUid</li> <li>childrenTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct child locations of a specific location.  |
 
 ### Example
 ```
