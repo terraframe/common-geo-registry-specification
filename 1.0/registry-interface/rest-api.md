@@ -4,9 +4,9 @@ GeoObjects can be queried to & from the common geo-registry.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /getGeoObject  |  GET  |  <ul><li>uid=:uid</li></ul>  |  Get a GeoObject by id.  |
-|  /createGeoObject  |  PUT  | <ul><li>geoObject=:geoObject</li></ul>  |  Create a GeoObject.  |
-|  /updateGeoObject  |  PUT  | <ul><li>geoObject=:geoObject</li></ul>  |  Update a GeoObject.  |
+|  /geoobject  |  GET  |  <ul><li>uid=:uid</li></ul>  |  Get a GeoObject by id.  |
+|  /geoobject  |  POST  | <ul><li>geoobject=:geoObject</li></ul>  |  Create a GeoObject.  |
+|  /geoobject  |  PUT  | <ul><li>geoObject=:geoObject</li></ul>  |  Update a GeoObject.  |
 
 ### Example
 ```
@@ -19,35 +19,42 @@ www.domain.com/createGeoObject?geoObject={}
 www.domain.com/updateGeoObject?geoObject={}
 ```
 
-# Multiple GeoObjects
-Multiple locations can be queried from specific levels of the location hierarchy. 
-
-| path  |  Method  |  params  | description  |
-|---|---|---|---|
-|  /locations  |  GET  |  <ul><li>hierarchyPositionName=:hierarchyPositionName</li> <li>geomType=:geomType</li></ul>  |  Get all locations at a specific level in the location heirarchy.  |
-
-### Example
-```
-www.domain.com/locations?hierarchyPositionName=village&geomType=point
-```
-
 # GeoObjects By Relationship
-Locations can be queried that have a direct relationship with a specific location.
+GeoObject can be queried based on relationships to other GeoObjects.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /getChildGeoObjects  |  GET  |  <ul><li>parentUid=:parentUid</li> <li>childrenTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct child locations of a specific location.  |
+|  /childgeoobjects  |  GET  |  <ul><li>parentUid=:parentUid</li> <li>childrenTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct child GeoObjects of a specific GeoObject.  |
+|  /parentgeoobjects  |  GET  |  <ul><li>childUid=:childUid</li> <li>parentTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct parent GeoObjects of a specific GeoObject.  |
 
 ### Example
 ```
-www.domain.com/directchildlocations?hierarchyPositionName=village&geomType=point
+www.domain.com/childgeoobjects?parentUid=999999&childrenTypes=type1,type2,type3&recursive=false
 ```
+```
+www.domain.com/parentgeoobject?childUid=999999&parentTypes=type1,type2,type3&recursive=false
+```
+
+# GeoObject UIDs
+Get list of valid UIDs for use in creating new GeoObjec The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /directparentlocations  |  GET  |  <ul> <li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName </li></ul>  |  Get all direct parent locations of a specific location.  |
+|  /geoobjectuids  |  GET  |  <ul><li>numberOfUids=:numberOfUids</li> </ul>  |  Get list of valid UIDs.  |
 
 ### Example
 ```
-www.domain.com/directparentlocations?hierarchyPositionName=village&geomType=point
+www.domain.com/geoobjectuids?numberOfUids=20
+```
+
+# GeoObject Types
+GeoOjectType objects that define the given list of types.
+
+| path  |  Method  |  params  | description  |
+|---|---|---|---|
+|  /geoobjecttypes  |  GET  |  <ul><li>types=:string[]</li> </ul>  |  Get list of valid GeoObject types.  |
+
+### Example
+```
+www.domain.com/geoobjecttypes?types=type1,type2,type3
 ```
