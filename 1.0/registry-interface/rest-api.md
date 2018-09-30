@@ -56,7 +56,7 @@ GeoObject can be queried based on relationships to other GeoObjects.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /childgeoobjects  |  GET  |  <ul><li>parentUid=string</li> <li>childrenTypes=string[]</li> <li>recursive=boolean </li></ul>  |  Get all direct child GeoObjects of a specific GeoObject.  |
+|  /childgeoobjects  |  GET  |  <ul><li>parentUid=string</li> <li>childrenTypes=string[]</li> <li>recursive=boolean </li></ul>  { parentUid : string, childrenTypes : [], recursive : boolean } |  Get all direct child GeoObjects of a specific GeoObject.  |
 |  /parentgeoobjects  |  GET  |  <ul><li>childUid=string</li> <li>parentTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct parent GeoObjects of a specific GeoObject.  |
 
 ### Example
