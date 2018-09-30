@@ -6,6 +6,7 @@ GeoObjects can be queried to & from the common geo-registry.
 |---|---|---|---|
 |  /getGeoObject  |  GET  |  <ul><li>uid=:uid</li></ul>  |  Get a GeoObject by id.  |
 |  /createGeoObject  |  PUT  | <ul><li>geoObject=:geoObject</li></ul>  |  Create a GeoObject.  |
+|  /updateGeoObject  |  PUT  | <ul><li>geoObject=:geoObject</li></ul>  |  Update a GeoObject.  |
 
 ### Example
 ```
@@ -13,6 +14,9 @@ www.domain.com/getGeoObject?id=99999999
 ```
 ```
 www.domain.com/createGeoObject?geoObject={}
+```
+```
+www.domain.com/updateGeoObject?geoObject={}
 ```
 
 # Multiple Locations 
