@@ -14,21 +14,41 @@ www.domain.com/getGeoObject?id=99999999
 ```
 ```
 www.domain.com/createGeoObject?geoObject={
-  type : string,
-  geometry : {
-    type : string,
-    coordinates : double[]
-  }
-  properties : {
-    uid : string,
-    code : string,
-    type : string<GeoObjectType>, // maps to GeoObjectType name value
-    status : string<Term>
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [0, 0]
+  },
+  "properties": {
+    "uid": "123",
+    "code": "Valley Health",
+    "type" : "HEALTHFACILITY",
+    "status" : "ACTIVE",
+    "featureAttributes" : [{
+      "facilityType" : "CLINIC",
+      "numberOfBeds" : 32
+    }]
   }
 }
 ```
 ```
-www.domain.com/updateGeoObject?geoObject={}
+www.domain.com/updateGeoObject?geoObject={
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [0, 0]
+  },
+  "properties": {
+    "uid": "123",
+    "code": "Valley Health",
+    "type" : "HEALTHFACILITY",
+    "status" : "ACTIVE",
+    "featureAttributes" : [{
+      "facilityType" : "CLINIC",
+      "numberOfBeds" : 32
+    }]
+  }
+}
 ```
 
 # GeoObjects By Relationship
