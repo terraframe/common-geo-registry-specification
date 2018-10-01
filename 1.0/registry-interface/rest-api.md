@@ -4,9 +4,9 @@ GeoObjects can be queried to & from the common geo-registry.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /geoobject  |  GET  |  <ul><li>uid=string</li></ul>  |  Get a GeoObject by id.  |
-|  /geoobject  |  POST  | <ul><li>geoobject=object</li></ul>  |  Create a GeoObject.  |
-|  /geoobject  |  PUT  | <ul><li>geoObject=object</li></ul>  |  Update a GeoObject.  |
+|  /geoobject  |  GET  | Required: <ul><li>uid=string</li></ul>  |  Get a GeoObject by id.  |
+|  /geoobject  |  POST  | Required: <ul><li>geoobject=object</li></ul>  |  Create a GeoObject.  |
+|  /geoobject  |  PUT  | Required: <ul><li>geoObject=object</li></ul>  |  Update a GeoObject.  |
 
 ### Example
 ```
@@ -56,8 +56,8 @@ GeoObject can be queried based on relationships to other GeoObjects.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /childgeoobjects  |  GET  |  <ul><li>parentUid=string</li> <li>childrenTypes=string[]</li> <li>recursive=boolean </li></ul>  |  Get all direct child GeoObjects of a specific GeoObject.  |
-|  /parentgeoobjects  |  GET  |  <ul><li>childUid=string</li> <li>parentTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct parent GeoObjects of a specific GeoObject.  |
+|  /childgeoobjects  |  GET  |  Required: <ul><li>parentUid=string</li> <li>childrenTypes=string[]</li> <li>recursive=boolean </li></ul>  |  Get all direct child GeoObjects of a specific GeoObject.  |
+|  /parentgeoobjects  |  GET  |  Required: <ul><li>childUid=string</li> <li>parentTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct parent GeoObjects of a specific GeoObject.  |
 
 ### Example
 ```
@@ -72,7 +72,7 @@ Get list of valid UIDs for use in creating new GeoObjec The Common Geo-Registry 
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /geoobjectuids  |  GET  |  <ul><li>numberOfUids=number</li> </ul>  |  Get list of valid UIDs.  |
+|  /geoobjectuids  |  GET  |  Required: <ul><li>numberOfUids=number</li> </ul>  |  Get list of valid UIDs.  |
 
 ### Example
 ```
@@ -84,7 +84,7 @@ GeoOjectType objects that define the given list of types.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /geoobjecttypes  |  GET  |  <ul><li>types=string[]</li> </ul>  |  Get list of valid GeoObject types.  |
+|  /geoobjecttypes  |  GET  |  Required: <ul><li>types=string[]</li> </ul>  |  Get list of valid GeoObject types.  |
 
 ### Example
 ```
