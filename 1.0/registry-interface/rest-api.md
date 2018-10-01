@@ -61,10 +61,10 @@ GeoObject can be queried based on relationships to other GeoObjects.
 
 ### Example
 ```
-www.domain.com/childgeoobjects?parentUid=999999&childrenTypes=type1,type2,type3&recursive=false
+www.domain.com/childgeoobjects?parentUid=999999&childrenTypes=[type1,type2,type3]&recursive=false
 ```
 ```
-www.domain.com/parentgeoobject?childUid=999999&parentTypes=type1,type2,type3&recursive=false
+www.domain.com/parentgeoobject?childUid=999999&parentTypes=[type1,type2,type3]&recursive=false
 ```
 
 # GeoObject UIDs
@@ -88,5 +88,5 @@ GeoOjectType objects that define the given list of types.
 
 ### Example
 ```
-www.domain.com/geoobjecttypes?types=type1,type2,type3
+www.domain.com/geoobjecttypes?types=[type1,type2,type3]
 ```
