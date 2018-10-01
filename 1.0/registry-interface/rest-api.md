@@ -1,45 +1,92 @@
 
-# Single Location
-Locations can be queried from the common geo-registry by id.
+# Single GeoObject
+GeoObjects can be queried to & from the common geo-registry.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /location  |  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li></ul>  |  Get a location by id.  |
+|  /geoobject  |  GET  | Required: <ul><li>uid=string</li></ul>  |  Get a GeoObject by id.  |
+|  /geoobject  |  POST  | Required: <ul><li>geoobject=object</li></ul>  |  Create a GeoObject.  |
+|  /geoobject  |  PUT  | Required: <ul><li>geoObject=object</li></ul>  |  Update a GeoObject.  |
 
 ### Example
 ```
-www.domain.com/location?id=99999999&geomType=point
+www.domain.com/getGeoObject?id=99999999
+```
+```
+www.domain.com/createGeoObject?geoObject={
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [0, 0]
+  },
+  "properties": {
+    "uid": "123",
+    "code": "Valley Health",
+    "type" : "HEALTHFACILITY",
+    "status" : "ACTIVE",
+    "featureAttributes" : [{
+      "facilityType" : "CLINIC",
+      "numberOfBeds" : 32
+    }]
+  }
+}
+```
+```
+www.domain.com/updateGeoObject?geoObject={
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [0, 0]
+  },
+  "properties": {
+    "uid": "123",
+    "code": "Valley Health",
+    "type" : "HEALTHFACILITY",
+    "status" : "ACTIVE",
+    "featureAttributes" : [{
+      "facilityType" : "CLINIC",
+      "numberOfBeds" : 32
+    }]
+  }
+}
 ```
 
-# Multiple Locations 
-Multiple locations can be queried from specific levels of the location hierarchy. 
+# GeoObjects By Relationship
+GeoObject can be queried based on relationships to other GeoObjects.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /locations  |  GET  |  <ul><li>hierarchyPositionName=:hierarchyPositionName</li> <li>geomType=:geomType</li></ul>  |  Get all locations at a specific level in the location heirarchy.  |
+|  /childgeoobjects  |  GET  |  Required: <ul><li>parentUid=string</li> <li>childrenTypes=string[]</li> <li>recursive=boolean </li></ul>  |  Get all direct child GeoObjects of a specific GeoObject.  |
+|  /parentgeoobjects  |  GET  |  Required: <ul><li>childUid=string</li> <li>parentTypes=:string[]</li> <li>recursive=:boolean </li></ul>  |  Get all direct parent GeoObjects of a specific GeoObject.  |
 
 ### Example
 ```
-www.domain.com/locations?hierarchyPositionName=village&geomType=point
+www.domain.com/childgeoobjects?parentUid=999999&childrenTypes=[type1,type2,type3]&recursive=false
+```
+```
+www.domain.com/parentgeoobject?childUid=999999&parentTypes=[type1,type2,type3]&recursive=false
 ```
 
-# Locations By Direct Relationship
-Locations can be queried that have a direct relationship with a specific location.
+# GeoObject UIDs
+Get list of valid UIDs for use in creating new GeoObjec The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /directchildlocations  |  GET  |  <ul><li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName </li></ul>  |  Get all direct child locations of a specific location.  |
+|  /geoobjectuids  |  GET  |  Required: <ul><li>numberOfUids=number</li> </ul>  |  Get list of valid UIDs.  |
 
 ### Example
 ```
-www.domain.com/directchildlocations?hierarchyPositionName=village&geomType=point
+www.domain.com/geoobjectuids?numberOfUids=20
 ```
+
+# GeoObject Types
+GeoOjectType objects that define the given list of types.
 
 | path  |  Method  |  params  | description  |
 |---|---|---|---|
-|  /directparentlocations  |  GET  |  <ul> <li>id=:id</li> <li>geomType=:geomType</li> <li>hierarchyPositionName=:hierarchyPositionName </li></ul>  |  Get all direct parent locations of a specific location.  |
+|  /geoobjecttypes  |  GET  |  Required: <ul><li>types=string[]</li> </ul>  |  Get list of valid GeoObject types.  |
 
 ### Example
 ```
-www.domain.com/directparentlocations?hierarchyPositionName=village&geomType=point
+www.domain.com/geoobjecttypes?types=[type1,type2,type3]
 ```
