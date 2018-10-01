@@ -10,10 +10,10 @@ GeoObjects can be queried to & from the common geo-registry.
 
 ### Example
 ```
-www.domain.com/getGeoObject?id=99999999
+www.domain.com/geoobject?id=99999999
 ```
 ```
-www.domain.com/createGeoObject?geoObject={
+www.domain.com/geoobject?geoObject={
   "type": "Feature",
   "geometry": {
     "type": "Point",
@@ -32,7 +32,7 @@ www.domain.com/createGeoObject?geoObject={
 }
 ```
 ```
-www.domain.com/updateGeoObject?geoObject={
+www.domain.com/geoobject?geoObject={
   "type": "Feature",
   "geometry": {
     "type": "Point",
