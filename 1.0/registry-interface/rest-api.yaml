@@ -1,156 +1,454 @@
-openapi: "3.0.0"
+swagger: "2.0"
 info:
   version: 1.0.0
-  title: TEST
-  description: A sample API that uses a petstore as an example to demonstrate features in the OpenAPI 3.0 specification
-  termsOfService: http://swagger.io/terms/
-  contact:
-    name: Swagger API Team
-    email: apiteam@swagger.io
-    url: http://swagger.io
+  title: Common Geo-Registry REST API
   license:
-    name: Apache 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0.html
-servers:
-  - url: http://petstore.swagger.io/api
+    name: MIT
+host: yourdomain
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
 paths:
-  /pets:
+  /geoobject:
     get:
-      description: |
-        Returns all pets from the system that the user has access to
-        Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet. Aenean at gravida augue, ac iaculis sem. Curabitur odio lorem, ornare eget elementum nec, cursus id lectus. Duis mi turpis, pulvinar ac eros ac, tincidunt varius justo. In hac habitasse platea dictumst. Integer at adipiscing ante, a sagittis ligula. Aenean pharetra tempor ante molestie imperdiet. Vivamus id aliquam diam. Cras quis velit non tortor eleifend sagittis. Praesent at enim pharetra urna volutpat venenatis eget eget mauris. In eleifend fermentum facilisis. Praesent enim enim, gravida ac sodales sed, placerat id erat. Suspendisse lacus dolor, consectetur non augue vel, vehicula interdum libero. Morbi euismod sagittis libero sed lacinia.
-
-        Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condimentum ligula luctus nec. Phasellus semper velit eget aliquet faucibus. In a mattis elit. Phasellus vel urna viverra, condimentum lorem id, rhoncus nibh. Ut pellentesque posuere elementum. Sed a varius odio. Morbi rhoncus ligula libero, vel eleifend nunc tristique vitae. Fusce et sem dui. Aenean nec scelerisque tortor. Fusce malesuada accumsan magna vel tempus. Quisque mollis felis eu dolor tristique, sit amet auctor felis gravida. Sed libero lorem, molestie sed nisl in, accumsan tempor nisi. Fusce sollicitudin massa ut lacinia mattis. Sed vel eleifend lorem. Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.
-      operationId: findPets
+      summary: Get a GeoObject by id.
+      operationId: getGeoObject
+      tags:
+        - GeoObject
       parameters:
-        - name: tags
+        - name: uid
           in: query
-          description: tags to filter by
-          required: false
-          style: form
+          description: GeoObject
+          required: true
+          type: string
+      responses:
+        "200":
+          description: A GeoObject
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/GeoObject'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a GeoObject
+      operationId: createGeoObject
+      tags:
+        - GeoObject
+      parameters:
+        - name: geoObject
+          in: body
+          description: GeoObject
+          required: true
+          schema:
+            $ref: '#/definitions/GeoObject'
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update a GeoObject
+      operationId: updateGeoObject
+      tags:
+        - GeoObject
+      parameters:
+        - name: geoObject
+          in: body
+          description: GeoObject
+          required: true
+          schema:
+            $ref: '#/definitions/GeoObject'
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /childgeoobjects:
+    get:
+      summary: Get all direct child GeoObjects of a specific GeoObject.
+      operationId: getChildGeoObjects
+      tags:
+        - GeoObject
+      parameters:
+        - name: parentUid
+          in: query
+          description: GeoObject
+          required: true
+          type: string
+        - name: childrenTypes
+          in: body
+          description: Children types.
+          required: true
           schema:
             type: array
             items:
               type: string
-        - name: limit
+        - name: recursive
           in: query
-          description: maximum number of results to return
-          required: false
-          schema:
-            type: integer
-            format: int32
+          description: Recursive.
+          required: true
+          type: string
       responses:
-        '200':
-          description: pet response
-          content:
-            application/json:
-              schema:
+        "200":
+          description: A GeoObject
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/GeoObject'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /parentgeoobjects:
+    get:
+      summary: Get all direct parent GeoObjects of a specific GeoObject.
+      operationId: getParentGeoObjects
+      tags:
+        - GeoObject
+      parameters:
+        - name: childUid
+          in: query
+          description: GeoObject
+          required: true
+          type: string
+        - name: parentTypes
+          in: body
+          description: Parent types.
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: recursive
+          in: query
+          description: Recursive.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: A GeoObject
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/GeoObject'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /geoobjectuids:
+    get:
+      summary: 	Get list of valid UIDs.
+      operationId: getGeoObjectUids
+      tags:
+        - GeoObject
+      parameters:
+        - name: numberOfUids
+          in: query
+          description: Number of UIDs to return.
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: A list of UIDs that can be used to create new GeoObjects on the client.
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema: 
+            type: array
+            items: 
+              type: string
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /geoobjecttypes:
+    get:
+      summary: 	Get list of valid UIDs.
+      operationId: getGeoObjectTypes
+      tags:
+        - GeoObject
+      parameters:
+        - name: types
+          in: query
+          description: Get list of valid GeoObject types.
+          required: true
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: A list of UIDs that can be used to create new GeoObjects on the client.
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema: 
+            type: array
+            items: 
+              type: string
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+definitions:
+  GeoObject:
+    $ref: "#/definitions/Feature"
+    
+  GeoObjects:
+    type: array
+    items:
+      $ref: '#/definitions/GeoObject'
+      
+  GeoObjectType:
+    type: object
+    properties:
+      code: 
+        type: string
+      localizedLabel: 
+        type: string
+      localizedDescription: 
+        type: string
+      attributes: 
+        type: array
+        items:
+          $ref: '#/definitions/AttributeType'
+    
+  AttributeType:
+    type: object
+    properties:
+      code: 
+        type: string
+      localizedLabel: 
+        type: string
+      type: 
+        type: string
+ 
+  AttributeTypes:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeType'
+  
+  Term:
+    type: object
+    properties:
+      code:
+        type: string
+      localizedLabel:
+        type: string
+      children:
+        type: array
+        items:
+          $ref: '#/definitions/Term' # Swagger UI can't render circular references
+
+  Geometry:
+    type: object
+    description: GeoJSon geometry
+    discriminator: type
+    required:
+      - type
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#geometry-objects
+    properties:
+      type:
+        type: string
+        enum:
+        - Point
+        - LineString
+        - Polygon
+        - MultiPoint
+        - MultiLineString
+        - MultiPolygon
+        description: the geometry type
+    
+  Point3D:
+    type: array
+    description: Point in 3D space
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id2
+    minItems: 2
+    maxItems: 3
+    items:
+      type: number
+          
+  Point:
+    type: object
+    description: GeoJSon geometry
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id2
+    allOf:
+      - $ref: "#/definitions/Geometry"
+      - properties:
+          coordinates:
+            $ref: '#/definitions/Point3D'
+            
+  LineString:
+    type: object
+    description: GeoJSon geometry
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id3
+    allOf:
+      - $ref: "#/definitions/Geometry"
+      - properties:
+          coordinates:
+            type: array
+            items:
+              $ref: '#/definitions/Point3D'
+
+  Polygon:
+    type: object
+    description: GeoJSon geometry
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id4
+    allOf:
+      - $ref: "#/definitions/Geometry"
+      - properties:
+          coordinates:
+            type: array
+            items:
+              type: array
+              items:
+                $ref: '#/definitions/Point3D'
+
+  MultiPoint:
+    type: object
+    description: GeoJSon geometry
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id5
+    allOf:
+      - $ref: "#/definitions/Geometry"
+      - properties:
+          coordinates:
+            type: array
+            items:
+              $ref: '#/definitions/Point3D'
+
+  MultiLineString:
+    type: object
+    description: GeoJSon geometry
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id6
+    allOf:
+      - $ref: "#/definitions/Geometry"
+      - properties:
+          coordinates:
+            type: array
+            items:
+              type: array
+              items:
+                $ref: '#/definitions/Point3D'
+
+  MultiPolygon:
+    type: object
+    description: GeoJSon geometry
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id6
+    allOf:
+      - $ref: "#/definitions/Geometry"
+      - properties:
+          coordinates:
+            type: array
+            items:
+              type: array
+              items:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    post:
-      description: Creates a new pet in the store.  Duplicates are allowed
-      operationId: addPet
-      requestBody:
-        description: Pet to add to the store
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NewPet'
-      responses:
-        '200':
-          description: pet response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /pets/{id}:
-    get:
-      description: Returns a user based on a single ID, if the user does not have access to the pet
-      operationId: find pet by id
-      parameters:
-        - name: id
-          in: path
-          description: ID of pet to fetch
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: pet response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    delete:
-      description: deletes a single pet based on the ID supplied
-      operationId: deletePet
-      parameters:
-        - name: id
-          in: path
-          description: ID of pet to delete
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '204':
-          description: pet deleted
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-components:
-  schemas:
-    Pet:
-      allOf:
-        - $ref: '#/components/schemas/NewPet'
-        - required:
-          - id
-          properties:
-            id:
-              type: integer
-              format: int64
+                  $ref: '#/definitions/Point3D'
 
-    NewPet:
-      required:
-        - name  
+  GeometryCollection:
+    type: object
+    description: GeoJSon geometry collection
+    required:
+     - type
+     - geometries
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#geometrycollection
+    properties:
+      type:
+        type: string
+        enum:
+        - GeometryCollection
+      geometries:
+        type: array
+        items:
+          $ref: '#/definitions/Geometry'
+
+  Feature:
+    type: object
+    description: GeoJSon Feature
+    required:
+     - type
+     - id
+     - geometry
+    externalDocs:
+      url: https://tools.ietf.org/html/rfc7946#section-3.2
+    properties:
+      type:
+        type: string
+        enum:
+          - Feature
+      id:
+        type: integer
+      geometry:
+        $ref: '#/definitions/GeometryCollection'
       properties:
-        name:
-          type: string
-        tag:
-          type: string    
+        type: object
+        properties:
+          uid: 
+            type: string
+          code: 
+            type: string
+          type: 
+            $ref: '#/definitions/GeoObjectType'
+          status: 
+            $ref: '#/definitions/Term'
 
-    Error:
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-
+  FeatureCollection:
+    type: object
+    description: GeoJSon Feature collection
+    required:
+     - type
+     - features
+    externalDocs:
+      url: https://tools.ietf.org/html/rfc7946#section-3.3
+    properties:
+      type:
+        type: string
+        enum:
+        - FeatureCollection
+      features:
+        type: array
+        items:
+          $ref: '#/definitions/Feature'
+             
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
