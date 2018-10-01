@@ -2,7 +2,7 @@
 The registry interface defines the standard API interface to an implementation of a server side common geo-registry. This includes two communication APIs and formal data model definitions.
 
 ### Supporting Documentation
-1. The REST API docs can be found ![here](https://terraframe.github.io/common-geo-registry-specification-rest-api-docs/#)
+1. The REST API docs can be found [here](https://terraframe.github.io/common-geo-registry-specification-rest-api-docs/#)
 
 ### Communication APIs
 1.  Server side Java API. 
