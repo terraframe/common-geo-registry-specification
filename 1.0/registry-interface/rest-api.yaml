@@ -15,23 +15,19 @@ produces:
 paths:
   /geoobject:
     get:
-      summary: Get a GeoObject by id.
+      summary: Returns a GeoObject with the given uid.
       operationId: getGeoObject
       tags:
         - GeoObject
       parameters:
         - name: uid
           in: query
-          description: GeoObject
+          description: The UID of the GeoObject.
           required: true
           type: string
       responses:
         "200":
-          description: A GeoObject
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
+          description: A GeoObject in GeoJSON format with the given uid.
           schema:
             $ref: '#/definitions/GeoObject'
         default:
@@ -39,14 +35,14 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
-      summary: Create a GeoObject
+      summary: Create a new GeoObject in the Common Geo-Registry.
       operationId: createGeoObject
       tags:
         - GeoObject
       parameters:
         - name: geoObject
           in: body
-          description: GeoObject
+          description: GeoObject in GeoJSON format of the newly created.
           required: true
           schema:
             $ref: '#/definitions/GeoObject'
@@ -58,14 +54,14 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
-      summary: Update a GeoObject
+      summary: Update a new GeoObject in the Common Geo-Registry.
       operationId: updateGeoObject
       tags:
         - GeoObject
       parameters:
         - name: geoObject
           in: body
-          description: GeoObject
+          description: GeoObject in GeoJSON format to be updated.
           required: true
           schema:
             $ref: '#/definitions/GeoObject'
@@ -78,36 +74,33 @@ paths:
             $ref: '#/definitions/Error'
   /childgeoobjects:
     get:
-      summary: Get all direct child GeoObjects of a specific GeoObject.
+      summary: Get children of the given GeoObject.
       operationId: getChildGeoObjects
       tags:
         - GeoObject
+        - Relationship
       parameters:
         - name: parentUid
           in: query
-          description: GeoObject
+          description: UID of the parent object for which the call fetches children.
           required: true
           type: string
         - name: childrenTypes
-          in: body
-          description: Children types.
+          in: query
+          description: An array of GeoObjectType names of the types of children GeoObjects to fetch. If blank then return children of all types.
           required: true
-          schema:
-            type: array
-            items:
-              type: string
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
         - name: recursive
           in: query
-          description: Recursive.
+          description: recursive TRUE if recursive children of the given parent with the given types should be returned, FALSE if only single level children should be returned.
           required: true
           type: string
       responses:
         "200":
           description: A GeoObject
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
           schema:
             $ref: '#/definitions/GeoObject'
         default:
@@ -117,36 +110,33 @@ paths:
             
   /parentgeoobjects:
     get:
-      summary: Get all direct parent GeoObjects of a specific GeoObject.
+      summary: Get parents of the given GeoObject.
       operationId: getParentGeoObjects
       tags:
         - GeoObject
+        - Relationship
       parameters:
         - name: childUid
           in: query
-          description: GeoObject
+          description: UID of the child object for which the call fetches parents.
           required: true
           type: string
         - name: parentTypes
-          in: body
-          description: Parent types.
+          in: query
+          description: An array of GeoObjectType names of the types of parent GeoObjects to fetch. If blank then return parents of all types.
           required: true
-          schema:
-            type: array
-            items:
-              type: string
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
         - name: recursive
           in: query
-          description: Recursive.
+          description: TRUE if recursive parents of the given parent with the given types should be returned, FALSE if only single level parents should be returned.
           required: true
           type: string
       responses:
         "200":
           description: A GeoObject
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
           schema:
             $ref: '#/definitions/GeoObject'
         default:
@@ -156,23 +146,20 @@ paths:
             
   /geoobjectuids:
     get:
-      summary: 	Get list of valid UIDs.
+      summary: 	Get list of valid UIDs for use in creating new GeoObjec The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
       operationId: getGeoObjectUids
       tags:
         - GeoObject
+        - Metadata
       parameters:
         - name: numberOfUids
           in: query
-          description: Number of UIDs to return.
+          description: NumberofUIDs that the Common Geo-Registry will issue to the mobile device.
           required: true
           type: integer
       responses:
         "200":
           description: A list of UIDs that can be used to create new GeoObjects on the client.
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
           schema: 
             type: array
             items: 
@@ -184,14 +171,15 @@ paths:
             
   /geoobjecttypes:
     get:
-      summary: 	Get list of valid UIDs.
+      summary: 	Return GeoOjectType objects that define the given list of types.
       operationId: getGeoObjectTypes
       tags:
         - GeoObject
+        - Metadata
       parameters:
         - name: types
           in: query
-          description: Get list of valid GeoObject types.
+          description: An array of GeoObjectType names. If blank then all GeoObjectType objects are returned.
           required: true
           type: array
           items:
@@ -199,10 +187,6 @@ paths:
       responses:
         "200":
           description: A list of UIDs that can be used to create new GeoObjects on the client.
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
           schema: 
             type: array
             items: 
@@ -401,6 +385,7 @@ definitions:
      - type
      - id
      - geometry
+     - properties
     externalDocs:
       url: https://tools.ietf.org/html/rfc7946#section-3.2
     properties:
@@ -411,9 +396,14 @@ definitions:
       id:
         type: integer
       geometry:
-        $ref: '#/definitions/GeometryCollection'
+        $ref: '#/definitions/Geometry'
       properties:
         type: object
+        required:
+          - uid
+          - code
+          - type
+          - status
         properties:
           uid: 
             type: string
