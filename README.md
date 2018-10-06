@@ -10,6 +10,9 @@ The text of this specification is licensed under a
 However, the use of this spec in products and code is entirely free:
 there are no royalties, restrictions, or requirements.
 
+## Supporting projects
+* [Common Geo-Registry Adapter](https://github.com/terraframe/common-geo-registry-adapter) 
+
 ## Implementations
 * [GeoPrism implementation of the Common Geo-Registry](https://github.com/terraframe/geoprism-geo-registry)
 
