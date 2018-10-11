@@ -57,7 +57,7 @@ public interface RegistryInterface {
     * @returns
     * @throws
     **/
-    public TreeNode getChildGeoObjects(String parentUid, String[] childrenTypes, Boolean recursive);
+    public ChildTreeNode getChildGeoObjects(String parentUid, String[] childrenTypes, Boolean recursive);
      
     /**
     * Get parents of the given GeoObject
@@ -72,7 +72,7 @@ public interface RegistryInterface {
     * @returns
     * @throws
     **/   
-    public TreeNode getParentGeoObjects(String childUid, String[] parentTypes, Boolean recursive);
+    public ParentTreeNode getParentGeoObjects(String childUid, String[] parentTypes, Boolean recursive);
     
     
     /**
