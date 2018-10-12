@@ -200,14 +200,6 @@ paths:
             
 definitions:
 
-  TreeNode:
-    type: object
-    properties:
-      geoObject:
-        $ref: '#/definitions/GeoObject'
-      hierarchyType:
-        type: string
-
   ChildTreeNode:
     type: object
     properties:
@@ -231,7 +223,7 @@ definitions:
         type: array
         description: test
         items:
-          $ref: '#/definitions/TreeNode'  # ReDoc UI can't render circular references
+          $ref: '#/definitions/ParentTreeNode'  # ReDoc UI can't render circular references
     
   GeoObject:
     $ref: "#/definitions/Feature"
