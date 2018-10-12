@@ -7,7 +7,7 @@ info:
 host: yourdomain
 basePath: /v1
 schemes:
-  - http
+  - https
 consumes:
   - application/json
 produces:
@@ -72,6 +72,7 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
+  
   /childgeoobjects:
     get:
       summary: Get children of the given GeoObject.
@@ -85,6 +86,7 @@ paths:
           description: UID of the parent object for which the call fetches children.
           required: true
           type: string
+          example: 999
         - name: childrenTypes
           in: query
           description: An array of GeoObjectType names of the types of children GeoObjects to fetch. If blank then return children of all types.
@@ -93,16 +95,18 @@ paths:
           collectionFormat: csv
           items:
             type: string
+          example: [HEALTHFACILITY]
         - name: recursive
           in: query
           description: recursive TRUE if recursive children of the given parent with the given types should be returned, FALSE if only single level children should be returned.
           required: true
           type: string
+          example: TRUE
       responses:
         "200":
-          description: A GeoObject
+          description: A ChildTreeNode object.
           schema:
-            $ref: '#/definitions/GeoObject'
+            $ref: '#/definitions/ChildTreeNode'
         default:
           description: unexpected error
           schema:
@@ -121,6 +125,7 @@ paths:
           description: UID of the child object for which the call fetches parents.
           required: true
           type: string
+          example: 999   
         - name: parentTypes
           in: query
           description: An array of GeoObjectType names of the types of parent GeoObjects to fetch. If blank then return parents of all types.
@@ -129,16 +134,18 @@ paths:
           collectionFormat: csv
           items:
             type: string
+          example: [HEALTHFACILITY]
         - name: recursive
           in: query
           description: TRUE if recursive parents of the given parent with the given types should be returned, FALSE if only single level parents should be returned.
           required: true
           type: string
+          example: TRUE
       responses:
         "200":
-          description: A GeoObject
+          description: A ParentTreeNode object.
           schema:
-            $ref: '#/definitions/GeoObject'
+            $ref: '#/definitions/ParentTreeNode'
         default:
           description: unexpected error
           schema:
@@ -146,7 +153,7 @@ paths:
             
   /geoobjectuids:
     get:
-      summary: 	Get list of valid UIDs for use in creating new GeoObjec The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
+      summary: 	Get list of valid UIDs for use in creating new GeoObjects. The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
       operationId: getGeoObjectUids
       tags:
         - GeoObject
@@ -157,9 +164,10 @@ paths:
           description: NumberofUIDs that the Common Geo-Registry will issue to the mobile device.
           required: true
           type: integer
+          example: 30  
       responses:
         "200":
-          description: A list of UIDs that can be used to create new GeoObjects on the client.
+          description: An array of UIDs.
           schema: 
             type: array
             items: 
@@ -184,19 +192,54 @@ paths:
           type: array
           items:
             type: string
+          example: [1, 5, 7]   
       responses:
         "200":
-          description: A list of UIDs that can be used to create new GeoObjects on the client.
+          description: An array of GeoObjectType objects.
           schema: 
             type: array
             items: 
-              type: string
+              $ref: '#/definitions/GeoObjectType'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
             
 definitions:
+
+  TreeNode:
+    type: object
+    properties: 
+      geoObject: 
+        $ref: '#/definitions/GeoObject'
+      hierarchyType: 
+        type: string
+
+  ChildTreeNode:
+    type: object
+    properties: 
+      geoObject: 
+        $ref: '#/definitions/GeoObject'
+      hierarchyType: 
+        type: string
+      children: 
+        type: array
+        items: 
+          $ref: '#/definitions/ChildTreeNode'  # ReDoc UI can't render circular references
+          
+  ParentTreeNode:
+    type: object
+    properties: 
+      geoObject: 
+        $ref: '#/definitions/GeoObject'
+      hierarchyType: 
+        type: string
+      parents: 
+        type: array
+        description: test
+        items: 
+          $ref: '#/definitions/TreeNode'  # ReDoc UI can't render circular references
+    
   GeoObject:
     $ref: "#/definitions/Feature"
     
@@ -244,7 +287,7 @@ definitions:
       children:
         type: array
         items:
-          $ref: '#/definitions/Term' # Swagger UI can't render circular references
+          $ref: '#/definitions/Term' # ReDoc UI can't render circular references
 
   Geometry:
     type: object
