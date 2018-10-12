@@ -125,7 +125,7 @@ paths:
           description: UID of the child object for which the call fetches parents.
           required: true
           type: string
-          example: 999   
+          example: 999
         - name: parentTypes
           in: query
           description: An array of GeoObjectType names of the types of parent GeoObjects to fetch. If blank then return parents of all types.
@@ -164,13 +164,13 @@ paths:
           description: NumberofUIDs that the Common Geo-Registry will issue to the mobile device.
           required: true
           type: integer
-          example: 30  
+          example: 30
       responses:
         "200":
           description: An array of UIDs.
-          schema: 
+          schema:
             type: array
-            items: 
+            items:
               type: string
         default:
           description: unexpected error
@@ -179,7 +179,7 @@ paths:
             
   /geoobjecttypes:
     get:
-      summary: 	Return GeoOjectType objects that define the given list of types.
+      summary: Return GeoOjectType objects that define the given list of types.
       operationId: getGeoObjectTypes
       tags:
         - GeoObject
@@ -196,9 +196,9 @@ paths:
       responses:
         "200":
           description: An array of GeoObjectType objects.
-          schema: 
+          schema:
             type: array
-            items: 
+            items:
               $ref: '#/definitions/GeoObjectType'
         default:
           description: unexpected error
@@ -209,35 +209,35 @@ definitions:
 
   TreeNode:
     type: object
-    properties: 
-      geoObject: 
+    properties:
+      geoObject:
         $ref: '#/definitions/GeoObject'
-      hierarchyType: 
+      hierarchyType:
         type: string
 
   ChildTreeNode:
     type: object
-    properties: 
-      geoObject: 
+    properties:
+      geoObject:
         $ref: '#/definitions/GeoObject'
       hierarchyType: 
         type: string
-      children: 
+      children:
         type: array
-        items: 
+        items:
           $ref: '#/definitions/ChildTreeNode'  # ReDoc UI can't render circular references
           
   ParentTreeNode:
     type: object
-    properties: 
+    properties:
       geoObject: 
         $ref: '#/definitions/GeoObject'
-      hierarchyType: 
+      hierarchyType:
         type: string
-      parents: 
+      parents:
         type: array
         description: test
-        items: 
+        items:
           $ref: '#/definitions/TreeNode'  # ReDoc UI can't render circular references
     
   GeoObject:
@@ -251,7 +251,7 @@ definitions:
   GeoObjectType:
     type: object
     properties:
-      code: 
+      code:
         type: string
       localizedLabel: 
         type: string
@@ -267,9 +267,9 @@ definitions:
     properties:
       code: 
         type: string
-      localizedLabel: 
+      localizedLabel:
         type: string
-      type: 
+      type:
         type: string
  
   AttributeTypes:
@@ -448,13 +448,13 @@ definitions:
           - type
           - status
         properties:
-          uid: 
+          uid:
             type: string
-          code: 
+          code:
             type: string
-          type: 
+          type:
             $ref: '#/definitions/GeoObjectType'
-          status: 
+          status:
             $ref: '#/definitions/Term'
 
   FeatureCollection:
