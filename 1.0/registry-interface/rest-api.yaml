@@ -86,7 +86,6 @@ paths:
           description: UID of the parent object for which the call fetches children.
           required: true
           type: string
-          example: 999
         - name: childrenTypes
           in: query
           description: An array of GeoObjectType names of the types of children GeoObjects to fetch. If blank then return children of all types.
@@ -95,13 +94,11 @@ paths:
           collectionFormat: csv
           items:
             type: string
-          example: [HEALTHFACILITY]
         - name: recursive
           in: query
           description: recursive TRUE if recursive children of the given parent with the given types should be returned, FALSE if only single level children should be returned.
           required: true
           type: string
-          example: TRUE
       responses:
         "200":
           description: A ChildTreeNode object.
@@ -125,7 +122,6 @@ paths:
           description: UID of the child object for which the call fetches parents.
           required: true
           type: string
-          example: 999
         - name: parentTypes
           in: query
           description: An array of GeoObjectType names of the types of parent GeoObjects to fetch. If blank then return parents of all types.
@@ -134,13 +130,11 @@ paths:
           collectionFormat: csv
           items:
             type: string
-          example: [HEALTHFACILITY]
         - name: recursive
           in: query
           description: TRUE if recursive parents of the given parent with the given types should be returned, FALSE if only single level parents should be returned.
           required: true
           type: string
-          example: TRUE
       responses:
         "200":
           description: A ParentTreeNode object.
@@ -164,7 +158,6 @@ paths:
           description: NumberofUIDs that the Common Geo-Registry will issue to the mobile device.
           required: true
           type: integer
-          example: 30
       responses:
         "200":
           description: An array of UIDs.
@@ -188,11 +181,11 @@ paths:
         - name: types
           in: query
           description: An array of GeoObjectType names. If blank then all GeoObjectType objects are returned.
-          required: true
+          required: false
           type: array
           items:
             type: string
-          example: [1, 5, 7]   
+  
       responses:
         "200":
           description: An array of GeoObjectType objects.
@@ -456,24 +449,6 @@ definitions:
             $ref: '#/definitions/GeoObjectType'
           status:
             $ref: '#/definitions/Term'
-
-  FeatureCollection:
-    type: object
-    description: GeoJSon Feature collection
-    required:
-     - type
-     - features
-    externalDocs:
-      url: https://tools.ietf.org/html/rfc7946#section-3.3
-    properties:
-      type:
-        type: string
-        enum:
-        - FeatureCollection
-      features:
-        type: array
-        items:
-          $ref: '#/definitions/Feature'
              
   Error:
     required:
