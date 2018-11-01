@@ -421,8 +421,6 @@ definitions:
         type: string
         enum:
           - Feature
-      id:
-        type: integer
       geometry:
         $ref: '#/definitions/Geometry'
       properties:
