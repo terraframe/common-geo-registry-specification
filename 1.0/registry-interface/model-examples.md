@@ -12,11 +12,9 @@
     "code": "Valley Health",
     "type" : "HEALTHFACILITY",
     "status" : "ACTIVE",
-    "localizedDisplayLabel" : "Valley Health Center"
-    "featureAttributes" : [{
-      "facilityType" : "CLINIC",
-      "numberOfBeds" : 32
-    }]
+    "localizedDisplayLabel" : "Valley Health Center",
+    "facilityType" : "CLINIC", // user defined property exampl
+    "numberOfBeds" : 32 // user defined property example
   }
 }
 ```
