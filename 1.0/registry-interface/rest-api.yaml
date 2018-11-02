@@ -53,7 +53,7 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-    put:
+    post:
       summary: Update a new GeoObject in the Common Geo-Registry.
       operationId: updateGeoObject
       tags:
