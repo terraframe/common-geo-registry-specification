@@ -36,7 +36,7 @@ According to the HGLC specification, attributes on GeoObject Types can be define
 |properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. This is a default attribute.||A postal code|
 |properties.type | GeoObjectType CODE which this object references. || "Village", "Household", "HealthFacility" |
 |properties.status | Term CODE which this object references to the term that defines the object status. Status values have not yet been defined. | Display labels on TERM values: "Active", "Inactive", "Pending Review"||
-|properties.localizedDisplayLabel | Localized display label. ||
+|properties.localizedDisplayLabel | Localized display label. |||
 
 
 ### ChildTreeNode
