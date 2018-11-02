@@ -430,6 +430,7 @@ definitions:
           - code
           - type
           - status
+          - localizedDisplayLabel
         properties:
           uid:
             type: string
@@ -439,6 +440,8 @@ definitions:
             $ref: '#/definitions/GeoObjectType'
           status:
             $ref: '#/definitions/Term'
+          localizedDisplayLabel:
+            type: string
              
   Error:
     required:
