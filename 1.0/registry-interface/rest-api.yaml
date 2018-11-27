@@ -5,7 +5,7 @@ info:
   license:
     name: MIT
 host: yourdomain
-basePath: /v1
+basePath: /api
 schemes:
   - https
 consumes:
@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /geoobject:
+  /geoobject/get:
     get:
       summary: Returns a GeoObject with the given uid.
       operationId: getGeoObject
@@ -34,6 +34,8 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
+
+  /geoobject/create:
     post:
       summary: Create a new GeoObject in the Common Geo-Registry.
       operationId: createGeoObject
@@ -53,7 +55,9 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-    put:
+
+  /geoobject/update:
+    post:
       summary: Update a new GeoObject in the Common Geo-Registry.
       operationId: updateGeoObject
       tags:
@@ -72,14 +76,40 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  
-  /childgeoobjects:
+
+  /geoobject/get-code:
+    get:
+      summary: TODO
+      operationId: getGeoObjectCode
+      tags:
+        - GeoObject
+      parameters:
+        - name: code
+          in: query
+          description: TODO.
+          required: true
+          type: string
+        - name: typeCode
+          in: query
+          description: TODO.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: A GeoObject in GeoJSON format with the given uid.
+          schema:
+            $ref: '#/definitions/GeoObject'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /geoobject/getchildren:
     get:
       summary: Get children of the given GeoObject.
       operationId: getChildGeoObjects
       tags:
         - GeoObject
-        - Relationship
       parameters:
         - name: parentUid
           in: query
@@ -103,19 +133,20 @@ paths:
         "200":
           description: A ChildTreeNode object.
           schema:
-            $ref: '#/definitions/ChildTreeNode'
+            type: array
+            items:
+              $ref: '#/definitions/ChildTreeNode'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-            
-  /parentgeoobjects:
+
+  /geoobject/getparents:
     get:
       summary: Get parents of the given GeoObject.
       operationId: getParentGeoObjects
       tags:
         - GeoObject
-        - Relationship
       parameters:
         - name: childUid
           in: query
@@ -139,23 +170,24 @@ paths:
         "200":
           description: A ParentTreeNode object.
           schema:
-            $ref: '#/definitions/ParentTreeNode'
+            type: array
+            items:
+              $ref: '#/definitions/ParentTreeNode'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-            
-  /geoobjectuids:
+
+  /geoobject/get-uids:
     get:
       summary: 	Get list of valid UIDs for use in creating new GeoObjects. The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
       operationId: getGeoObjectUids
       tags:
         - GeoObject
-        - Metadata
       parameters:
-        - name: numberOfUids
+        - name: amount
           in: query
-          description: NumberofUIDs that the Common Geo-Registry will issue to the mobile device.
+          description: Number of UIDs that the Common Geo-Registry will issue to the mobile device.
           required: true
           type: integer
       responses:
@@ -169,14 +201,52 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-            
-  /geoobjecttypes:
+
+  /geoobject/addchild:
+    post:
+      summary: Creates a relationship between a parent GeoObject and a child GeoObject.
+      operationId: addChildRelationship
+      tags:
+        - GeoObject
+      parameters:
+        - in: body
+          name: relationship
+          description: TODO
+          schema:
+            type: object
+            required:
+              - parentId
+              - parentTypeCode
+              - child
+              - childTypeCode
+              - hierarchyCode
+            properties:
+              parentId:
+                type: string
+              parentTypeCode:
+                type: string
+              child:
+                type: string
+              childTypeCode:
+                type: string
+              hierarchyCode:
+                type: string
+      responses:
+        "201":
+          description: ParentTreeNode
+          schema:
+            $ref: '#/definitions/ParentTreeNode'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /geoobjecttype/get-all:
     get:
       summary: Return GeoOjectType objects that define the given list of types.
       operationId: getGeoObjectTypes
       tags:
-        - GeoObject
-        - Metadata
+        - GeoObjectType
       parameters:
         - name: types
           in: query
@@ -185,7 +255,103 @@ paths:
           type: array
           items:
             type: string
-  
+      responses:
+        "200":
+          description: An array of GeoObjectType objects.
+          schema:
+            $ref: '#/definitions/GeoObjectType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /geoobjecttype/create:
+    post:
+      summary: Create a new GeoObjectType in the Common Geo-Registry.
+      operationId: createGeoObjectType
+      tags:
+        - GeoObjectType
+      parameters:
+        - name: geoObjectType
+          in: body
+          description: GeoObjectType in GeoJSON format of the newly created.
+          required: true
+          schema:
+            $ref: '#/definitions/GeoObjectType'
+      responses:
+        "201":
+          description: GeoObjectType that was just created.
+          schema:
+            $ref: '#/definitions/GeoObjectType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /geoobjecttype/update:
+    post:
+      summary: Update a new GeoObject in the Common Geo-Registry.
+      operationId: updateGeoObjectType
+      tags:
+        - GeoObjectType
+      parameters:
+        - name: geoObject
+          in: body
+          description: GeoObjectType in GeoJSON format to be updated.
+          required: true
+          schema:
+            $ref: '#/definitions/GeoObjectType'
+      responses:
+        "201":
+          description: GeoObjectType that was just updated.
+          schema:
+            $ref: '#/definitions/GeoObjectType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /geoobjecttype/delete:
+    post:
+      summary: Delete a GeoObjectType from the Common Geo-Registry.
+      operationId: deleteGeoObjectType
+      tags:
+        - GeoObjectType
+      parameters:
+        - in: body
+          name: code
+          description: TODO
+          schema:
+            type: object
+            required:
+              - code
+            properties:
+              code:
+                type: string
+      responses:
+        "201":
+          description: GeoObjectType that was just updated.
+          schema:
+            $ref: '#/definitions/GeoObjectType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /hierarchytype/get-all:
+    get:
+      summary: Return GeoOjectType objects that define the given list of types.
+      operationId: getHierarchyTypes
+      tags:
+        - HierarchyType
+      parameters:
+        - name: types
+          in: query
+          description: An array of GeoObjectType names. If blank then all GeoObjectType objects are returned.
+          required: false
+          type: array
+          items:
+            type: string
       responses:
         "200":
           description: An array of GeoObjectType objects.
@@ -197,7 +363,172 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-            
+
+  /hierarchytype/create:
+    post:
+      summary: Create a new HierarchyType in the Common Geo-Registry.
+      operationId: createHierarchyType
+      tags:
+        - HierarchyType
+      parameters:
+        - name: hierarchyType
+          in: body
+          description: HierarchyType in GeoJSON format.
+          required: true
+          schema:
+            $ref: '#/definitions/HierarchyType'
+      responses:
+        "201":
+          description: HierarType that was just created.
+          schema:
+            $ref: '#/definitions/HierarchyType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /hierarchytype/update:
+    post:
+      summary: Update an existing HierarchyType in the Common Geo-Registry.
+      operationId: updateHierarchyType
+      tags:
+        - HierarchyType
+      parameters:
+        - name: hierarchyType
+          in: body
+          description: HierarchyType in GeoJSON format.
+          required: true
+          schema:
+            $ref: '#/definitions/HierarchyType'
+      responses:
+        "201":
+          description: HierarType that was just updated.
+          schema:
+            $ref: '#/definitions/HierarchyType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /hierarchytype/add:
+    post:
+      summary: Create a new relationship between two GeoObjectTypes in the Common Geo-Registry.
+      operationId: addHierarchyType
+      tags:
+        - HierarchyType
+      parameters:
+        - in: body
+          name: relationship
+          description: TODO
+          schema:
+            type: object
+            required:
+              - hierarchyCode
+              - parentGeoObjectTypeCode
+              - childGeoObjectTypeCode
+            properties:
+              hierarchyCode:
+                type: string
+              parentGeoObjectTypeCode:
+                type: string
+              childGeoObjectTypeCode:
+                type: string
+      responses:
+        "201":
+          description: HierarchyType that was just created.
+          schema:
+            $ref: '#/definitions/HierarchyType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /hierarchytype/remove:
+    post:
+      summary: Removes a relationship between two GeoObjectTypes in the Common Geo-Registry.
+      operationId: removeHierarchyType
+      tags:
+        - HierarchyType
+      parameters:
+        - in: body
+          name: relationship
+          description: TODO
+          schema:
+            type: object
+            required:
+              - hierarchyCode
+              - parentGeoObjectTypeCode
+              - childGeoObjectTypeCode
+            properties:
+              hierarchyCode:
+                type: string
+              parentGeoObjectTypeCode:
+                type: string
+              childGeoObjectTypeCode:
+                type: string
+      responses:
+        "201":
+          description: HierarchyType that was just created.
+          schema:
+            $ref: '#/definitions/HierarchyType'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /hierarchytype/delete:
+    post:
+      summary: Deletes a HierarchyType in the Common Geo-Registry.
+      operationId: deleteHierarchyType
+      tags:
+        - HierarchyType
+      parameters:
+        - in: body
+          name: code
+          description: TODO
+          schema:
+            type: object
+            required:
+              - code
+            properties:
+              code:
+                type: string
+      responses:
+        "201":
+          description: Null response.
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /executeActions:
+    post:
+      summary: Executes the provided actions in the order they exist in the provided json array as a single transaction.
+      operationId: executeActions
+      tags:
+        - Actions
+      parameters:
+        - in: body
+          name: code
+          description: TODO
+          schema:
+            type: object
+            required:
+              - actions
+            properties:
+              actions:
+                type: array
+                items:
+                  type: string
+      responses:
+        "201":
+          description: Null response.
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+
 definitions:
 
   ChildTreeNode:
@@ -205,17 +536,17 @@ definitions:
     properties:
       geoObject:
         $ref: '#/definitions/GeoObject'
-      hierarchyType: 
+      hierarchyType:
         type: string
       children:
         type: array
         items:
           $ref: '#/definitions/ChildTreeNode'  # ReDoc UI can't render circular references
-          
+
   ParentTreeNode:
     type: object
     properties:
-      geoObject: 
+      geoObject:
         $ref: '#/definitions/GeoObject'
       hierarchyType:
         type: string
@@ -224,44 +555,44 @@ definitions:
         description: test
         items:
           $ref: '#/definitions/ParentTreeNode'  # ReDoc UI can't render circular references
-    
+
   GeoObject:
     $ref: "#/definitions/Feature"
-    
+
   GeoObjects:
     type: array
     items:
       $ref: '#/definitions/GeoObject'
-      
+
   GeoObjectType:
     type: object
     properties:
       code:
         type: string
-      localizedLabel: 
+      localizedLabel:
         type: string
-      localizedDescription: 
+      localizedDescription:
         type: string
-      attributes: 
+      attributes:
         type: array
         items:
           $ref: '#/definitions/AttributeType'
-    
+
   AttributeType:
     type: object
     properties:
-      code: 
+      code:
         type: string
       localizedLabel:
         type: string
       type:
         type: string
- 
+
   AttributeTypes:
     type: array
     items:
       $ref: '#/definitions/AttributeType'
-  
+
   Term:
     type: object
     properties:
@@ -273,6 +604,20 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Term' # ReDoc UI can't render circular references
+
+  HierarchyType:
+    type: object
+    properties:
+      code:
+        type: string
+      localizedLabel:
+        type: string
+      localizedDescription:
+        type: string
+      rootGeoObjectTypes:
+        type: array
+        items:
+          type: string
 
   Geometry:
     type: object
@@ -293,7 +638,7 @@ definitions:
         - MultiLineString
         - MultiPolygon
         description: the geometry type
-    
+
   Point3D:
     type: array
     description: Point in 3D space
@@ -303,7 +648,7 @@ definitions:
     maxItems: 3
     items:
       type: number
-          
+
   Point:
     type: object
     description: GeoJSon geometry
@@ -314,7 +659,7 @@ definitions:
       - properties:
           coordinates:
             $ref: '#/definitions/Point3D'
-            
+
   LineString:
     type: object
     description: GeoJSon geometry
@@ -411,7 +756,6 @@ definitions:
     description: GeoJSon Feature
     required:
      - type
-     - id
      - geometry
      - properties
     externalDocs:
@@ -431,6 +775,9 @@ definitions:
           - type
           - status
           - localizedDisplayLabel
+          - sequence
+          - createdDate
+          - updatedDate
         properties:
           uid:
             type: string
@@ -442,7 +789,13 @@ definitions:
             $ref: '#/definitions/Term'
           localizedDisplayLabel:
             type: string
-             
+          sequence:
+            type: integer
+          createdDate:
+            type: string
+          updatedDate:
+            type: string
+
   Error:
     required:
       - code
@@ -453,3 +806,4 @@ definitions:
         format: int32
       message:
         type: string
+
