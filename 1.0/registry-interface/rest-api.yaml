@@ -79,19 +79,19 @@ paths:
 
   /geoobject/get-code:
     get:
-      summary: TODO
+      summary: Gets a GeoObject by code.
       operationId: getGeoObjectCode
       tags:
         - GeoObject
       parameters:
         - name: code
           in: query
-          description: TODO.
+          description: Code of the GeoObject to get.
           required: true
           type: string
         - name: typeCode
           in: query
-          description: TODO.
+          description: Code of the GeoObject Type.
           required: true
           type: string
       responses:
@@ -211,7 +211,7 @@ paths:
       parameters:
         - in: body
           name: relationship
-          description: TODO
+          description: Object containing body parameters.
           schema:
             type: object
             required:
@@ -320,7 +320,7 @@ paths:
       parameters:
         - in: body
           name: code
-          description: TODO
+          description: Object containing body parameters.
           schema:
             type: object
             required:
@@ -419,7 +419,7 @@ paths:
       parameters:
         - in: body
           name: relationship
-          description: TODO
+          description: Object containing body parameters.
           schema:
             type: object
             required:
@@ -452,7 +452,7 @@ paths:
       parameters:
         - in: body
           name: relationship
-          description: TODO
+          description: Object containing body parameters.
           schema:
             type: object
             required:
@@ -485,7 +485,7 @@ paths:
       parameters:
         - in: body
           name: code
-          description: TODO
+          description: Object containing body parameters.
           schema:
             type: object
             required:
@@ -510,7 +510,7 @@ paths:
       parameters:
         - in: body
           name: code
-          description: TODO
+          description: Object containing body parameters.
           schema:
             type: object
             required:
