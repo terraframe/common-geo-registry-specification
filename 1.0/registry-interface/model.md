@@ -21,6 +21,9 @@ According to the HGLC specification, attributes on GeoObject Types can be define
     type : string<GeoObjectType>, // maps to GeoObjectType name value
     status : string<Term>
     localizedDisplayLabel : string
+    sequence: integer
+    createdDate: string
+    updatedDate: string
     ... user defined and additional system defined attributes added to properties list.
   }
 }
@@ -37,6 +40,9 @@ According to the HGLC specification, attributes on GeoObject Types can be define
 |properties.type | GeoObjectType CODE which this object references. || "Village", "Household", "HealthFacility" |
 |properties.status | Term CODE which this object references to the term that defines the object status. Status values have not yet been defined. | Display labels on TERM values: "Active", "Inactive", "Pending Review"||
 |properties.localizedDisplayLabel | Localized display label. |||
+|properties.sequence | Sequence number. |||
+|properties.createdDate | Date the object was created. |||
+|properties.updatedDate | Date of the last time the object was updated. |||
 
 
 ### ChildTreeNode
