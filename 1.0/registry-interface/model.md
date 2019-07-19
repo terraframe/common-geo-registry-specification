@@ -3,10 +3,11 @@
 ### GeoObject
 A programming domain abstraction for a geographic feature that represents a location (point type objects) such as a village, household, or an area (polygon type object) such as a focus area that includes its geometry and attributes.
 
-GeoObjects just contain data and not metadata. Metadata include localized labels and all possible select list options for a term attribute.
+GeoObjects serialize directly into GeoJSON which can be directly rendered by the front-end, all with a simple `geoObject.toJSON()` ! As you'll see in a minute, all the additional data attributes are stored in the `properties` section of the GeoJSON. The properties section contains a standard list of attributes (see below for a full list), and any additional attributes which can be predicted by reading the attributes on the GeoObject's GeoObjectType (referenced here as `properties.type`).
 
-According to the HGLC specification, attributes on GeoObject Types can be defined at runtime using an administrative user interface. Metadata that describe a GeoObject's type is defined in the GeoObjecType JSON format.
+It's worth repeating that GeoObjects contain **data** and not **metadata**. The metadata for a GeoObject is stored in the GeoObjectType. This includes localized labels and all possible select list options for a term attribute. According to the HGLC specification, attributes on GeoObjectType can be defined at runtime using an administrative user interface (or the appropriate API). Metadata that describe a GeoObject's type is defined in the GeoObjecType JSON format.
 
+Here is what a serialized GeoObject looks like
 
 ```
 {
