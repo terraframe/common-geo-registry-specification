@@ -16,6 +16,10 @@ paths:
       tags:
         - GeoObject
       parameters:
+        - in: header
+          name: Accept-Language
+          type: string
+          required: false
         - name: typeCode
           in: query
           description: The code of the GeoObjectType that defines the GeoObjects.
