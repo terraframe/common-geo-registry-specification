@@ -11,7 +11,7 @@ schemes:
 paths:
   /cgr/geoobject/get-all:
     get:
-      summary: Returns a GeoObject with the given uid.
+      summary: Returns an array of GeoObjects.
       operationId: getGeoObject
       tags:
         - GeoObject
@@ -38,10 +38,10 @@ paths:
           type: string
         - name: format
           in: query
-          description: Format the GeoObjects will returned as. Default is JSON_CGR.
+          description: Format in which to return the GeoObjects. Default is JSON_CGR.
           required: false
           type: string
-          enum: [REVEAL, JSON_CGR]
+          enum: [JSON_REVEAL, JSON_CGR]
         - name: pageNumber
           in: query
           description: Page number used for pagination.
