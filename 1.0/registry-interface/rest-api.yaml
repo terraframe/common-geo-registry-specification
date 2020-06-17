@@ -5,95 +5,57 @@ info:
   license:
     name: MIT
 host: yourdomain
-basePath: /api
+basePath: /v1
 schemes:
   - https
-consumes:
-  - application/json
-produces:
-  - application/json
 paths:
-  /geoobject/get:
+  /cgr/geoobject/get-all:
     get:
       summary: Returns a GeoObject with the given uid.
       operationId: getGeoObject
       tags:
         - GeoObject
       parameters:
-        - name: uid
-          in: query
-          description: The UID of the GeoObject.
-          required: true
-          type: string
-      responses:
-        "200":
-          description: A GeoObject in GeoJSON format with the given uid.
-          schema:
-            $ref: '#/definitions/GeoObject'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobject/create:
-    post:
-      summary: Create a new GeoObject in the Common Geo-Registry.
-      operationId: createGeoObject
-      tags:
-        - GeoObject
-      parameters:
-        - name: geoObject
-          in: body
-          description: GeoObject in GeoJSON format of the newly created.
-          required: true
-          schema:
-            $ref: '#/definitions/GeoObject'
-      responses:
-        "201":
-          description: Null response
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobject/update:
-    post:
-      summary: Update a new GeoObject in the Common Geo-Registry.
-      operationId: updateGeoObject
-      tags:
-        - GeoObject
-      parameters:
-        - name: geoObject
-          in: body
-          description: GeoObject in GeoJSON format to be updated.
-          required: true
-          schema:
-            $ref: '#/definitions/GeoObject'
-      responses:
-        "201":
-          description: Null response
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobject/get-code:
-    get:
-      summary: Gets a GeoObject by code.
-      operationId: getGeoObjectCode
-      tags:
-        - GeoObject
-      parameters:
-        - name: code
-          in: query
-          description: Code of the GeoObject to get.
-          required: true
-          type: string
         - name: typeCode
           in: query
-          description: Code of the GeoObject Type.
+          description: The code of the GeoObjectType that defines the GeoObjects.
           required: true
           type: string
+        - name: hierarchyCode
+          in: query
+          description: The code of the Hierarchy that the GeoObjectType belongs to. Default is FALSE.
+          required: true
+          type: string
+        - name: includeGeographicLevel
+          in: query
+          description: TRUE to return the level in the hierarchy the GeoObjectType resides.
+          required: false
+          type: boolean
+        - name: updatedSince
+          in: query
+          description: Date in UTC from wich only GeoObjects will returned that have been updated.
+          required: false
+          type: string
+        - name: format
+          in: query
+          description: Format the GeoObjects will returned as. Default is JSON_CGR.
+          required: false
+          type: string
+          enum: [REVEAL, JSON_CGR]
+        - name: pageNumber
+          in: query
+          description: Page number used for pagination.
+          required: true
+          type: integer
+        - name: pageSize
+          in: query
+          description: Page size (number or results to return) used for pagination.
+          required: true
+          type: integer
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
       responses:
         "200":
           description: A GeoObject in GeoJSON format with the given uid.
@@ -104,254 +66,32 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /geoobject/getchildren:
-    get:
-      summary: Get children of the given GeoObject.
-      operationId: getChildGeoObjects
-      tags:
-        - GeoObject
-      parameters:
-        - name: parentUid
-          in: query
-          description: UID of the parent object for which the call fetches children.
-          required: true
-          type: string
-        - name: childrenTypes
-          in: query
-          description: An array of GeoObjectType names of the types of children GeoObjects to fetch. If blank then return children of all types.
-          required: true
-          type: array
-          collectionFormat: csv
-          items:
-            type: string
-        - name: recursive
-          in: query
-          description: recursive TRUE if recursive children of the given parent with the given types should be returned, FALSE if only single level children should be returned.
-          required: true
-          type: string
-      responses:
-        "200":
-          description: A ChildTreeNode object.
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ChildTreeNode'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobject/getparents:
-    get:
-      summary: Get parents of the given GeoObject.
-      operationId: getParentGeoObjects
-      tags:
-        - GeoObject
-      parameters:
-        - name: childUid
-          in: query
-          description: UID of the child object for which the call fetches parents.
-          required: true
-          type: string
-        - name: parentTypes
-          in: query
-          description: An array of GeoObjectType names of the types of parent GeoObjects to fetch. If blank then return parents of all types.
-          required: true
-          type: array
-          collectionFormat: csv
-          items:
-            type: string
-        - name: recursive
-          in: query
-          description: TRUE if recursive parents of the given parent with the given types should be returned, FALSE if only single level parents should be returned.
-          required: true
-          type: string
-      responses:
-        "200":
-          description: A ParentTreeNode object.
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ParentTreeNode'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobject/get-uids:
-    get:
-      summary: 	Get list of valid UIDs for use in creating new GeoObjects. The Common Geo-Registry will only accept newly created GeoObjects with a UID that was issued from the Common GeoRegistry.
-      operationId: getGeoObjectUids
-      tags:
-        - GeoObject
-      parameters:
-        - name: amount
-          in: query
-          description: Number of UIDs that the Common Geo-Registry will issue to the mobile device.
-          required: true
-          type: integer
-      responses:
-        "200":
-          description: An array of UIDs.
-          schema:
-            type: array
-            items:
-              type: string
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobject/addchild:
-    post:
-      summary: Creates a relationship between a parent GeoObject and a child GeoObject.
-      operationId: addChildRelationship
-      tags:
-        - GeoObject
-      parameters:
-        - in: body
-          name: relationship
-          description: Object containing body parameters.
-          schema:
-            type: object
-            required:
-              - parentId
-              - parentTypeCode
-              - child
-              - childTypeCode
-              - hierarchyCode
-            properties:
-              parentId:
-                type: string
-              parentTypeCode:
-                type: string
-              child:
-                type: string
-              childTypeCode:
-                type: string
-              hierarchyCode:
-                type: string
-      responses:
-        "201":
-          description: ParentTreeNode
-          schema:
-            $ref: '#/definitions/ParentTreeNode'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobjecttype/get-all:
+  /cgr/geoobjecttype/get-all:
     get:
       summary: Return GeoOjectType objects that define the given list of types.
       operationId: getGeoObjectTypes
       tags:
         - GeoObjectType
+        - Metadata
       parameters:
         - name: types
           in: query
-          description: An array of GeoObjectType names. If blank then all GeoObjectType objects are returned.
+          description: An array of GeoObjectType codes. If blank then all GeoObjectType objects are returned.
           required: false
           type: array
           items:
             type: string
-      responses:
-        "200":
-          description: An array of GeoObjectType objects.
-          schema:
-            $ref: '#/definitions/GeoObjectType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobjecttype/create:
-    post:
-      summary: Create a new GeoObjectType in the Common Geo-Registry.
-      operationId: createGeoObjectType
-      tags:
-        - GeoObjectType
-      parameters:
-        - name: geoObjectType
-          in: body
-          description: GeoObjectType in GeoJSON format of the newly created.
-          required: true
-          schema:
-            $ref: '#/definitions/GeoObjectType'
-      responses:
-        "201":
-          description: GeoObjectType that was just created.
-          schema:
-            $ref: '#/definitions/GeoObjectType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobjecttype/update:
-    post:
-      summary: Update a new GeoObject in the Common Geo-Registry.
-      operationId: updateGeoObjectType
-      tags:
-        - GeoObjectType
-      parameters:
-        - name: geoObject
-          in: body
-          description: GeoObjectType in GeoJSON format to be updated.
-          required: true
-          schema:
-            $ref: '#/definitions/GeoObjectType'
-      responses:
-        "201":
-          description: GeoObjectType that was just updated.
-          schema:
-            $ref: '#/definitions/GeoObjectType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /geoobjecttype/delete:
-    post:
-      summary: Delete a GeoObjectType from the Common Geo-Registry.
-      operationId: deleteGeoObjectType
-      tags:
-        - GeoObjectType
-      parameters:
-        - in: body
-          name: code
-          description: Object containing body parameters.
-          schema:
-            type: object
-            required:
-              - code
-            properties:
-              code:
-                type: string
-      responses:
-        "201":
-          description: GeoObjectType that was just updated.
-          schema:
-            $ref: '#/definitions/GeoObjectType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /hierarchytype/get-all:
-    get:
-      summary: Return GeoOjectType objects that define the given list of types.
-      operationId: getHierarchyTypes
-      tags:
-        - HierarchyType
-      parameters:
-        - name: types
+        - name: hierarchies
           in: query
-          description: An array of GeoObjectType names. If blank then all GeoObjectType objects are returned.
+          description: An array of Hierarchy codes. If blank then all Hierarchy objects are returned.
           required: false
           type: array
           items:
             type: string
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
       responses:
         "200":
           description: An array of GeoObjectType objects.
@@ -364,172 +104,15 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /hierarchytype/create:
-    post:
-      summary: Create a new HierarchyType in the Common Geo-Registry.
-      operationId: createHierarchyType
-      tags:
-        - HierarchyType
-      parameters:
-        - name: hierarchyType
-          in: body
-          description: HierarchyType in GeoJSON format.
-          required: true
-          schema:
-            $ref: '#/definitions/HierarchyType'
-      responses:
-        "201":
-          description: HierarType that was just created.
-          schema:
-            $ref: '#/definitions/HierarchyType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /hierarchytype/update:
-    post:
-      summary: Update an existing HierarchyType in the Common Geo-Registry.
-      operationId: updateHierarchyType
-      tags:
-        - HierarchyType
-      parameters:
-        - name: hierarchyType
-          in: body
-          description: HierarchyType in GeoJSON format.
-          required: true
-          schema:
-            $ref: '#/definitions/HierarchyType'
-      responses:
-        "201":
-          description: HierarType that was just updated.
-          schema:
-            $ref: '#/definitions/HierarchyType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /hierarchytype/add:
-    post:
-      summary: Create a new relationship between two GeoObjectTypes in the Common Geo-Registry.
-      operationId: addHierarchyType
-      tags:
-        - HierarchyType
-      parameters:
-        - in: body
-          name: relationship
-          description: Object containing body parameters.
-          schema:
-            type: object
-            required:
-              - hierarchyCode
-              - parentGeoObjectTypeCode
-              - childGeoObjectTypeCode
-            properties:
-              hierarchyCode:
-                type: string
-              parentGeoObjectTypeCode:
-                type: string
-              childGeoObjectTypeCode:
-                type: string
-      responses:
-        "201":
-          description: HierarchyType that was just created.
-          schema:
-            $ref: '#/definitions/HierarchyType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /hierarchytype/remove:
-    post:
-      summary: Removes a relationship between two GeoObjectTypes in the Common Geo-Registry.
-      operationId: removeHierarchyType
-      tags:
-        - HierarchyType
-      parameters:
-        - in: body
-          name: relationship
-          description: Object containing body parameters.
-          schema:
-            type: object
-            required:
-              - hierarchyCode
-              - parentGeoObjectTypeCode
-              - childGeoObjectTypeCode
-            properties:
-              hierarchyCode:
-                type: string
-              parentGeoObjectTypeCode:
-                type: string
-              childGeoObjectTypeCode:
-                type: string
-      responses:
-        "201":
-          description: HierarchyType that was just created.
-          schema:
-            $ref: '#/definitions/HierarchyType'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /hierarchytype/delete:
-    post:
-      summary: Deletes a HierarchyType in the Common Geo-Registry.
-      operationId: deleteHierarchyType
-      tags:
-        - HierarchyType
-      parameters:
-        - in: body
-          name: code
-          description: Object containing body parameters.
-          schema:
-            type: object
-            required:
-              - code
-            properties:
-              code:
-                type: string
-      responses:
-        "201":
-          description: Null response.
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /executeActions:
-    post:
-      summary: Executes the provided actions in the order they exist in the provided json array as a single transaction.
-      operationId: executeActions
-      tags:
-        - Actions
-      parameters:
-        - in: body
-          name: code
-          description: Object containing body parameters.
-          schema:
-            type: object
-            required:
-              - actions
-            properties:
-              actions:
-                type: array
-                items:
-                  type: string
-      responses:
-        "201":
-          description: Null response.
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-
 definitions:
+
+  TreeNode:
+    type: object
+    properties:
+      geoObject:
+        $ref: '#/definitions/GeoObject'
+      hierarchyType:
+        type: string
 
   ChildTreeNode:
     type: object
@@ -554,7 +137,7 @@ definitions:
         type: array
         description: test
         items:
-          $ref: '#/definitions/ParentTreeNode'  # ReDoc UI can't render circular references
+          $ref: '#/definitions/TreeNode'  # ReDoc UI can't render circular references
 
   GeoObject:
     $ref: "#/definitions/Feature"
@@ -604,20 +187,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Term' # ReDoc UI can't render circular references
-
-  HierarchyType:
-    type: object
-    properties:
-      code:
-        type: string
-      localizedLabel:
-        type: string
-      localizedDescription:
-        type: string
-      rootGeoObjectTypes:
-        type: array
-        items:
-          type: string
 
   Geometry:
     type: object
@@ -756,6 +325,7 @@ definitions:
     description: GeoJSon Feature
     required:
      - type
+     - id
      - geometry
      - properties
     externalDocs:
@@ -765,6 +335,8 @@ definitions:
         type: string
         enum:
           - Feature
+      id:
+        type: integer
       geometry:
         $ref: '#/definitions/Geometry'
       properties:
@@ -774,10 +346,6 @@ definitions:
           - code
           - type
           - status
-          - localizedDisplayLabel
-          - sequence
-          - createdDate
-          - updatedDate
         properties:
           uid:
             type: string
@@ -787,14 +355,6 @@ definitions:
             $ref: '#/definitions/GeoObjectType'
           status:
             $ref: '#/definitions/Term'
-          localizedDisplayLabel:
-            type: string
-          sequence:
-            type: integer
-          createdDate:
-            type: string
-          updatedDate:
-            type: string
 
   Error:
     required:
@@ -806,4 +366,3 @@ definitions:
         format: int32
       message:
         type: string
-
