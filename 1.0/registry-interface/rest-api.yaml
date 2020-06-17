@@ -72,7 +72,6 @@ paths:
       operationId: getGeoObjectTypes
       tags:
         - GeoObjectType
-        - Metadata
       parameters:
         - name: types
           in: query
