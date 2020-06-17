@@ -18,6 +18,7 @@ paths:
       parameters:
         - in: header
           name: Accept-Language
+          description: Language locale string including a locale code that will define which language the labels in the GeoObjects should be returned as. Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
           type: string
           required: false
         - name: typeCode
