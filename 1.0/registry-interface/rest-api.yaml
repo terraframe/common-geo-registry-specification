@@ -18,7 +18,7 @@ paths:
       parameters:
         - in: header
           name: Accept-Language
-          description: Language locale string (e.g. fr-CH) including a locale code that will define which language the labels in the GeoObjects should be returned as. 
+          description: Language locale string including a locale code (e.g. fr-CH) that will define which language the labels in the GeoObjects should be returned as. 
           type: string
           required: false
         - name: typeCode
