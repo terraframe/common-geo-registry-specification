@@ -7,7 +7,7 @@ The registry interface defines the standard API interface to an implementation o
 ### Updating Rendered REST API Docs
 The [rendered REST API docs](https://terraframe.github.io/common-geo-registry-specification-rest-api-docs/#) are hosted in a seperate repository to keep this specification repository clean from the web implementation artifacts used to render and host the docs. The repository for hosting the REST API docs can be found [here](https://github.com/terraframe/common-geo-registry-specification-rest-api-docs). See that project repository for information of re-building the rendered documentation.
 
-https://travis-ci.com/terraframe/common-geo-registry-specification-rest-api-docs
+https://travis-ci.com/terraframe/common-geo-registry-specification-rest-api-documentation
 
 ### Communication APIs
 1.  Server side Java API. 
