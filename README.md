@@ -1,6 +1,6 @@
 ## About
 
-Details about this project can be found [here](PROJECT_DETAILS.md).
+
 
 
 ## License
