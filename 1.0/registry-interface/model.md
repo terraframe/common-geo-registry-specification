@@ -19,12 +19,12 @@ Here is what a serialized GeoObject looks like
   properties : {
     uid : string,
     code : string,
-    type : string<GeoObjectType>, // maps to GeoObjectType name value
-    status : string<Term>
-    localizedDisplayLabel : string
-    sequence: integer
+    type : string<GeoObjectType>, 
+    displayLabel : string
+    invalid : boolean
+    exists : boolean
     createdDate: string
-    updatedDate: string
+    lastUpdatedDate: string
     ... user defined and additional system defined attributes added to properties list.
   }
 }
