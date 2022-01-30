@@ -23,8 +23,9 @@ Here is what a serialized GeoObject looks like
     displayLabel : string
     invalid : boolean
     exists : boolean
-    createdDate: string
-    lastUpdatedDate: string
+    createdDate : string
+    lastUpdateDate : string
+    sequence : integer
     ... user defined and additional system defined attributes added to properties list.
   }
 }
@@ -39,11 +40,12 @@ Here is what a serialized GeoObject looks like
 |properties.uid | UID for the object. This is a default attribute. ||
 |properties.code | Human Readable ID but not the UID. Not necessarily unique but should be unique within a subset of the hierarchy. This is a default attribute.||A postal code|
 |properties.type | GeoObjectType CODE which this object references. || "Village", "Household", "HealthFacility" |
-|properties.status | Term CODE which this object references to the term that defines the object status. Status values have not yet been defined. | Display labels on TERM values: "Active", "Inactive", "Pending Review"||
-|properties.localizedDisplayLabel | Localized display label. |||
+|properties.displayLabel | Localized display label. |||
 |properties.sequence | Sequence number. |||
 |properties.createdDate | Date the object was created. |||
-|properties.updatedDate | Date of the last time the object was updated. |||
+|properties.lastUpdateDate | Date of the last time the object was updated. |||
+|properties.exists |  |||
+|properties.invalid |  |||
 
 
 ### ChildTreeNode
